@@ -1,0 +1,20 @@
+# step 1: basic import
+# import week6_import_a
+# print(week6_import_a.my_cool_function())
+
+# step 2: giving it a better name
+import week6_import_a as imp
+# part of step 2, you can import specific functions/variables
+# into your current global scope
+from week6_import_a import tutorial_room
+
+# part of step 2, printing out information we obtained from our import
+print(imp.my_cool_function())
+print(tutorial_room)
+
+# part of step 4
+print("The name of week5_import_b is: ", __name__)
+
+# step 5: show how main code can be hidden
+if(__name__ == "__main__"):
+    print("week5_import_b.py is being run as the main file")

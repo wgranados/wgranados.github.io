@@ -1,6 +1,12 @@
 owner: William Granados
-url: "wlgranados.github.io"
-baseurl: "/"
+url: "localhost:4000"
+baseurl: ""
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
 social:
     email: me@wgma00.me
     github: wlgranados 

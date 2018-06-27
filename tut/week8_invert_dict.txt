@@ -1,0 +1,38 @@
+def invert_dict(input_dict):
+    '''(dict) -> dict
+
+    Return an inverted copy of input_dict. Every key-value pair in input_dict
+    will be a value-key pair in the result. Since multiple values in
+    input_dict may be mapped to by the same key, the values in the returned
+    dictionary will be held as a set.
+
+    input_dict is unchanged.
+
+    >>> my_dict = {'A':1, 'B':2, 'C':2}
+    >>> result = invert_dict(my_dict)
+    >>> result == {1:{'A'}, 2:{'B', 'C'}}
+    True
+    >>> my_dict == {'A':1, 'B':2, 'C':2}
+    True
+
+    REQ: Values in input_dict must be immutable data types
+    (int, float, str, tuple, bool)
+
+    '''
+    # create a new dictionary to store the result
+    result = {}
+    # loop through every key/value pair in input_dictionary
+    for next_key in input_dict:
+        next_value = input_dict[next_key]
+        # 2 cases:
+        # this value is already in the result dictionary
+        if(next_value in result):
+            # append the key to this value's set
+            result[next_value].add(next_key)
+        # this value is not a key in the result dictionary already
+        else:
+            # add the value as a key, and a new set containing the key
+            # as a value
+            result[next_value] = {next_key}
+
+    return result

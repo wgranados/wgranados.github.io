@@ -1,0 +1,38 @@
+Python 3.5.3 (v3.5.3:1880cb95a742, Jan 16 2017, 08:49:46)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> x = [1,2,[3,4]] # remember that you create a new id for the list inside x
+>>> y = x # this assigns y to the id of the list x is pointing too
+>>> x
+[1, 2, [3, 4]]
+>>> y
+[1, 2, [3, 4]]
+>>> x[0] = -1
+>>> x
+[-1, 2, [3, 4]]
+>>> y # since they're pointing to the same id this should be the same as x
+[-1, 2, [3, 4]]
+>>> y = x[:] # shallow copy of x: creates a new id for a list which y points to
+>>> y[0] = 1
+>>> x
+[-1, 2, [3, 4]]
+>>> y
+[1, 2, [3, 4]]
+>>> y[2][0] = 4 # even though it's a shallow copy the list [3,4] in x and y point to the same id
+>>> x
+[-1, 2, [4, 4]]
+>>> y
+[1, 2, [4, 4]]
+>>> x = [1,2,3]
+>>> y = [1,2,3] # these have different ids even though they have the same content, python only reuses ids when the item is immutable
+>>> id(x)
+4329443592
+>>> id(y)
+4329396552
+>>> x = [1,2,[3,4]]
+>>> y = [1,2,[3,4]] # note that the same property above should apply for the inner list
+>>> id(x[2])
+4329396232
+>>> id(y[2])
+4329443592
+>>>

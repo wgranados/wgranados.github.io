@@ -1,0 +1,26 @@
+import sys # importing a library so we can check the python version
+
+print('The python version required for this course is 3.5+')
+
+# Assume the python version is < 2.7 to begin with
+incorrect_version = True 
+# sys.version returns a long string with info we want, but we only care about 
+# the version so we'll split it by spaces and get the first index with the data
+# we want
+parsed_data = sys.version.split(' ')
+version = parsed_data[0] 
+
+print('Your Python version is: ' + version + '\n')
+
+# parse a string like '3.5.2' so it becomes a list of str like ['3', '5', '2']
+parsed_version = version.split(".") 
+
+# determine whether the python version is correct
+if parsed_version[0] >= '3' and parsed_version[1] >= '5':
+    incorrect_version = False 
+
+# tells the user if the version of the python is correct
+if (incorrect_version):
+    print('Please update/change your python to the latest version')
+else:
+    print('As of Sept 12, 2017 your version of python is ok')

@@ -1,0 +1,42 @@
+'''
+Problem Statement:
+Write a function that takes in a student's name, student's number, and
+enrollment status in CSCA08 and age and displays it in the format
+<student num, name, age,enrollment status>
+'''
+
+
+import doctest  # library used for automating examples
+
+
+def student_data(name, age, student_num, in_a08):
+    ''' (str, int, str, bool) -> str
+
+    Given a student's name, age, student number, and enrolment status. This
+    function will return a string representation of their data, in order
+    of student number, name, age, and enrolment status. i.e.
+    '<student num, name, age, enrollment status>'
+
+    REQ: age >= 0
+    >>> student_data("Jana", 18, "1234567", True)
+    '<1234567,Jana,18,True>'
+    >>> student_data("John", 22, "17433", False)
+    '<17433,John,22,False>'
+    '''
+    # start off left bracket for what's being returned
+    data = '<'
+    # populate data with the entries student_num, name, age, in_a08
+    # and seperate by commas
+    data = data + student_num + ","
+    data = data + name + ","
+    data = data + str(age) + ","
+    data = data + str(in_a08) + ">"
+    return data
+
+# This if statements  only executes this block of code if we're
+# running week4.py directly, and are not importing it
+# in some other file
+if __name__ == '__main__':
+    # this line runes all of the examples in our student_data function
+    # without us having to manually test it in our python shell
+    doctest.testmod()

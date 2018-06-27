@@ -1,0 +1,4 @@
+student_data|"Alice", 0, "1234567", True|"Minimum value for age, in a08"|'<1234567,Alice,0,True>'
+student_data|"Alice", 0, "1234567", False|"Minimum value for age, not in a08"|'<1234567,Alice,0,False>'
+student_data|"Alice", 20, "1234567", True|"Intermediate value for age, in a08"|'<1234567,Alice,20,True>'
+student_data|"Alice", 20, "1234567", False|"Intermediate value for age, not in a08"|'<1234567,Alice,20,True>'
