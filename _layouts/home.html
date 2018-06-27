@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    {% include head.html %}
+    <body>
+        <div>
+            <div class="container">
+                <div id="name" class="row h-100 justify-content-center align-items-center">
+                    <p class="name">{{site.owner}}</p>
+                </div>
+                <div id="about" class="row h-100 justify-content-center align-items-center">
+                    <a href="about/" class="row link">
+                        <h3>About</h4>
+                    </a> 
+                </div>
+                <div id="blog" class="row h-100 justify-content-center align-items-center">
+                    <a href="/blog/" class="row link">
+                        <h3>Blog</h4>
+                    </a> 
+                </div>
+                <div id="tutorials" class="row h-100 justify-content-center align-items-center">
+                    <a href="tutorial" class="row link">
+                        <h3>Tutorials</h4>
+                    </a>
+                </div>
+                <div id="resume" class="row h-100 justify-content-center align-items-center">
+                    <a href="projects/" class="row link">
+                        <h3>Resume</h4>
+                    </a>
+                </div>
+                <div class="row h-100 justify-content-center align-items-center">
+                        <a class="column social-media link" title={{site.social.email}} href="mailto:{{site.social.email}}" aria-hidden="true">
+                            <i class="fa fa-envelope fa-2x"></i>
+                        </a>
+                        <a class="column social-media link" title={{site.social.github}} href="https://github.com/{{site.social.github}}">
+                            <i class="fa fa-github fa-2x"></i>
+                        </a>
+                        <a class="column social-media link" title={{site.social.linkedin}} href="https://www.linkedin.com/in/{{site.social.linkedin}}/">
+                            <i class="fa fa-linkedin-square fa-2x"></i>
+                        </a>
+                        <a class="column social-media link" title={{site.social.twitter}} href="https://twitter.com/{{site.social.twitter}}/">
+                            <i class="fa fa-twitter fa-2x"></i>
+                        </a>
+                        <a class="column social-media link" title={{site.social.lastfm}} href="https://lastfm.com/user/{{site.social.lastfm}}/">
+                            <i class="fa fa-lastfm fa-2x"></i>
+                        </a>
+                        <a class="column social-media link" title={{site.social.yelp}} href="https://{{site.social.yelp}}.yelp">
+                            <i class="fa fa-yelp fa-2x"></i>
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </body>
+</html>
