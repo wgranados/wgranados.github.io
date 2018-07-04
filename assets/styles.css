@@ -23,3 +23,7 @@
 .txt-style{
     font-size: 18px;
 }
+
+.tutHeader {
+    overflow: hidden;
+}
