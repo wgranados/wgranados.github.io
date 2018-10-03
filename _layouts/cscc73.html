@@ -6,7 +6,7 @@ title: cscc73
   <p style="font-weight: 900;font-size: -webkit-xxx-large;text-align: center;">Welcome to CSCC73</p>
   <p class="txt-style"><b>TA name:</b> William Granados</p>
   <p class="txt-style"><b>Tutorial:</b> TUT002 - Tuesday 4-5pm, BV264</p>
-  <p class="txt-style"><b>Office hours:</b> TBD</p>
+  <p class="txt-style"><b>Office hours:</b> Friday 4-5pm, IC402, Rotational (for all TAs) </p>
   <p class="txt-style"><b>Email Policy:</b> Before emailing me, consider attending my practical or posting the question on <a href = "https://piazza.com/mail.utoronto.ca/fall2018/cscc73">Piazza</a>. My email address is <a href="mailto:william.granadosmatamoros@mail.utoronto.ca?subject=CSCC73">william.granadosmatamoros@mail.utoronto.ca</a>. When emailing me, use your utoronto email and in the subject include "CSCC73".</p>
   <p class="txt-style"><b>Expectations:</b> Content covered may appear on assignments or exams, so please be on time. </p> 
 </div>
@@ -28,17 +28,74 @@ title: cscc73
         </div>
       </div>
     </div-->
+    <div class="card">
+      <div class="card-header" id="heading2">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+              Week 4: October 2nd - Dynamic Programming 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse4" class="collapse show" aria-labelledby="heading4" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered  Chain Matrix Multiplication
+          <li class="txt-style">Overview</li>
+          <ul> 
+            <li><b>Problem:</b> Compute chain matrix multiplication with minimum number of scalar multiplications.</li>
+            <li><b>Implicit Tree:</b> Can represent computation as tree structure, where leaves are matricies, and intermediate nodes are results, and root is final result.</li>
+            <li><b>Idea:</b> From implicit tree structure, notice we choose $k, s.t \, i \leq k \leq j$, as our tree spliter.</li>
+            <li><b>Observation:</b> Can represent matricies dimensions as unique $m_0, m_1, \dots , m_{n-1}, m_n$, where $A_1 = \mathbb{R}^{m_0 \cdot m_1}$, $A_2 = \mathbb{R}^{m_1 \cdot m_2}, etc.$ </li>
+            <li><b>DP Recurrence:</b> $DP[i][j] = \text{min # mults in } A_i, \dots, A_j, \text{where } i < j$
+            </br> $DP[i][j] =\begin{cases} 0, & \text{if $i=j$}.\\ min_{i \leq k \leq j} {DP[i][k] + DP[k+1][j] + m_{i-1}\cdot m_k \cdot m_j}, & \text{if i < j}. \end{cases}$
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="heading3">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+              Week 3: September 25th - Divide and Conquer Algorithms  II
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse3" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered some more solving different recurrences, and designing a D&C solution for a problem.
+          <li class="txt-style">Recurrences</li>
+          <ul> 
+            <li>$T(n) = 4 \cdot T(\frac{n}{8}) + c \cdot n, T(1) = 1$, we proved $T(n) \in O(n)$ using back substituion.</li>
+            <li>$T(n) = 2 \cdot T(\frac{n}{4}) + \log{n}, T(1) = 1$, we proved $T(n) \in O(\sqrt{n})$ using back substituion.</li>
+          </ul>
+          <li class="txt-style">Master Theorem</li>
+          <ul>
+            <li>Solves recurrences of the form $T(n) = a \cdot T(\frac{n}{b}) + c \cdot n^d$, $T(1) = \text{some constant}$</li>
+            <li>if $a < b^d \implies T(n) = \theta(n^d)$</li>
+            <li>if $a = b^d \implies T(n) = \theta(n^d\log{n})$</li>
+            <li>if $a > b^d \implies T(n) = \theta(n^{\log_{b}{n}})$</li>
+          </ul>
+          <li class="txt-style">Challenge Problem</li>
+          <ul>
+            <li>Solved the <a href="http://web.cs.ucdavis.edu/~bai/ECS122A/Maxsubarray.pdf">Maximum subarray problem.</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="card">
       <div class="card-header" id="heading2">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-              Week 2: Divide and Conquer Algorithms 
+              Week 2: September 18th - Divide and Conquer Algorithms I
           </button>
         </h5>
       </div>
   
-      <div id="collapse2" class="collapse show" aria-labelledby="heading2" data-parent="#accordion">
+      <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
         <div class="card-body">
           This week discussed approaches for finding runtime in Divide & Conquer Algorithms (KT 5.1-5.2).
           <li class="txt-style">Merge sort</li>
