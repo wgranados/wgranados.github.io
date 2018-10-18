@@ -29,15 +29,55 @@ title: cscc73
       </div>
     </div-->
     <div class="card">
-      <div class="card-header" id="heading2">
+      <div class="card-header" id="heading6">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
-              Week 4: October 2nd - Dynamic Programming 
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+              Week 6: October 16th - Dynamic Programming II 
           </button>
         </h5>
       </div>
   
-      <div id="collapse4" class="collapse show" aria-labelledby="heading4" data-parent="#accordion">
+      <div id="collapse6" class="collapse show" aria-labelledby="heading6" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered the classic LCS and LIS problems, <a href="http://www.cs.mun.ca/~kol/courses/2711-w08/dynprog-2711.pdf">resources</a>.
+          <ul> 
+            <li class="txt-style">LCS</li>
+            <ul> 
+              <li><b>Problem:</b> Given two strings $X,Y$, find the longest common subsequence of characters. </li>
+              <li><b>Example:</b> X,Y = TGACTA, GTGCATG, LCS = len(TCGA) = 4</li> 
+              <li><b>Idea:</b> Find best LCS on $x_1, \dots, x_{i-1}$ and $y_1, \dots , y_{j-1}$, try to improve LCS by ending on $x_i, y_i$</li> 
+              <li><b>DP Recurrence:</b> $DP[i][j] = \text{LCS from } x_1, \dots, x_i \text{ and } y_1 , \dots y_j $
+              </br> $DP[i][j] =\begin{cases} DP[i-1][j-1]+1, & \text{if $x_i=x_j$}.\\ max \{DP[i-1][j] , DP[i][j-1]\}, & \text{otherwise} \end{cases}$
+              </li>
+              <li><b>Runtime:</b> $O(N \cdot M)$, in terms of length of both strings</li>
+            </ul>
+          </ul>
+          <li class="txt-style">LIS</li>
+          <ul> 
+            <li><b>Problem:</b> Given an unsorted array A, find the longest increasing subsequence of characters. </li>
+            <li><b>Example:</b> A=[7,3,8,5,2,6], LIS = len([3,4,6]) = 3</li> 
+            <li><b>Approach 1:</b> Reduce to LCS by sorting S=A, then running LCS(A, S) </li> 
+            <li><b>Approach 2:</b> Calculate LIS ending at $a_i$, then LIS must be some subset $\{a_1, \dots a_{i-1} \} \cup a_i$ </li> 
+            <li><b>DP Recurrence:</b> $\text{DP[i] = longest LIS ending at } a_i$  
+            </br> $DP[i] = 1 + max(\{DP[j] | 1 \leq j \leq i \land a_j < a_i\})$
+            </li>
+              <li><b>Runtime:</b> $O(N^2)$, for looping through array and finding best LIS on $a_1, \dots , a_{i-1}$</li>
+          </ul>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="heading4">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+              Week 4: October 2nd - Dynamic Programming  I
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
         <div class="card-body">
           Today we covered  Chain Matrix Multiplication
           <li class="txt-style">Overview</li>
