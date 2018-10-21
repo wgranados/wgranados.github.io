@@ -45,7 +45,7 @@ title: cscc73
             <ul> 
               <li><b>Problem:</b> Given two strings $X,Y$, find the longest common subsequence of characters. </li>
               <li><b>Example:</b> X,Y = TGACTA, GTGCATG, LCS = len(TCGA) = 4</li> 
-              <li><b>Idea:</b> Find best LCS on $x_1, \dots, x_{i-1}$ and $y_1, \dots , y_{j-1}$, try to improve LCS by ending on $x_i, y_i$</li> 
+              <li><b>Idea:</b> Find best LCS on $x_1, \dots, x_{i-1}$ and $y_1, \dots , y_{j-1}$, try to improve LCS by ending on $x_i, y_j$</li> 
               <li><b>DP Recurrence:</b> $DP[i][j] = \text{LCS from } x_1, \dots, x_i \text{ and } y_1 , \dots y_j $
               </br> $DP[i][j] =\begin{cases} DP[i-1][j-1]+1, & \text{if $x_i=x_j$}.\\ max \{DP[i-1][j] , DP[i][j-1]\}, & \text{otherwise} \end{cases}$
               </li>
