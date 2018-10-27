@@ -32,3 +32,16 @@
     /* small hack that works, bootstrap is removing the top margin which mislaigns h1-h6*/
     margin-top: 0.67em !important;
 }
+
+.spoiler, .spoiler2{ 
+    color: gray; 
+    background-color:gray;
+  }
+  
+.spoiler:hover{
+color: white;
+}
+
+.spoiler2:hover { 
+background-color:white; 
+}
