@@ -29,6 +29,57 @@ title: cscc73
       </div>
     </div-->
     <div class="card">
+      <div class="card-header" id="heading2">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+              Week 8: October 30th - Midterm Solutions 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse8" class="collapse show" aria-labelledby="heading8" data-parent="#accordion">
+        <div class="card-body">
+          Today we went over the solutions for the midterm. 
+          <ul>
+            <li class="txt-style">Q1</li>
+            <ul>
+              <li><b>Problem: </b>Given processing times $p_1, \cdots, p_n$, find ordering of $\pi$, s.t $ p_{\pi(1)}, \dots p_{\pi(n)}$ minimizes the cost function $C(j) = \sum_{i=0}^{j} p_{\pi(i)}, $ for the average completion time, $ \frac{1}{n} \cdot \sum_{j=0}^{n} C(j)$</li>
+              <li><b>Solution: </b>Sort by processing time.</li>
+              <li><b>Proof: </b> Let $G = g_1, \cdots, g_n$ be the output from our greedy solution, 
+                and $O = o_1, \cdots, o_n$ be <b>any</b> optimal solution such that, $G \neq O$.  Choose $r > 0$ such that  
+                $o_r \neq g_r$, then $o_r > g_r$ by way G is constructed. 
+                Consider swapping $o_r$ with $min\{o_k|k > r\}$, lets call this $O'$, 
+                then $\sum_{j=r}^{k} C(j) \text{ on } O' \leq \sum_{j=r}^{k} C(j) \text{ on } O$, because $(k-r) \cdot o_k \leq (k-r) \cdot o_r$. 
+                This does not affect the processing times of $C(j-1), C(k+1)$, and reduces the average running time by $\frac{(k-r)*(o_r-o_k)}{n}$ and can be done 
+                repeatedly to create a better solution similar to $G$, no worse than $O$.
+                </li>
+                
+            </ul>
+            <li class="text-style">Q2</li>
+            <ul>
+              <li><b>Problem: </b> Given N lines bounded by a rectangular box, starting from the bottom of the box, and ending at the top of the box. Count the number of intersections.</li>
+              <li><b>Possible Solution: </b> Consider labeling the lines base on their left to right order on the top of the box, from 1..n, resulting in a set S. 
+                Now order this set based on each lines left to right order on the bottom of the box. Define an inversion on S as a pair $i,j$ such that $i < j, S(i) > S(j)$. 
+                Now count the the inversions on this list using the $O(nlogn)$ Divide and Conquer algorithm described in KT 5.3.</li>
+            </ul>
+            <li class="text-style">Q3</li>
+            <ul>
+              <li><b>Problem: </b>Find largest strictly increasing then strictly decreasing subsequence in an array A.</li>
+              <li><b>Solution: </b>Observe that a strictly decreasing subsequence is simply an increasing subsequence if we look backwards from the array. Calculate LIS forwards and backwards on A. Inductively, since we've defined LIS to be the longest subsequence ending at i, we can run through both arrays and take the maximum of $LIS_{fwd}+LIS_{bwd}-1$</li>
+            </ul>
+            <li class="text-style">Q4</li>
+            <ul>
+              <li><b>Problem: </b> Calculate max IDS on a graph connected with triangular components.</li>
+              <li><b>Solution: </b> let i be the ith triangular component, $a_i$ be the node connecting components $i \to i+1$, $b_i, c_i$ by other nodes in the component. 
+                If we select $a_i$, then we cannot select component $i-1$, $b_i$, or $c_i$, so must select $a_i$ and best IDS upto compontent $i-2$. 
+                If we do not select $a_i$, we should take $max(b_i, c_i)$, since these nodes are indepedent from component $i-1$ we can simply select the best IDS upto component $i-1$. </li>
+            </ul>
+          </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
       <div class="card-header" id="heading7">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
@@ -37,7 +88,7 @@ title: cscc73
         </h5>
       </div>
   
-      <div id="collapse7" class="collapse show" aria-labelledby="heading7" data-parent="#accordion">
+      <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordion">
         <div class="card-body">
           Today we covered Maximum Independent Set (Path)
           <ul> 
