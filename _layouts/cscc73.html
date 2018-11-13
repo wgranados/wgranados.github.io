@@ -29,6 +29,65 @@ title: cscc73
       </div>
     </div-->
     <div class="card">
+      <div class="card-header" id="heading10">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
+              Week 10: October 13th - Linear Programming
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse10" class="collapse show" aria-labelledby="heading10" data-parent="#accordion">
+        <div class="card-body">
+          This week we're going over circulation problem with lower bound, and the optimum bandwidth allocation.
+          <b>Midterms will be handed back this week.</b>
+          <ul>  
+            <li class="text-style">Circulation Problem (lower bounds)</li>
+            <ul>
+              <li>Reduced to basic ciruclation problem</li>
+            </ul>
+            <li class="text-style">Bandwith Allocation</li>
+            <ul>  
+              <li>Went over example from DPV 7.1.3</li>
+            </ul>
+            <li class="text-style">Midterm Regrade</li>
+            <ul>  
+              <li> <a href="https://drive.google.com/file/d/1150bxSUjaOnUx7WNxzciUOSPwyKM9srp/view?usp=sharing">Marking Scheme</a></li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="heading9">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
+              Week 9: October 6th - Network Flow on Bipartite Graphs 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse9" class="collapse " aria-labelledby="heading9" data-parent="#accordion">
+        <div class="card-body">
+          This week we covered a famous theorem used in Network Flow problems, more resources <a href="http://web.math.ucsb.edu/~padraic/mathcamp_2011/flows_graphs/MC2011_flows_graphs_wk2_day2.pdf">here</a>.
+          <ul> 
+            <li class="text-style">Halls theorem</li>
+            <ul>
+              <li><b>Thm: </b> Given a bipartite graph $G = (V_1, V_2, E)$, and $|V_1| = |V_2|$. 
+                Then $G$ has a perfect matching iff $\forall S \subset V_1 , |S| \leq |N(S)|$. </li>
+              <li><b>Proof Idea:</b>We can model a bipartite graph as a network flow problem my mapping the given input graph into a flow graph,
+                from this flow graph we can apply FF to give a lower bound on the max flow (or min cut) of the graph,
+                from their we can apply breakdown the problem into some set S containing $V_1$, 
+                and $\bar S$ containing $V_2$. We calculate the flow on each half, and bound it above by 
+                the properties we know.</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
       <div class="card-header" id="heading2">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
@@ -37,7 +96,7 @@ title: cscc73
         </h5>
       </div>
   
-      <div id="collapse8" class="collapse show" aria-labelledby="heading8" data-parent="#accordion">
+      <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordion">
         <div class="card-body">
           Today we went over the solutions for the midterm. 
           <ul>
