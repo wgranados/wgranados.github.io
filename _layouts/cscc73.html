@@ -28,23 +28,64 @@ title: cscc73
         </div>
       </div>
     </div-->
+
     <div class="card">
-      <div class="card-header" id="heading10">
+      <div class="card-header" id="heading11">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
-              Week 10: October 13th - Linear Programming
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+              Week 11: November 20th - Linear Programming 
           </button>
         </h5>
       </div>
   
-      <div id="collapse10" class="collapse show" aria-labelledby="heading10" data-parent="#accordion">
+      <div id="collapse11" class="collapse show" aria-labelledby="heading11" data-parent="#accordion">
+        <div class="card-body">
+          Today I handed back remarks, any <b>uncollected</b> midterms have been left with Dr. Bretscher. </br>
+          Here are some extra notes on solving <a href="http://www.cs.toronto.edu/~denisp/csc373/docs/tutorial6-reg.pdf">LPs</a>, using slack variables.
+          <ul>  
+            <li class="text-style">Example 1</li>
+            <ul>
+              <li> <b>Variables:</b> X,Y </li>
+              <li> <b>Objective Function:</b> $max \{X+Y\}$ </li>
+              <li> <b>Constraints:</b> $a \cdot X + b \cdot Y \leq 1$, $x \geq 0 $, $y \geq 0$ </li>
+              <li> <b>Problem: </b> Find $a,b \in \mathbb{R}$ that satisfy the following. 
+                <ul>
+                  <li>When LP is infeasible</li>
+                  <li>When the LP is unbounded</li>
+                  <li>When the LP has a unique solution.</li>
+                </ul>
+              </li>
+            </ul>
+            <li class="text-style">Example 2</li>
+            <ul>  
+              <li> <b>Variables:</b> X,Y </li>
+              <li> <b>Objective Function:</b> $max \{5 \cdot X+ 3 \cdot Y\}$ </li>
+              <li> <b>Constraints:</b> $5 \cdot X - 2 \cdot Y \geq 0$, $x + y \leq 7$, $0 \leq x \leq 5$, $y \geq 0$ </li>
+              <li> <b>Problem: </b>  Solve the above LP, graph it, identify verticies, and optimal solution, then verify it.</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="heading10">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
+              Week 10: November 13th - Network Flow & Linear Programming
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#accordion">
         <div class="card-body">
           This week we're going over circulation problem with lower bound, and the optimum bandwidth allocation.
           <b>Midterms will be handed back this week.</b>
           <ul>  
             <li class="text-style">Circulation Problem (lower bounds)</li>
             <ul>
-              <li>Reduced to basic ciruclation problem</li>
+              <li>Reduced to basic ciruclation problem, by converting vertices with lower bounds into a set of vertices 
+                with different demands similar to the classical problem.</li>
             </ul>
             <li class="text-style">Bandwith Allocation</li>
             <ul>  
@@ -59,7 +100,7 @@ title: cscc73
       <div class="card-header" id="heading9">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
-              Week 9: October 6th - Network Flow on Bipartite Graphs 
+              Week 9: November 6th - Network Flow on Bipartite Graphs 
           </button>
         </h5>
       </div>
