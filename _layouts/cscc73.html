@@ -28,19 +28,53 @@ title: cscc73
         </div>
       </div>
     </div-->
+    <div class="card">
+      <div class="card-header" id="heading12">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse12" aria-expanded="true" aria-controls="collapse12">
+              Week 12: November 27th - Linear Programming III
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse12" class="collapse show" aria-labelledby="heading12" data-parent="#accordion">
+        <div class="card-body">
+          Good luck on finals! Today we went over <a href="https://www.geeksforgeeks.org/johnsons-algorithm/">Johnson's Algorithm</a>
+          <ul>  
+            <li class="text-style">Johnson's Algorithm</li>
+            <ul>
+              <li><b>Challenge:</b> All pairs shortest path, but faster than Floyd Warshall for sparse graphs</li>
+              <li><b>Considerations:</b> Running Dijkstras $N$ times, which works well on sparse graphs.</li>
+              <li><b>Issues:</b> Dijkstras doesn't work with negative weight edges, requires changing graph while preserving shortest paths.</li>
+              <li><b>Solution:</b> 
+                For each edge $(u,v) \in E$, define unique $X_u, X_v$ value for each node, and consider $wt'(u,v) = wt(u,v) + x_u-x_v$, where $wt'(u,v) \geq 0$ 
+                for Dijkstras to work. Above equivalent to a set of difference constraints as $x_u - x_v \leq wt(u,v)$ which is solved with Bellman Ford, as long as no negative wt cycle exists. 
+                With set of $s \to u$ paths given from dist array in bellman ford, treat them as your $x_u$'s, and create $wt'$ as discussed, then run Dijkstras $N$ times on $wt'$, 
+                to obtain $\delta(u,v) = \text{shortest } u \to v \text{ path}$, finally remove value of $x_u-x_v$, for each $u \to v$ solution.
+              
+              </li>
+              <li><b>Justification:</b>Turns out for any $s \to t \text{ path } p$, the values are a telescoping sum and 
+                $wt'(path) = wt(path) + x_s - x_t$, so after solving problem, can just remove these values.</li>
+
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="card">
       <div class="card-header" id="heading11">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
-              Week 11: November 20th - Linear Programming 
+              Week 11: November 20th - Linear Programming II 
           </button>
         </h5>
       </div>
   
-      <div id="collapse11" class="collapse show" aria-labelledby="heading11" data-parent="#accordion">
+      <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#accordion">
         <div class="card-body">
           Today I handed back remarks, any <b>uncollected</b> midterms have been left with Dr. Bretscher. </br>
+          Here are some extra notes on solving <a href="http://www.cs.toronto.edu/~denisp/csc373/docs/tutorial6-reg.pdf">LPs</a>, using slack variables.
           <ul>  
             <li class="text-style">Example 1</li>
             <ul>
@@ -71,7 +105,7 @@ title: cscc73
       <div class="card-header" id="heading10">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
-              Week 10: November 13th - Network Flow & Linear Programming
+              Week 10: November 13th - Network Flow II & Linear Programming I 
           </button>
         </h5>
       </div>
@@ -99,7 +133,7 @@ title: cscc73
       <div class="card-header" id="heading9">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
-              Week 9: November 6th - Network Flow on Bipartite Graphs 
+              Week 9: November 6th - Network Flow I  
           </button>
         </h5>
       </div>
