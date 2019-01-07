@@ -1,0 +1,434 @@
+---
+layout: default-tut
+title: cscb63 
+---
+<div>
+  <p style="font-weight: 900;font-size: -webkit-xxx-large;text-align: center;">Welcome to CSCB63</p>
+  <p class="txt-style"><b>TA name:</b> William Granados</p>
+  <p class="txt-style"><b>Tutorial:</b> TBD</p>
+  <p class="txt-style"><b>Office hours:</b> TBD </p>
+  <p class="txt-style"><b>Email Policy:</b> Before emailing me, consider attending my practical or posting the question on <a href = "https://piazza.com/mail.utoronto.ca/winter2019/cscb63">Piazza</a>. My email address is <a href="mailto:william.granadosmatamoros@mail.utoronto.ca?subject=CSCC73">william.granadosmatamoros@mail.utoronto.ca</a>. When emailing me, use your utoronto email and in the subject include "CSCB63".</p>
+  <p class="txt-style"><b>Expectations:</b> Content covered may appear on assignments or exams, so please be on time. </p> 
+</div>
+
+<div id="accordion">
+    <!--div class="card">
+      <div class="card-header" id="heading2">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse3">
+              Week 3: September 19th - Python Memory Model
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse2" class="collapse show" aria-labelledby="heading2" data-parent="#accordion">
+        <div class="card-body">
+          <ul> Enter stuff here
+          </ul>
+        </div>
+      </div>
+    </div-->
+    <!--div class="card">
+      <div class="card-header" id="heading12">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse12" aria-expanded="true" aria-controls="collapse12">
+              Week 12: November 27th - Linear Programming III
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse12" class="collapse show" aria-labelledby="heading12" data-parent="#accordion">
+        <div class="card-body">
+          Good luck on finals! Today we went over <a href="https://www.geeksforgeeks.org/johnsons-algorithm/">Johnson's Algorithm</a>
+          <ul>  
+            <li class="text-style">Johnson's Algorithm</li>
+            <ul>
+              <li><b>Challenge:</b> All pairs shortest path, but faster than Floyd Warshall for sparse graphs</li>
+              <li><b>Considerations:</b> Running Dijkstras $N$ times, which works well on sparse graphs.</li>
+              <li><b>Issues:</b> Dijkstras doesn't work with negative weight edges, requires changing graph while preserving shortest paths.</li>
+              <li><b>Solution:</b> 
+                For each edge $(u,v) \in E$, define unique $X_u, X_v$ value for each node, and consider $wt'(u,v) = wt(u,v) + x_u-x_v$, where $wt'(u,v) \geq 0$ 
+                for Dijkstras to work. Above equivalent to a set of difference constraints as $x_u - x_v \leq wt(u,v)$ which is solved with Bellman Ford, as long as no negative wt cycle exists. 
+                With set of $s \to u$ paths given from dist array in bellman ford, treat them as your $x_u$'s, and create $wt'$ as discussed, then run Dijkstras $N$ times on $wt'$, 
+                to obtain $\delta(u,v) = \text{shortest } u \to v \text{ path}$, finally remove value of $x_u-x_v$, for each $u \to v$ solution.
+              
+              </li>
+              <li><b>Justification:</b>Turns out for any $s \to t \text{ path } p$, the values are a telescoping sum and 
+                $wt'(path) = wt(path) + x_s - x_t$, so after solving problem, can just remove these values.</li>
+
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!----div class="card">
+      <div class="card-header" id="heading11">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+              Week 11: November 20th - Linear Programming II 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#accordion">
+        <div class="card-body">
+          Today I handed back remarks, any <b>uncollected</b> midterms have been left with Dr. Bretscher. </br>
+          Here are some extra notes on solving <a href="http://www.cs.toronto.edu/~denisp/csc373/docs/tutorial6-reg.pdf">LPs</a>, using slack variables.
+          <ul>  
+            <li class="text-style">Example 1</li>
+            <ul>
+              <li> <b>Variables:</b> X,Y </li>
+              <li> <b>Objective Function:</b> $max \{X+Y\}$ </li>
+              <li> <b>Constraints:</b> $a \cdot X + b \cdot Y \leq 1$, $x \geq 0 $, $y \geq 0$ </li>
+              <li> <b>Problem: </b> Find $a,b \in \mathbb{R}$ that satisfy the following. 
+                <ul>
+                  <li>When LP is infeasible</li>
+                  <li>When the LP is unbounded</li>
+                  <li>When the LP has a unique solution.</li>
+                </ul>
+              </li>
+            </ul>
+            <li class="text-style">Example 2</li>
+            <ul>  
+              <li> <b>Variables:</b> X,Y </li>
+              <li> <b>Objective Function:</b> $max \{5 \cdot X+ 3 \cdot Y\}$ </li>
+              <li> <b>Constraints:</b> $5 \cdot X - 2 \cdot Y \geq 0$, $x + y \leq 7$, $0 \leq x \leq 5$, $y \geq 0$ </li>
+              <li> <b>Problem: </b>  Solve the above LP, graph it, identify verticies, and optimal solution, then verify it.</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!--div class="card">
+      <div class="card-header" id="heading10">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
+              Week 10: November 13th - Network Flow II & Linear Programming I 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#accordion">
+        <div class="card-body">
+          This week we're going over circulation problem with lower bound, and the optimum bandwidth allocation.
+          <b>Midterms will be handed back this week.</b>
+          <ul>  
+            <li class="text-style">Circulation Problem (lower bounds)</li>
+            <ul>
+              <li>Reduced to basic ciruclation problem, by converting vertices with lower bounds into a set of vertices 
+                with different demands similar to the classical problem.</li>
+            </ul>
+            <li class="text-style">Bandwith Allocation</li>
+            <ul>  
+              <li>Went over example from DPV 7.1.3</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading9">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
+              Week 9: November 6th - Network Flow I  
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse9" class="collapse " aria-labelledby="heading9" data-parent="#accordion">
+        <div class="card-body">
+          This week we covered a famous theorem used in Network Flow problems, more resources <a href="http://web.math.ucsb.edu/~padraic/mathcamp_2011/flows_graphs/MC2011_flows_graphs_wk2_day2.pdf">here</a>.
+          <ul> 
+            <li class="text-style">Halls theorem</li>
+            <ul>
+              <li><b>Thm: </b> Given a bipartite graph $G = (V_1, V_2, E)$, and $|V_1| = |V_2|$. 
+                Then $G$ has a perfect matching iff $\forall S \subset V_1 , |S| \leq |N(S)|$. </li>
+              <li><b>Proof Idea:</b>We can model a bipartite graph as a network flow problem my mapping the given input graph into a flow graph,
+                from this flow graph we can apply FF to give a lower bound on the max flow (or min cut) of the graph,
+                from their we can apply breakdown the problem into some set S containing $V_1$, 
+                and $\bar S$ containing $V_2$. We calculate the flow on each half, and bound it above by 
+                the properties we know.</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading2">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+              Week 8: October 30th - Midterm Solutions 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordion">
+        <div class="card-body">
+          Today we went over the solutions for the midterm. 
+          <ul>
+            <li class="txt-style">Q1</li>
+            <ul>
+              <li><b>Problem: </b>Given processing times $p_1, \cdots, p_n$, find ordering of $\pi$, s.t $ p_{\pi(1)}, \dots p_{\pi(n)}$ minimizes the cost function $C(j) = \sum_{i=0}^{j} p_{\pi(i)}, $ for the average completion time, $ \frac{1}{n} \cdot \sum_{j=0}^{n} C(j)$</li>
+              <li><b>Solution: </b>Sort by processing time.</li>
+              <li><b>Proof: </b> Let $G = g_1, \cdots, g_n$ be the output from our greedy solution, 
+                and $O = o_1, \cdots, o_n$ be <b>any</b> optimal solution such that, $G \neq O$.  Choose $r > 0$ such that  
+                $o_r \neq g_r$, then $o_r > g_r$ by way G is constructed. 
+                Consider swapping $o_r$ with $min\{o_k|k > r\}$, lets call this $O'$, 
+                then $\sum_{j=r}^{k} C(j) \text{ on } O' \leq \sum_{j=r}^{k} C(j) \text{ on } O$, because $(k-r) \cdot o_k \leq (k-r) \cdot o_r$. 
+                This does not affect the processing times of $C(j-1), C(k+1)$, and reduces the average running time by $\frac{(k-r)*(o_r-o_k)}{n}$ and can be done 
+                repeatedly to create a better solution similar to $G$, no worse than $O$.
+                </li>
+                
+            </ul>
+            <li class="text-style">Q2</li>
+            <ul>
+              <li><b>Problem: </b> Given N lines bounded by a rectangular box, starting from the bottom of the box, and ending at the top of the box. Count the number of intersections.</li>
+              <li><b>Possible Solution: </b> Consider labeling the lines base on their left to right order on the top of the box, from 1..n, resulting in a set S. 
+                Now order this set based on each lines left to right order on the bottom of the box. Define an inversion on S as a pair $i,j$ such that $i < j, S(i) > S(j)$. 
+                Now count the the inversions on this list using the $O(nlogn)$ Divide and Conquer algorithm described in KT 5.3.</li>
+            </ul>
+            <li class="text-style">Q3</li>
+            <ul>
+              <li><b>Problem: </b>Find largest strictly increasing then strictly decreasing subsequence in an array A.</li>
+              <li><b>Solution: </b>Observe that a strictly decreasing subsequence is simply an increasing subsequence if we look backwards from the array. Calculate LIS forwards and backwards on A. Inductively, since we've defined LIS to be the longest subsequence ending at i, we can run through both arrays and take the maximum of $LIS_{fwd}+LIS_{bwd}-1$</li>
+            </ul>
+            <li class="text-style">Q4</li>
+            <ul>
+              <li><b>Problem: </b> Calculate max IDS on a graph connected with triangular components.</li>
+              <li><b>Solution: </b> let i be the ith triangular component, $a_i$ be the node connecting components $i \to i+1$, $b_i, c_i$ by other nodes in the component. 
+                If we select $a_i$, then we cannot select component $i-1$, $b_i$, or $c_i$, so must select $a_i$ and best IDS upto compontent $i-2$. 
+                If we do not select $a_i$, we should take $max(b_i, c_i)$, since these nodes are indepedent from component $i-1$ we can simply select the best IDS upto component $i-1$. </li>
+            </ul>
+          </ul>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading7">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+              Week 7: October 23 - Dynamic Programming III 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered Maximum Independent Set (Path)
+          <ul> 
+            <li><b>Problem:</b> Given a graph G=(V,E), a path is $v_1, v_2, \dots, v_n $ s.t $v_i, v_j$ are connected if $|i-j|=1$. Each vertex has a weight $w_i$. Find set in a path G, with largest weight and no adjacent nodes.</li>
+            <li><b>Example:</b> Given a path [1,8,6,3,6], MIS = 14 (8+6) </li>
+            <li><b>Approach 1:</b> Greedily choose highest value node, delete adjacent nodes, repeat. Does this work? <span class="spoiler">No. Counter example: [7,8,7,1]</span></li> 
+            <li><b>Approach 2:</b> Greedily choose all odd or even indecies since maximum number of values. Does this work? <span class="spoiler">No. Check first example.</span> 
+            <li><b>Approach 3:</b> Find best IDS on $x_1, \dots, x_{i-1}$, looking ahead if $w_i$ improves solution, then must require best IDS from $x_1, \dots, x_{i-2}$, otherwise don't include and IDS is max IDS from $x_1, \dots, x_{i-1}$
+            <li><b>DP Recurrence:</b> $DP[i] = max(DP[i-1], DP[i-2] + w_i)$</li>
+            <li><b>Runtime:</b> $O(N)$</li>
+            <li><b>Note:</b> The problem for complete graphs is NP-hard, so unlikely that a polynomial algorithm exists.</li>
+
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!--div class="card">
+      <div class="card-header" id="heading6">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+              Week 6: October 16th - Dynamic Programming II 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered the classic LCS and LIS problems, <a href="http://www.cs.mun.ca/~kol/courses/2711-w08/dynprog-2711.pdf">resources</a>.
+          <ul> 
+            <li class="txt-style">LCS</li>
+            <ul> 
+              <li><b>Problem:</b> Given two strings $X,Y$, find the longest common subsequence of characters. </li>
+              <li><b>Example:</b> X,Y = TGACTA, GTGCATG, LCS = len(TCGA) = 4</li> 
+              <li><b>Idea:</b> Find best LCS on $x_1, \dots, x_{i-1}$ and $y_1, \dots , y_{j-1}$, try to improve LCS by ending on $x_i, y_j$</li> 
+              <li><b>DP Recurrence:</b> $DP[i][j] = \text{LCS from } x_1, \dots, x_i \text{ and } y_1 , \dots y_j $
+              </br> $DP[i][j] =\begin{cases} DP[i-1][j-1]+1, & \text{if $x_i=x_j$}.\\ max \{DP[i-1][j] , DP[i][j-1]\}, & \text{otherwise} \end{cases}$
+              </li>
+              <li><b>Runtime:</b> $O(N \cdot M)$, in terms of length of both strings</li>
+            </ul>
+          </ul>
+          <li class="txt-style">LIS</li>
+          <ul> 
+            <li><b>Problem:</b> Given an unsorted array A, find the longest increasing subsequence of characters. </li>
+            <li><b>Example:</b> A=[7,3,8,5,2,6], LIS = len([3,4,6]) = 3</li> 
+            <li><b>Approach 1:</b> Reduce to LCS by sorting S=A, then running LCS(A, S) </li> 
+            <li><b>Approach 2:</b> Calculate LIS ending at $a_i$, then LIS must be some subset $\{a_1, \dots a_{i-1} \} \cup a_i$ </li> 
+            <li><b>DP Recurrence:</b> $\text{DP[i] = longest LIS ending at } a_i$  
+            </br> $DP[i] = 1 + max(\{DP[j] | 1 \leq j \leq i \land a_j < a_i\})$
+            </li>
+              <li><b>Runtime:</b> $O(N^2)$, for looping through array and finding best LIS on $a_1, \dots , a_{i-1}$</li>
+          </ul>
+        </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading4">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+              Week 4: October 2nd - Dynamic Programming  I
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered  Chain Matrix Multiplication
+          <li class="txt-style">Overview</li>
+          <ul> 
+            <li><b>Problem:</b> Compute chain matrix multiplication with minimum number of scalar multiplications.</li>
+            <li><b>Implicit Tree:</b> Can represent computation as tree structure, where leaves are matricies, and intermediate nodes are results, and root is final result.</li>
+            <li><b>Idea:</b> From implicit tree structure, notice we choose $k, s.t \, i \leq k \leq j$, as our tree spliter.</li>
+            <li><b>Observation:</b> Can represent matricies dimensions as unique $m_0, m_1, \dots , m_{n-1}, m_n$, where $A_1 = \mathbb{R}^{m_0 \cdot m_1}$, $A_2 = \mathbb{R}^{m_1 \cdot m_2}, etc.$ </li>
+            <li><b>DP Recurrence:</b> $DP[i][j] = \text{min # mults in } A_i, \dots, A_j, \text{where } i < j$
+            </br> $DP[i][j] =\begin{cases} 0, & \text{if $i=j$}.\\ min_{i \leq k \leq j} {DP[i][k] + DP[k+1][j] + m_{i-1}\cdot m_k \cdot m_j}, & \text{if i < j}. \end{cases}$
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading3">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+              Week 3: September 25th - Divide and Conquer Algorithms  II
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse3" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
+        <div class="card-body">
+          Today we covered some more solving different recurrences, and designing a D&C solution for a problem.
+          <li class="txt-style">Recurrences</li>
+          <ul> 
+            <li>$T(n) = 4 \cdot T(\frac{n}{8}) + c \cdot n, T(1) = 1$, we proved $T(n) \in O(n)$ using back substituion.</li>
+            <li>$T(n) = 2 \cdot T(\frac{n}{4}) + \log{n}, T(1) = 1$, we proved $T(n) \in O(\sqrt{n})$ using back substituion.</li>
+          </ul>
+          <li class="txt-style">Master Theorem</li>
+          <ul>
+            <li>Solves recurrences of the form $T(n) = a \cdot T(\frac{n}{b}) + c \cdot n^d$, $T(1) = \text{some constant}$</li>
+            <li>if $a < b^d \implies T(n) = \theta(n^d)$</li>
+            <li>if $a = b^d \implies T(n) = \theta(n^d\log{n})$</li>
+            <li>if $a > b^d \implies T(n) = \theta(n^{\log_{b}{n}})$</li>
+          </ul>
+          <li class="txt-style">Challenge Problem</li>
+          <ul>
+            <li>Solved the <a href="http://web.cs.ucdavis.edu/~bai/ECS122A/Maxsubarray.pdf">Maximum subarray problem.</a></li>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading2">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+              Week 2: September 18th - Divide and Conquer Algorithms I
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
+        <div class="card-body">
+          This week discussed approaches for finding runtime in Divide & Conquer Algorithms (KT 5.1-5.2).
+          <li class="txt-style">Merge sort</li>
+          <ul> 
+            <li><b>Recurrence:</b> $T(n) = 2 \cdot T(\frac{n}{2}) + c \cdot n $</li>
+            <li><b>Approach 1:</b> Unrolling recursion, we examined the recursion tree of the algorithm. 
+              <ul>
+                <li>We calculated the amount of work done per node to be $\frac{c \cdot n}{2^{i}}$
+                <li>There were $2^{i}$ nodes per level, so overall work was $2^{i} \cdot \left( \frac{c \cdot n }{2^{i}} \right) = c \cdot n$</li>
+                <li>There are $\log{n}$ levels since it's a perfect binary tree, so overal time complexity was $\sum_{i=0}^{\log{n}} c \cdot n = O(n\log{n})$</li> 
+              </ul>
+            <li><b>Approach 2:</b> Backsubstituion, we took a <i>wild</i> guess that the algorithm would run in $O(n\log(n))$, then proved this through induction. Important step in proof involved logarithm identities.</li>
+          </ul>
+          <li class="txt-style">Similar D&C Algorithms, that create more nodes per level in the recursion tree.</li>
+          <ul>
+            <li><b>Recurrence:</b> $T(n) = q \cdot T(\frac{n}{2}) + c \cdot n, q > 2$ </li>
+            <li><b>Approach:</b> Unrolling recursion, we examagined the recursion tree of the algorithm, same idea as above, but we used the identity for geometric sums to simpify the equation. Resulting in algorithms running in $O(n^{log{q}})$</li>
+            <li><b>Problems:</b> You're encouraged to apply similar techniques when evaluating <a href="#">Closest Pair of Points</a>, and <a href="#">Karatsuba Multiplication</a> </li>
+          </ul>
+          <li class="txt-style">Similar D&C Algorithms, only 1 node per level in recursion tree.</li>
+          <ul>
+            <li><b>Recurrence:</b> $T(n) = T(\frac{n}{2}) + c \cdot n$</li>
+            <li><b>Approach:</b>Unrolling recursion, similar idea as above, using geometric sum, resulting in algorithms running in $O(n)$</li>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <!---div class="card">
+      <div class="card-header" id="heading1">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+              Week 1: September 11th - Greedy Algorithms 
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
+        <div class="card-body">
+          This week we covered the MST problem (KT Pg.142-149), and how it can be solved with Prims and Kruskals, along with the correctness proof for these.
+          <li class="txt-style">Prim's Algorithm</li>
+          <ul>
+            <li><b>Idea:</b> Push edges from an arbitrary on a min heap, iteratively select the smallest weighted edge which is a part of our solution.</li>
+            <li><b>Time Complexity:</b> $O(|E| \cdot \log(V))$ with an adjacency list and binomial heap, varies with <a href="https://en.wikipedia.org/wiki/Prim%27s_algorithm">implementation.</a></li>
+            <li><b>Fun Fact</b> The graph <i>must</i> be connected, otherwise will only find MST in one of the components.</b></li>
+          </ul>
+          <li class="txt-style">Kruskal's Algorithm</li>
+          <ul>
+            <li><b>Idea:</b> Sort edges by least weight, use a <a href="">disjoint set</a> data structure to iteratively select the smallest weighted edge that is a part of our solution.</li>
+            <li><b>Time Complexity:</b> $O(|E| \cdot \log(V))$, depending on DS implemention, can assume we use path compression and union by rank.</li>
+            <li><b>Fun Fact:</b> If the graph <i>isn't</i> connected, will generate a minimum spanning forest (a collection of trees!).</b></li>
+          </ul>
+          <li class="txt-style">Correctness</li>
+          <ul>
+            <li><b>Tree theorem:</b> Need to prove that an MST is a tree</li> 
+            <li><b>Cut Theorem:</b> Need to prove that greedily choosing the smallest edge at each iteration of the algorithm, will result in an MST.</li> 
+          </ul>
+          <li class="txt-style">Challenge Problems</li>
+          <ul>
+            <li><a href="tut3/gas-station.pdf">Gas-Station Refueling</a></li>
+            <li><a href="https://wcipeg.com/problem/acmtryouts3c">A Subtle Surf</a></li>
+            <li><a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=531">Superbull</a></li>
+          </ul>
+        </div>
+      </div>
+    </div-->
+
+    <div class="card">
+      <div class="card-header" id="heading0">
+        <h5 class="mb-0 tutHeader">
+          <button 
+            class="btn btn-link" 
+            data-toggle="collapse" 
+            data-target="#collapse0" 
+            aria-expanded="true" 
+            aria-controls="collapse0"
+            title="Week 0: September 4th">
+            Week 0: Jan 7th - No Tutorial
+          </button>
+        </h5>
+      </div>
+      <div id="collapse0" class="collapse" aria-labelledby="heading0" data-parent="#accordion">
+        <div class="card-body">
+            There are no tutorials this week. Instead here's a link to a funny comic <a href="https://xkcd.com/835/">XKCD - Trees</a>.
+        </div>
+      </div>
+    </div>
+  </div>
