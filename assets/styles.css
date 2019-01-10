@@ -45,3 +45,20 @@ color: white;
 .spoiler2:hover { 
 background-color:white; 
 }
+
+
+.sudokuRow {
+    padding-bottom: 1px;
+}
+.sudokuCell { 
+    border: solid thin; 
+    height: 2.0em; 
+    width: 2.0em; 
+    text-align: center; 
+    padding: 0; 
+}
+
+.sudokuCell:nth-child(3n) {
+    border-right:solid ;
+    border-right-width: 2px;
+}
