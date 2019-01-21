@@ -5,8 +5,7 @@ title: cscb63
 <div>
   <p style="font-weight: 900;font-size: -webkit-xxx-large;text-align: center;">Welcome to CSCB63</p>
   <p class="txt-style"><b>TA name:</b> William Granados</p>
-  <p class="txt-style"><b>Tutorial:</b> TBD</p>
-  <p class="txt-style"><b>Office hours:</b> TBD </p>
+  <p class="txt-style"><b>Tutorial:</b> TUT06: Monday 4-5pm, HW215</p>
   <p class="txt-style"><b>Email Policy:</b> Before emailing me, consider attending my practical or posting the question on <a href = "https://piazza.com/mail.utoronto.ca/winter2019/cscb63">Piazza</a>. My email address is <a href="mailto:william.granadosmatamoros@mail.utoronto.ca?subject=CSCC73">william.granadosmatamoros@mail.utoronto.ca</a>. When emailing me, use your utoronto email and in the subject include "CSCB63".</p>
   <p class="txt-style"><b>Expectations:</b> Content covered may appear on assignments or exams, so please be on time. </p> 
 </div>
@@ -357,11 +356,11 @@ title: cscb63
               </ul>
             <li><b>Approach 2:</b> Backsubstituion, we took a <i>wild</i> guess that the algorithm would run in $O(n\log(n))$, then proved this through induction. Important step in proof involved logarithm identities.</li>
           </ul>
-          <li class="txt-style">Similar D&C Algorithms, that create more nodes per level in the recursion tree.</li>
+          <li class="txt-style">similar d&c algorithms, that create more nodes per level in the recursion tree.</li>
           <ul>
-            <li><b>Recurrence:</b> $T(n) = q \cdot T(\frac{n}{2}) + c \cdot n, q > 2$ </li>
-            <li><b>Approach:</b> Unrolling recursion, we examagined the recursion tree of the algorithm, same idea as above, but we used the identity for geometric sums to simpify the equation. Resulting in algorithms running in $O(n^{log{q}})$</li>
-            <li><b>Problems:</b> You're encouraged to apply similar techniques when evaluating <a href="#">Closest Pair of Points</a>, and <a href="#">Karatsuba Multiplication</a> </li>
+            <li><b>recurrence:</b> $t(n) = q \cdot t(\frac{n}{2}) + c \cdot n, q > 2$ </li>
+            <li><b>approach:</b> unrolling recursion, we examagined the recursion tree of the algorithm, same idea as above, but we used the identity for geometric sums to simpify the equation. resulting in algorithms running in $o(n^{log{q}})$</li>
+            <li><b>problems:</b> you're encouraged to apply similar techniques when evaluating <a href="#">closest pair of points</a>, and <a href="#">karatsuba multiplication</a> </li>
           </ul>
           <li class="txt-style">Similar D&C Algorithms, only 1 node per level in recursion tree.</li>
           <ul>
@@ -372,44 +371,27 @@ title: cscb63
       </div>
     </div-->
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading1">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-              Week 1: September 11th - Greedy Algorithms 
+              Week 1: January 14th - Time Complexity Practice 
           </button>
         </h5>
       </div>
   
-      <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
+      <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion">
         <div class="card-body">
-          This week we covered the MST problem (KT Pg.142-149), and how it can be solved with Prims and Kruskals, along with the correctness proof for these.
-          <li class="txt-style">Prim's Algorithm</li>
+          This week we covered some techniques for proving time complexity bounds on some expressions. I <b>highly</b> recommend reading <a href="http://www.cs.toronto.edu/~vassos/teaching/c73/handouts/brief-complexity.pdf">Vassos's notes</a> for a refresher!
           <ul>
-            <li><b>Idea:</b> Push edges from an arbitrary on a min heap, iteratively select the smallest weighted edge which is a part of our solution.</li>
-            <li><b>Time Complexity:</b> $O(|E| \cdot \log(V))$ with an adjacency list and binomial heap, varies with <a href="https://en.wikipedia.org/wiki/Prim%27s_algorithm">implementation.</a></li>
-            <li><b>Fun Fact</b> The graph <i>must</i> be connected, otherwise will only find MST in one of the components.</b></li>
-          </ul>
-          <li class="txt-style">Kruskal's Algorithm</li>
+          <li class="txt-style">Problems</li>
           <ul>
-            <li><b>Idea:</b> Sort edges by least weight, use a <a href="">disjoint set</a> data structure to iteratively select the smallest weighted edge that is a part of our solution.</li>
-            <li><b>Time Complexity:</b> $O(|E| \cdot \log(V))$, depending on DS implemention, can assume we use path compression and union by rank.</li>
-            <li><b>Fun Fact:</b> If the graph <i>isn't</i> connected, will generate a minimum spanning forest (a collection of trees!).</b></li>
+            <li>Draw a 2D table with column headers and row headers both being: ln(n), lg(n), lg(n^2), (lg n)^2, n, n*lg(n), 2^n, 2^(3n) </li>
           </ul>
-          <li class="txt-style">Correctness</li>
-          <ul>
-            <li><b>Tree theorem:</b> Need to prove that an MST is a tree</li> 
-            <li><b>Cut Theorem:</b> Need to prove that greedily choosing the smallest edge at each iteration of the algorithm, will result in an MST.</li> 
-          </ul>
-          <li class="txt-style">Challenge Problems</li>
-          <ul>
-            <li><a href="tut3/gas-station.pdf">Gas-Station Refueling</a></li>
-            <li><a href="https://wcipeg.com/problem/acmtryouts3c">A Subtle Surf</a></li>
-            <li><a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=531">Superbull</a></li>
-          </ul>
+
         </div>
       </div>
-    </div-->
+    </div>
 
     <div class="card">
       <div class="card-header" id="heading0">
