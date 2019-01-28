@@ -345,6 +345,23 @@ title: cscb63
       <div id="collapse2" class="collapse show" aria-labelledby="heading2" data-parent="#accordion">
         <div class="card-body">
           Quiz 1 to be handed back next week. Went over insert/delete options on AVL trees, here's a useful <a href="http://www.cs.toronto.edu/~toni/Courses/265-2010/handouts/avl.pdf">reference</a>.
+          <ul>
+          <li class="txt-style">Quiz Solution</li>
+          <ul>
+            <li> <b>Prove/disprove</b> $\sqrt{n} \in \Omega(\log{n^{100}})$ </br>
+              $\sqrt{n} \in \Omega(\log{n^{100}}) \iff \exists c > 0, \exists n_0 > 0 \text{ s.t } \forall n \geq n_0 \sqrt{n} \geq c \cdot \log{n^{100}}$ </br>
+              $\sqrt{n} \geq c \cdot \log{n^{100}}$ </br>
+              $\sqrt{n} \geq c \cdot 100 \cdot \log{n}$ (log rules) </br>
+              Choose $n_0 = 10, c = \frac{1}{100}$, $\therefore$ statement holds and $\sqrt{n} \in \Omega(\log{n^{100}})$ 
+            </li>
+            <li> <b>Prove/disprove</b> $\sqrt{n} \in \Omega(\log{n^{n}})$</li>
+              $\sqrt{n} \in \Omega(\log{n^{n}}) \iff \exists c > 0, \exists n_0 > 0 \text{ s.t } \forall n \geq n_0 \sqrt{n} \geq c \cdot \log{n^{n}}$ </br>
+              $\sqrt{n} \geq c \cdot \log{n^{n}}$ </br>
+              $\sqrt{n} \geq c \cdot n \cdot \log{n}$ (log rules) </br>
+              $ 1 \geq c \cdot \sqrt{n} \cdot \log{n}$ (divide by $\sqrt{n}$ both sides) </br>
+              This statement is a contradiction, because suppose we choose $n_0 > 1$, can always choose some $n > n_0$ such that the inequality doesn't hold. 
+              $\therefore \sqrt{n} \notin \Omega(\log{n^{n}})$
+          </ul>
         </div>
       </div>
     </div>
