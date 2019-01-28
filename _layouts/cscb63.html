@@ -333,43 +333,21 @@ title: cscb63
       </div>
     </div-->
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading2">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-              Week 2: September 18th - Divide and Conquer Algorithms I
+              Week 2: January 28th - AVL tree insert/deletion 
           </button>
         </h5>
       </div>
   
       <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
         <div class="card-body">
-          This week discussed approaches for finding runtime in Divide & Conquer Algorithms (KT 5.1-5.2).
-          <li class="txt-style">Merge sort</li>
-          <ul> 
-            <li><b>Recurrence:</b> $T(n) = 2 \cdot T(\frac{n}{2}) + c \cdot n $</li>
-            <li><b>Approach 1:</b> Unrolling recursion, we examined the recursion tree of the algorithm. 
-              <ul>
-                <li>We calculated the amount of work done per node to be $\frac{c \cdot n}{2^{i}}$
-                <li>There were $2^{i}$ nodes per level, so overall work was $2^{i} \cdot \left( \frac{c \cdot n }{2^{i}} \right) = c \cdot n$</li>
-                <li>There are $\log{n}$ levels since it's a perfect binary tree, so overal time complexity was $\sum_{i=0}^{\log{n}} c \cdot n = O(n\log{n})$</li> 
-              </ul>
-            <li><b>Approach 2:</b> Backsubstituion, we took a <i>wild</i> guess that the algorithm would run in $O(n\log(n))$, then proved this through induction. Important step in proof involved logarithm identities.</li>
-          </ul>
-          <li class="txt-style">similar d&c algorithms, that create more nodes per level in the recursion tree.</li>
-          <ul>
-            <li><b>recurrence:</b> $t(n) = q \cdot t(\frac{n}{2}) + c \cdot n, q > 2$ </li>
-            <li><b>approach:</b> unrolling recursion, we examagined the recursion tree of the algorithm, same idea as above, but we used the identity for geometric sums to simpify the equation. resulting in algorithms running in $o(n^{log{q}})$</li>
-            <li><b>problems:</b> you're encouraged to apply similar techniques when evaluating <a href="#">closest pair of points</a>, and <a href="#">karatsuba multiplication</a> </li>
-          </ul>
-          <li class="txt-style">Similar D&C Algorithms, only 1 node per level in recursion tree.</li>
-          <ul>
-            <li><b>Recurrence:</b> $T(n) = T(\frac{n}{2}) + c \cdot n$</li>
-            <li><b>Approach:</b>Unrolling recursion, similar idea as above, using geometric sum, resulting in algorithms running in $O(n)$</li>
-          </ul>
+          Quiz 1 to be handed back next week. Went over insert/delete options on AVL trees, here's a useful <a href="http://www.cs.toronto.edu/~toni/Courses/265-2010/handouts/avl.pdf">reference</a>.
         </div>
       </div>
-    </div-->
+    </div>
 
     <div class="card">
       <div class="card-header" id="heading1">
