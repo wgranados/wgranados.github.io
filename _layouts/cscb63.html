@@ -235,114 +235,107 @@ title: cscb63
       </div>
     </div-->
 
-    <!--div class="card">
+    <div class="card">
       <div class="card-header" id="heading6">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
-              Week 6: October 16th - Dynamic Programming II 
+              Week 5: February 11th - MST Algorithms and Dijkstras 
           </button>
         </h5>
       </div>
   
-      <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordion">
+      <div id="collapse6" class="collapse show" aria-labelledby="heading6" data-parent="#accordion">
         <div class="card-body">
-          Today we covered the classic LCS and LIS problems, <a href="http://www.cs.mun.ca/~kol/courses/2711-w08/dynprog-2711.pdf">resources</a>.
-          <ul> 
-            <li class="txt-style">LCS</li>
-            <ul> 
-              <li><b>Problem:</b> Given two strings $X,Y$, find the longest common subsequence of characters. </li>
-              <li><b>Example:</b> X,Y = TGACTA, GTGCATG, LCS = len(TCGA) = 4</li> 
-              <li><b>Idea:</b> Find best LCS on $x_1, \dots, x_{i-1}$ and $y_1, \dots , y_{j-1}$, try to improve LCS by ending on $x_i, y_j$</li> 
-              <li><b>DP Recurrence:</b> $DP[i][j] = \text{LCS from } x_1, \dots, x_i \text{ and } y_1 , \dots y_j $
-              </br> $DP[i][j] =\begin{cases} DP[i-1][j-1]+1, & \text{if $x_i=x_j$}.\\ max \{DP[i-1][j] , DP[i][j-1]\}, & \text{otherwise} \end{cases}$
-              </li>
-              <li><b>Runtime:</b> $O(N \cdot M)$, in terms of length of both strings</li>
-            </ul>
+          Today we covered the MST problem, and how it can be solved with prims, kruskals, and dijkstras briefly. Here's examples for <a href="tut3/mst.cpp">MST</a> and <a href="tut3/dijkstra.cpp">Dijkstras</a>.
+          <b>Next quix requires dijkstra</b>
+
+          <li class="txt-style">Prim's algorithm</li>
+          <ul>
+            <li><b>idea:</b> push edges from an arbitrary on a min heap, iteratively select the smallest weighted edge which is a part of our solution.</li>
+            <li><b>time complexity:</b> $o(|e| \cdot \log(v))$ with an adjacency list and binomial heap, varies with <a href="https://en.wikipedia.org/wiki/prim%27s_algorithm">implementation.</a></li>
+            <li><b>fun fact</b> the graph <i>must</i> be connected, otherwise will only find mst in one of the components.</b></li>
           </ul>
-          <li class="txt-style">LIS</li>
-          <ul> 
-            <li><b>Problem:</b> Given an unsorted array A, find the longest increasing subsequence of characters. </li>
-            <li><b>Example:</b> A=[7,3,8,5,2,6], LIS = len([3,4,6]) = 3</li> 
-            <li><b>Approach 1:</b> Reduce to LCS by sorting S=A, then running LCS(A, S) </li> 
-            <li><b>Approach 2:</b> Calculate LIS ending at $a_i$, then LIS must be some subset $\{a_1, \dots a_{i-1} \} \cup a_i$ </li> 
-            <li><b>DP Recurrence:</b> $\text{DP[i] = longest LIS ending at } a_i$  
-            </br> $DP[i] = 1 + max(\{DP[j] | 1 \leq j \leq i \land a_j < a_i\})$
-            </li>
-              <li><b>Runtime:</b> $O(N^2)$, for looping through array and finding best LIS on $a_1, \dots , a_{i-1}$</li>
+          <li class="txt-style">Kruskal's algorithm</li>
+          <ul>
+            <li><b>idea:</b> sort edges by least weight, use a <a href="">disjoint set</a> data structure to iteratively select the smallest weighted edge that is a part of our solution.</li>
+            <li><b>time complexity:</b> $o(|e| \cdot \log(v))$, depending on ds implemention, can assume we use path compression and union by rank.</li>
+            <li><b>fun fact:</b> if the graph <i>isn't</i> connected, will generate a minimum spanning forest (a collection of trees!).</b></li>
           </ul>
-        </ul>
+          <li class="txt-style">Dijkstras's algorithm</li>
+          <ul>
+            <li><b>idea:</b> Keep track of best results seen so far when reaching a node, and ensure that we're always expanding the nodes in the cheapest way. Solves cheapest path in weighted graph.</li> 
+            <li><b>time complexity:</b> $o(|e| + v \cdot \log(v))$, depending on ds implemention for finding cheapest node to expand, can use priority queue.</li>
+          </ul>
+          <li class="txt-style">Challenge problems</li>
+          <ul>
+            <li><a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=531">superbull</a></li>
+            <li><a href="https://wcipeg.com/problem/graph3p2">shortestpath</a></li>
+          </ul>
         </div>
       </div>
-    </div-->
+    </div>
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading4">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
-              Week 4: October 2nd - Dynamic Programming  I
+              Week 4: February 4th - BFS and DFS Search trees 
           </button>
         </h5>
       </div>
   
       <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
         <div class="card-body">
-          Today we covered  Chain Matrix Multiplication
-          <li class="txt-style">Overview</li>
-          <ul> 
-            <li><b>Problem:</b> Compute chain matrix multiplication with minimum number of scalar multiplications.</li>
-            <li><b>Implicit Tree:</b> Can represent computation as tree structure, where leaves are matricies, and intermediate nodes are results, and root is final result.</li>
-            <li><b>Idea:</b> From implicit tree structure, notice we choose $k, s.t \, i \leq k \leq j$, as our tree spliter.</li>
-            <li><b>Observation:</b> Can represent matricies dimensions as unique $m_0, m_1, \dots , m_{n-1}, m_n$, where $A_1 = \mathbb{R}^{m_0 \cdot m_1}$, $A_2 = \mathbb{R}^{m_1 \cdot m_2}, etc.$ </li>
-            <li><b>DP Recurrence:</b> $DP[i][j] = \text{min # mults in } A_i, \dots, A_j, \text{where } i < j$
-            </br> $DP[i][j] =\begin{cases} 0, & \text{if $i=j$}.\\ min_{i \leq k \leq j} {DP[i][k] + DP[k+1][j] + m_{i-1}\cdot m_k \cdot m_j}, & \text{if i < j}. \end{cases}$
-            </li>
+          Today we covered representation of graphs, bfs and dfs search trees, here's a <a href="tut3/W8_BFS_DFS.pdf">really great document</a> I created a while ago
+          <li class="txt-style">Breadth First Search</li>
+          <ul>
+            <li>BFS expands the nearest neighbours first, and can be used for shorest path problem on unicost graphs.</li>
+            <li>BFS tree is explores per layer, and can be generally implemented with a queue data structure</li>
+            <li>Tree generally looks complete, as it fills out layer per layer</li>
           </ul>
+          <li class="txt-style">Depth First Search</li>
+          <ul>
+            <li>DFS expands and explores most recent node, and can be used for finding a path problem on any graph.</li>
+            <li>DFS tree is created at length, and can be generally implemented with a queue data structure</li>
+            <li>Tree generally looks longs, similar to a linked list, since it goes deep.</li>
+          </ul>
+
         </div>
       </div>
-    </div-->
+    </div>
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading3">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
-              Week 3: September 25th - Divide and Conquer Algorithms  II
+              Week 3: Janurary 28th - Weight balanced tree insert/deletion 
           </button>
         </h5>
       </div>
   
       <div id="collapse3" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
         <div class="card-body">
-          Today we covered some more solving different recurrences, and designing a D&C solution for a problem.
-          <li class="txt-style">Recurrences</li>
-          <ul> 
-            <li>$T(n) = 4 \cdot T(\frac{n}{8}) + c \cdot n, T(1) = 1$, we proved $T(n) \in O(n)$ using back substituion.</li>
-            <li>$T(n) = 2 \cdot T(\frac{n}{4}) + \log{n}, T(1) = 1$, we proved $T(n) \in O(\sqrt{n})$ using back substituion.</li>
-          </ul>
-          <li class="txt-style">Master Theorem</li>
+          Today we covered two rotations that are used in weight balanced trees for insertion and deletion, which can be found <a href="http://www.utsc.utoronto.ca/~bretscher/b63/lectures/w3/wbt.pdf">here</a> 
+          <li class="txt-style">Weight Balanced Trees</li>
           <ul>
-            <li>Solves recurrences of the form $T(n) = a \cdot T(\frac{n}{b}) + c \cdot n^d$, $T(1) = \text{some constant}$</li>
-            <li>if $a < b^d \implies T(n) = \theta(n^d)$</li>
-            <li>if $a = b^d \implies T(n) = \theta(n^d\log{n})$</li>
-            <li>if $a > b^d \implies T(n) = \theta(n^{\log_{b}{n}})$</li>
-          </ul>
-          <li class="txt-style">Challenge Problem</li>
-          <ul>
-            <li>Solved the <a href="http://web.cs.ucdavis.edu/~bai/ECS122A/Maxsubarray.pdf">Maximum subarray problem.</a></li>
-          </ul>
+            <li>Are trees with the invariant for each node: $\frac{1}{3} \leq \frac{node.left+1}{node.right +1} \leq 3$, you're keeping track of the ratio between the number of nodes in the left and right subtrees.</li>
+            <lI>Insertion begins like a normal BST, then you identify infractions for the invariant and execute one of the two rotations on a case by case basis.</lI>
+            <li>When deleting the root, you can replace it with either the successor (smallest node in right subtree) or predecessor(greatest node in left subtree), <b>For this course always choose successor</b> </li>
+          </li>
         </div>
       </div>
-    </div-->
+    </div>
 
     <div class="card">
       <div class="card-header" id="heading2">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-              Week 2: January 28th - AVL tree insert/deletion 
+              Week 2: January 21st - AVL tree insert/deletion 
           </button>
         </h5>
       </div>
   
-      <div id="collapse2" class="collapse show" aria-labelledby="heading2" data-parent="#accordion">
+      <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
         <div class="card-body">
           Quiz 1 to be handed back next week. Went over insert/delete options on AVL trees, here's a useful <a href="http://www.cs.toronto.edu/~toni/Courses/265-2010/handouts/avl.pdf">reference</a>.
           <ul>
