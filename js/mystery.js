@@ -43,3 +43,31 @@ function populate(){
     }
 
 }
+
+
+function hidemonty() {
+    var x = document.getElementById("monty");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+function hidebirthday() {
+    var x = document.getElementById("birthday");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+function hideball() {
+    var x = document.getElementById("ball");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }

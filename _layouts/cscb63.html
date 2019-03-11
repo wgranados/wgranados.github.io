@@ -128,109 +128,161 @@ title: cscb63
       </div>
     </div-->
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading9">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
-              Week 9: November 6th - Network Flow I  
+              Week 9: March 11th - Probability Review  
           </button>
         </h5>
       </div>
   
-      <div id="collapse9" class="collapse " aria-labelledby="heading9" data-parent="#accordion">
+      <div id="collapse9" class="collapse show" aria-labelledby="heading9" data-parent="#accordion">
         <div class="card-body">
-          This week we covered a famous theorem used in Network Flow problems, more resources <a href="http://web.math.ucsb.edu/~padraic/mathcamp_2011/flows_graphs/MC2011_flows_graphs_wk2_day2.pdf">here</a>.
-          <ul> 
-            <li class="text-style">Halls theorem</li>
-            <ul>
-              <li><b>Thm: </b> Given a bipartite graph $G = (V_1, V_2, E)$, and $|V_1| = |V_2|$. 
-                Then $G$ has a perfect matching iff $\forall S \subset V_1 , |S| \leq |N(S)|$. </li>
-              <li><b>Proof Idea:</b>We can model a bipartite graph as a network flow problem my mapping the given input graph into a flow graph,
-                from this flow graph we can apply FF to give a lower bound on the max flow (or min cut) of the graph,
-                from their we can apply breakdown the problem into some set S containing $V_1$, 
-                and $\bar S$ containing $V_2$. We calculate the flow on each half, and bound it above by 
-                the properties we know.</li>
-            </ul>
-          </ul>
+            Today we went over the following problems. Midterms will be handed back starting next week, or duing my own office hours
+            this week Friday 11-3pm. <br></br>
+
+
+
+            <h2>Monty Hall</h2>
+            
+            <p>There are 3 doors. Behind one door is the prize, behind the other two doors are
+            empty (or goats, whatever). First you choose one door. Then the game host opens
+            a door, but not what you choose, and not the prize door (the game host
+            knows). The game host now offers you the choice of staying with your first
+            choice or switching to the remaining door.</p>
+            
+            <p>(a) What is the probability that the prize is behind your first choice?</p>
+            <p>(b) What is the probability that the prize is behind the remaining door?</p>
+            
+            <script src="{{ base.url | prepend: site.url }}/js/mystery.js"></script>
+            <center><button onClick={hidemonty()}>show answer</button></center>
+
+            <div id="monty" style="display: none;">
+              <b>Answer</b>
+              <p>Label the doors #1, #2, and #3, and assume the prize is behind #1 without loss
+              of generality (you can always re-do this for #2 and #3). </p>
+              <p>You are equally likely to choose any of the doors. </p>
+              
+              <ul>
+                <li>Case 1 with probability 1/3: You choose #1. It has the prize. The game host
+                opens #2 or #3, but neither has the prize.</li>
+                <li>Case 2 with probability 1/3: You choose #2. The game host opens #3. The prize
+                is behind the remaining door.</li>
+                <li>Case 3 with probability 1/3: You choose #3. The game host opens #2. The prize
+                is behind the remaining door.</li>
+                <li>There is one case where the prize is behind your first choice. The probability
+                of this case is 1/3. </li>
+                <li>There are two cases where the prize is behind the remaining door. The total
+                probability of these two cases is 2/3.</li>
+                <li>It is possible to instead assume you choose #1 but the prize location varies.
+                A similar case analysis and the same answer.</li>
+              </ul>
+            </div>
+            
+            <h2>The Assignment Due Date Paradox</h2>
+            
+            <p>You're taking 4 courses. All four Assignment 1's are due in week 4. Each prof
+            independently chooses one weekday (Monday to Friday) for the due date.</p>
+            
+            <p>(a) How many ways are there overall?</p>
+            <p>(b) How many ways are there such that all 4 assignments are due on different
+            days, i.e., no two assignments are due on the same day? And so what is the
+            probability that this happens?</p>
+            <p>(c) How many ways are there such that at least two assignments are due on the
+            same day? And probability?</p>
+            <p> (d) You always have two assignments due on the same day, or two midterms on the
+            same day. Is that conspiracy? Or just probability? :) </p>
+
+            <center><button onClick={hidebirthday()}>show answer</button></center>
+
+            <div id="birthday" style="display: none;">
+              <p> (a) Answer: Each assignment has 5 choices. Altogether 5*5*5*5, i.e., 5^4, 625. </p>
+              <p> (b) Answer: </p>
+              <p># of ways: 5*4*3*2 = 120. </p>
+              <p>Probability: 120/625 = 0.192, less than 1/5.</p>
+              <p> (c) Answer: </p>
+              <p># of ways: 625 - 120 = 505.</p>
+              <p>Probability: 505/625 (equivalently 1 - 0.192) = 0.808, more than 4/5.</p>
+              <p>(d) Answer: Open-ended discussion. May lament on how the profs don't try to
+              coordinate among themselves and spread things out, but they definitely didn't
+              conspire to clash! But why don't your exams clash? Because the registrar's
+              office actually looks at everyone's courses and minimizes clashes globally.
+              It is actually quite difficult...</p>
+            </div>
+            
+            
+            <h2>The ith Ball</h2>
+            
+            <p>There are 6 red balls and 9 blue balls in a bag; when you draw a ball from the
+            bag, each ball in the bag is equally likely drawn. Randomly draw 3 balls from
+            the bag without replacement---after a ball is drawn, do not put it back into the
+            bag. Find the probability that the ith ball, ($1 \leq i \leq 3$), is one of the red
+            balls.</p>
+            
+            <center><button onClick={hideball()}>show answer</button></center>
+
+            <div id="ball" style="display: none;">
+              <b>Answer:</b>
+              
+              <p>It will be 6/15 = 2/5, the proportion of red balls, does not even care what i
+              is. There are two ways to see this:</p>
+              
+              <p>Method 1: Very slick but some people may doubt it. Choose a ball for the ith
+              slot first --- 2/5 probability it's red --- then the other 2 draws don't matter.</p>
+              
+              <p>pethod 2: This justifies the above.</p>
+              
+              <p>The probability is the ratio between:</p>
+              
+              <p>* permutations of 3 balls out of 15 balls such that the ith ball is red</p>
+              
+                  <p>6 ways to make the ith slot red, then 14P2 ways to fill the other 2 slots.
+                  14P2 = 14*13 (14 ways for one slot, then 13 ways for the other)
+                  You may have seen the formula 14!/(14-2)!</p>
+              
+                  <p>6 * 14P2 = 6 * 14 * 13</p>
+              
+              <p>* permutations of 3 balls out of 15 balls, no condition</p>
+              
+                  <p>15P3 = 15*14*13 (15 ways for 1st slot, 14 for 2nd, 13 for 3rd)
+                  You may have seen the formula 15!/(15-3)!</p>
+              
+              <p>The ratio: (6*14*13)/(15*14*13) = 6/15 </p>
+              
+            </div>
         </div>
       </div>
-    </div-->
+    </div>
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading2">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
-              Week 8: October 30th - Midterm Solutions 
+              Week 8: March 4th - Amortized Analysis II 
           </button>
         </h5>
       </div>
   
       <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordion">
         <div class="card-body">
-          Today we went over the solutions for the midterm. 
-          <ul>
-            <li class="txt-style">Q1</li>
-            <ul>
-              <li><b>Problem: </b>Given processing times $p_1, \cdots, p_n$, find ordering of $\pi$, s.t $ p_{\pi(1)}, \dots p_{\pi(n)}$ minimizes the cost function $C(j) = \sum_{i=0}^{j} p_{\pi(i)}, $ for the average completion time, $ \frac{1}{n} \cdot \sum_{j=0}^{n} C(j)$</li>
-              <li><b>Solution: </b>Sort by processing time.</li>
-              <li><b>Proof: </b> Let $G = g_1, \cdots, g_n$ be the output from our greedy solution, 
-                and $O = o_1, \cdots, o_n$ be <b>any</b> optimal solution such that, $G \neq O$.  Choose $r > 0$ such that  
-                $o_r \neq g_r$, then $o_r > g_r$ by way G is constructed. 
-                Consider swapping $o_r$ with $min\{o_k|k > r\}$, lets call this $O'$, 
-                then $\sum_{j=r}^{k} C(j) \text{ on } O' \leq \sum_{j=r}^{k} C(j) \text{ on } O$, because $(k-r) \cdot o_k \leq (k-r) \cdot o_r$. 
-                This does not affect the processing times of $C(j-1), C(k+1)$, and reduces the average running time by $\frac{(k-r)*(o_r-o_k)}{n}$ and can be done 
-                repeatedly to create a better solution similar to $G$, no worse than $O$.
-                </li>
-                
-            </ul>
-            <li class="text-style">Q2</li>
-            <ul>
-              <li><b>Problem: </b> Given N lines bounded by a rectangular box, starting from the bottom of the box, and ending at the top of the box. Count the number of intersections.</li>
-              <li><b>Possible Solution: </b> Consider labeling the lines base on their left to right order on the top of the box, from 1..n, resulting in a set S. 
-                Now order this set based on each lines left to right order on the bottom of the box. Define an inversion on S as a pair $i,j$ such that $i < j, S(i) > S(j)$. 
-                Now count the the inversions on this list using the $O(nlogn)$ Divide and Conquer algorithm described in KT 5.3.</li>
-            </ul>
-            <li class="text-style">Q3</li>
-            <ul>
-              <li><b>Problem: </b>Find largest strictly increasing then strictly decreasing subsequence in an array A.</li>
-              <li><b>Solution: </b>Observe that a strictly decreasing subsequence is simply an increasing subsequence if we look backwards from the array. Calculate LIS forwards and backwards on A. Inductively, since we've defined LIS to be the longest subsequence ending at i, we can run through both arrays and take the maximum of $LIS_{fwd}+LIS_{bwd}-1$</li>
-            </ul>
-            <li class="text-style">Q4</li>
-            <ul>
-              <li><b>Problem: </b> Calculate max IDS on a graph connected with triangular components.</li>
-              <li><b>Solution: </b> let i be the ith triangular component, $a_i$ be the node connecting components $i \to i+1$, $b_i, c_i$ by other nodes in the component. 
-                If we select $a_i$, then we cannot select component $i-1$, $b_i$, or $c_i$, so must select $a_i$ and best IDS upto compontent $i-2$. 
-                If we do not select $a_i$, we should take $max(b_i, c_i)$, since these nodes are indepedent from component $i-1$ we can simply select the best IDS upto component $i-1$. </li>
-            </ul>
-          </ul>
-          </ul>
+          Today we covered potential method for incrementing example in CLRS, as well as special queue example.
         </div>
       </div>
-    </div-->
+    </div>
 
-    <!---div class="card">
+    <div class="card">
       <div class="card-header" id="heading7">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
-              Week 7: October 23 - Dynamic Programming III 
+              Week 7: Februrary 25 - Amortized Analysis I  
           </button>
         </h5>
       </div>
   
       <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordion">
         <div class="card-body">
-          Today we covered Maximum Independent Set (Path)
-          <ul> 
-            <li><b>Problem:</b> Given a graph G=(V,E), a path is $v_1, v_2, \dots, v_n $ s.t $v_i, v_j$ are connected if $|i-j|=1$. Each vertex has a weight $w_i$. Find set in a path G, with largest weight and no adjacent nodes.</li>
-            <li><b>Example:</b> Given a path [1,8,6,3,6], MIS = 14 (8+6) </li>
-            <li><b>Approach 1:</b> Greedily choose highest value node, delete adjacent nodes, repeat. Does this work? <span class="spoiler">No. Counter example: [7,8,7,1]</span></li> 
-            <li><b>Approach 2:</b> Greedily choose all odd or even indecies since maximum number of values. Does this work? <span class="spoiler">No. Check first example.</span> 
-            <li><b>Approach 3:</b> Find best IDS on $x_1, \dots, x_{i-1}$, looking ahead if $w_i$ improves solution, then must require best IDS from $x_1, \dots, x_{i-2}$, otherwise don't include and IDS is max IDS from $x_1, \dots, x_{i-1}$
-            <li><b>DP Recurrence:</b> $DP[i] = max(DP[i-1], DP[i-2] + w_i)$</li>
-            <li><b>Runtime:</b> $O(N)$</li>
-            <li><b>Note:</b> The problem for complete graphs is NP-hard, so unlikely that a polynomial algorithm exists.</li>
-
-          </ul>
+          Today we covered agregrate and accounting method for the incrementing example problem in CLRS.
         </div>
       </div>
     </div-->
@@ -244,7 +296,7 @@ title: cscb63
         </h5>
       </div>
   
-      <div id="collapse6" class="collapse show" aria-labelledby="heading6" data-parent="#accordion">
+      <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordion">
         <div class="card-body">
           Today we covered the MST problem, and how it can be solved with prims, kruskals, and dijkstras briefly. Here's examples for <a href="tut3/mst.cpp">MST</a> and <a href="tut3/dijkstra.cpp">Dijkstras</a>.
           <b>Next quiz requires Dijkstra!</b>
