@@ -10,7 +10,7 @@ function getSolution() {
     crunchy.src ="https://www.sante.com.pl/wp-content/uploads/2017/07/Crunchy_Bar_with_nuts_and_almonds_35g-Sante.jpg"
     const sln = document.getElementById("sln");
     const par = sln.parentNode;
-    par.replaceChild(cruncy, sln);
+    par.replaceChild(crunchy, sln);
 }
 
 function populate(){
