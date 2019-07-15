@@ -1,14 +1,16 @@
 function getSolution() {
     console.log("you have been gnomed!")
-    var vid = document.createElement("iframe");
-    vid.setAttribute("src", "https://www.youtube.com/embed/6n3pFFPSlW4?autoplay=1");
-    vid.setAttribute("width", "560");
-    vid.setAttribute("height", "315");
-    vid.setAttribute("frameborder", "0");
-    vid.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+    // var vid = document.createElement("iframe");
+    // vid.setAttribute("src", "https://www.youtube.com/embed/6n3pFFPSlW4?autoplay=1");
+    // vid.setAttribute("width", "560");
+    // vid.setAttribute("height", "315");
+    // vid.setAttribute("frameborder", "0");
+    // vid.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+    var crunchy = document.createElment("img");
+    crunchy.src ="https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjY3ZWY0LXjAhWkmOAKHZNMCb0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.sante.com.pl%2Fproducts%2Fcrunchy-bar-nuts-almonds-35g%2F&psig=AOvVaw0K2_urxW4y5DA7ntFu3TE7&ust=1563235499212202"
     const sln = document.getElementById("sln");
     const par = sln.parentNode;
-    par.replaceChild(vid, sln);
+    par.replaceChild(cruncy, sln);
 }
 
 function populate(){
