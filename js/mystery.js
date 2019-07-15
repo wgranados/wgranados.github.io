@@ -1,12 +1,12 @@
 function getSolution() {
-    console.log("you have been gnomed!")
+    //console.log("you have been gnomed!")
     // var vid = document.createElement("iframe");
     // vid.setAttribute("src", "https://www.youtube.com/embed/6n3pFFPSlW4?autoplay=1");
     // vid.setAttribute("width", "560");
     // vid.setAttribute("height", "315");
     // vid.setAttribute("frameborder", "0");
     // vid.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
-    var crunchy = document.createElment("img");
+    var crunchy = document.createElement("img");
     crunchy.src ="https://www.sante.com.pl/wp-content/uploads/2017/07/Crunchy_Bar_with_nuts_and_almonds_35g-Sante.jpg"
     const sln = document.getElementById("sln");
     const par = sln.parentNode;
