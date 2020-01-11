@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LEEKSPIN!!</title>
+  <style>
+    .leekspin {
+      cursor: url({{ site.url | append: page.url}}/assets/leekspin/leek.png),
+      url(hyper.cur),
+      pointer;
+    }
+
+    img {
+      border-radius: 50%;
+      -webkit-transition: -webkit-transform .8s ease-in-out;
+      transition: transform .8s ease-in-out;
+    }
+
+    img:hover {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  </style>
+  <script>
+
+    var time
+    var output
+
+    function Init() {
+      time = 1;
+      StartTimer()
+    }
+
+    function convertOutput() {
+      var hours = 0
+      var mins = 0
+      var secs = time
+
+      while (secs >= 60) {
+        secs -= 60;
+        mins += 1;
+      }
+
+      if (secs < 10) {
+        secs = "0" + secs;
+      }
+
+      while (mins >= 60) {
+        mins -= 60;
+        hours += 1;
+      }
+
+      if (mins < 10) {
+        mins = "0" + mins;
+      }
+
+      output = hours + ":" + mins + ":" + secs;
+    }
+
+    function StartTimer() {
+      time += 1;
+      convertOutput();
+      document.getElementById("time").innerHTML = output;
+      self.setTimeout("StartTimer()", 1000);
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <body onLoad="javascript:Init()" bgcolor="white">
+    <center>
+      <h2>LEEK SPIN!</h2>
+    </center>
+    <div class="leekspin">
+      <center>
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+      </center>
+    </div>
+    <div class="leekspin">
+      <center>
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+        <img src="{{ site.url | append: page.url}}/assets/leekspin/leekspin.gif" alt="leekspin"
+          style="width:304px;height:228px;">
+      </center>
+      </div-->
+
+      <div style="text-align:center; color:black; font-size:14pt; font-weight:bold">
+        You've been spinning for <span id="time">00:00:00</span>.
+      </div>
+
+      <div style="visibility:hidden">
+        <audio autoplay loop>
+          <source src="{{ site.url | append: page.url}}/assets/leekspin/loituma.mp4">
+        </audio>
+  </body>
+
+</html>
