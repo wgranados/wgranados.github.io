@@ -1,5 +1,5 @@
 function getSolution() {
-  onsole.log("you have been gnomed!")
+  console.log("you have been gnomed!")
   var vid = document.createElement("iframe");
   vid.setAttribute("src", "https://www.youtube.com/embed/6n3pFFPSlW4?autoplay=1");
   vid.setAttribute("width", "560");
