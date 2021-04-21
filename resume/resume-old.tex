@@ -1,0 +1,252 @@
+			% resume.tex
+% vim:set ft=tex spell:
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[letterpaper,margin=0.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{mdwlist}
+\usepackage{sectsty}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{tgpagella}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=black,
+}
+% sentence spacing to be slight better
+\usepackage{setspace}
+
+
+% \onehalfspacing
+% \singlespacing
+\setstretch{1.05}
+
+\usepackage{calc}  
+\usepackage{enumitem}  
+
+\pagestyle{empty}
+\setlength{\tabcolsep}{0em}
+
+% indentsection style, used for sections that aren't already in lists
+% that need indentation to the level of all text in the document
+\newenvironment{indentsection}[1]%
+{\begin{list}{}%
+		{\setlength{\leftmargin}{#1}}%
+		\item[]%
+	}
+	{\end{list}}
+
+% opposite of above; bump a section back toward the left margin
+\newenvironment{unindentsection}[1]%
+{\begin{list}{}%
+		{\setlength{\leftmargin}{-0.5#1}}%
+		\item[]%
+	}
+	{\end{list}}
+
+% format two pieces of text, one left aligned and one right aligned
+\newcommand{\headerrow}[2]
+{\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
+		#1 &
+		#2 \\
+\end{tabular*}}
+% format three piexes of text on the same line
+\newcommand{\headerrowthree}[3]
+{\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
+		#1 &
+		#2 &
+		#3 \\
+\end{tabular*}}
+
+% make "C++" look pretty when used in text by touching up the plus signs
+\newcommand{\CPP}
+{C\nolinebreak[4]\hspace{-.05em}\raisebox{.22ex}{\footnotesize\bf ++}}
+
+\newcommand{\ts}{\textsuperscript}
+
+
+
+% and the actual content starts here
+\begin{document}
+	
+	\begin{center}
+		{\LARGE \textbf{William Granados}}
+		\ \vspace{0.2em}
+		\ \\ \textbf{Location} Toronto, Canada\ \ \textbullet
+		\ \textbf{Phone} \href{tel:16477418751}{+1(647) 741-8751}\ \ \textbullet
+		\ \textbf{Email}  \href{mailto:me@wgma.ca}{me@wgma.ca}
+		%  \textbf{Summoner} \href{https://na.op.gg/summoner/userName=wgmeister}{wgmeister}
+		\  % \textbf{Twitter} \href{https://twitter.com/wgma00}{@wgma00}
+		\\ \ \textbf{LinkedIn} \href{https://linkedin.com/in/wlgranados}{linkedin.com/in/wlgranados} \textbullet
+		\ \textbf{Portfolio} \href{https://wgma.ca}{wgma.ca} \textbullet
+		\ \textbf{Github} \href{https://github.com/wlgranados}{github.com/wlgranados}
+		\ 
+	\end{center}
+	
+	\vspace{-0.3em}
+	\hrule
+	\vspace{-0.4em}
+	\bigskip
+	
+	\begin{tabular}[b]{ll}
+		\begin{minipage}[t]{.47\textwidth}
+			\subsubsection*{\centering{Education}}
+			\headerrow
+			{\textbf{University of Toronto}}
+			{\textbf{Expected: August 2020}}
+			\headerrow
+			{\emph{Candidate Honours BSc, Computer Science and Statistics}}
+			{}
+			\vspace{-1.8em}
+			\begin{itemize}[leftmargin=*]
+				  \setlength\itemsep{0em}
+				\item Courses: OS, Systems, Software Design, HCI, AI, Functional Programming, Compiler Optimization,  Security,  Engineering Large Systems, Regression
+				\item TA: Intro to CS,  Algorithm Design, Data Structures
+			\end{itemize}
+		\end{minipage}% This must go next to `\end{tabular}`
+	
+		\begin{minipage}[t]{.53\textwidth}
+			\subsubsection*{\centering{Extracurricular}}
+			\begin{itemize*}
+				 \setlength\itemsep{0.1em}
+				\item  Bronze Medallist, Canadian Computing Olympiad
+				\item  Gold Division, USA Computing Olympiad
+				\item  Honorable mention, East Central NA ICPC
+				\item Student Coach, ICPC team placing 21st of 130 teams
+				\item Organizer,  algorithms contest \textbf{\href{https://utscode.com}{UTSCode}}, 150+ users
+				\item Finalist, 2016 University of Michigan MHacks8 
+			\end{itemize*}
+		\end{minipage}% This must go next to `\end{minipage}`
+	\end{tabular}
+	
+	\vspace{0.4em}
+	\hrule
+	\vspace{-0.4em}
+	
+	
+	\subsubsection*{Employment}
+	
+	\begin{itemize}[label={}, leftmargin=*]
+
+
+
+		\item
+		\headerrow
+		{\textbf{\href{https://www.rbc.com/about-rbc.html}{Royal Bank of Canada}}, Software Developer Intern, Devops Services Team}
+		{\textbf{Toronto, ON}}
+		\\
+		\headerrow
+		{\emph{Tech: Elastic Search, Jenkins, Groovy, Docker, Python, Bash, Openshift, UrbanCodeDeploy, OpenSSL, Aqua}}
+		{\emph{Summer 2019}}
+		\begin{itemize}
+			\setlength\itemsep{0.1em}
+			\item  Proposed and led development for production server deployment pipeline for Beats and Logstash used in monitoring of jmx metrics and logs from Jira \& Jenkins. Overall saved teams hours debugging failing servers
+		
+			\item Automated various tasks for audit and management purposes like deletion of unused permission groups, deletion of backups from IBM TSM  for Github, saving the company approximately \$3000 monthly
+			
+			\item  Volunteered to maintain open source fork of Searx and mentor participants for an internal company innovation challenge. Searx was adopted by several teams to resolve search problems at RBC with chat bots
+			\end{itemize}
+
+
+		\item
+		\headerrow
+		{\textbf{\href{https://rubikloud.com/}{Rubikloud}}, Software Engineer Intern, Platform Engineering Team}
+		{\textbf{Toronto, ON}}
+		\\
+		\headerrow
+		{\emph{Tech: React, Redux, Jenkins, Selenium, Java, Scala, PostgreSQL, Jupyter, Spark, Docker}}
+		{\emph{Summer 2018}}
+		\begin{itemize}
+			\setlength\itemsep{0.1em}
+			\item Developed critical user-facing features (tables and notifications)  requiring React/Redux and resolved several bugs before release. This provided users decreased initial load times speeds by 90\% and beneficial feedback
+			\item Wrote regression tests for ETL pipeline (data layer) using Luigi, Yarn UI, and SQL queries. Also refactored integration tests for application layer using Selenium+Jenkins, identifying  several bugs before release
+			
+			
+
+		\end{itemize}
+
+		
+	\end{itemize}
+
+	\hrule
+	\vspace{-0.4em}
+	\subsubsection*{Personal Projects}
+
+	\begin{itemize}[label={}, leftmargin=*]
+	\parskip=0.1em
+		
+		\item 
+		\headerrow
+		{\textbf{\href{https://wgma.ca/assets/planit-presentation.pdf}{PlanIt}}, Travel Planning Website }
+		{\emph{December 2019}}
+		{\emph{Tech: Java, Spring, HTML, CSS, Thymeleaf, MySQL, MongoDB, Docker, Jira}}
+		\begin{itemize*}
+			\item Negotiated features with product owners, designed user stories and planned out sprint backlog over 2 month time frame. Winner of innovation award for best presentation,  technology, and usability over 10+ other teams 
+			\item  Implemented the REST API for users session handler and reviews system using Java spring and  databases 
+			
+		\end{itemize*}
+	
+	
+		\item
+		\headerrow
+		{\textbf{\href{https://wgma.ca/quadbot}{Quadbot}}, Asynchronous Multiplatform Chat Bot}
+		{\emph{May 2019}}
+		{\emph{Tech: Python, Asyncio, Pytest, Searx, TravisCI, Coveralls, Docker}}
+		\begin{itemize}
+			\setlength\itemsep{0.1em}
+			\item  Supported several communities with commands for  a  \LaTeX \  interpretor, curated search for sites like Steam, Arxiv, etc by designing bot to run on Discord, Slack, and Showdown. Thus engaging users in 10+ rooms
+			\item Automated functional test suite with 80\% test coverage on Travis CI, and created dockerized application allowing for simple deployment and  horizontal scaling across multiple platforms
+
+		\end{itemize}
+
+		
+
+
+		\item
+		\headerrow
+		{\textbf{\href{https://letmeknow.news}{LetMeKnow}}, News Aggregating Website}
+		{\emph{November 2017}}
+		{\emph{Tech: Python, Django, Angular, Javascript, PostgreSQL, Nginx, AWS}}
+		\begin{itemize}
+			\setlength\itemsep{0.07em}
+
+			\item Developed core news insights features using Django for  RESTful API management and PostgreSQL for database queries. Managed hosting/uptime for website with load balancing through Nginx on an AWS EC2 server 
+		\end{itemize}
+	
+		
+		\iffalse  
+			\item 
+		\headerrow
+		{\textbf{\href{https://github.com/wgma00/mobile-waste-wizard}{Mobile Waste Wizard}}, Waste Categorizing Android Application}
+		{\emph{October 2015}}
+				{\emph{Tech: Android, Java}}
+		\begin{itemize*}
+			\item  Redesigned UI by following the Google Material Design guidelines to facilitate search (by text, and voice) 
+
+		\end{itemize*}
+		\fi 
+	
+		
+	\end{itemize}
+
+
+
+	\hrule
+	\vspace{-0.5em}
+
+	\subsubsection*{Technical Skills}
+	\begin{indentsection}{\parindent/2}
+		\hyphenpenalty=1000
+		\begin{description*}
+			\item[Languages/Other:]
+			  C, \CPP, Ruby, Scala, Spring, Haskell, \LaTeX, HTML, CSS, XML, LLVM, Vim, MongoDB, Neo4j
+			\item[Open Source Contributions:] \href{https://github.com/Zarel/Pokemon-Showdown/commits?author=wlgranados}{PokemonShowdown}, \href{https://github.com/matplotlib/matplotlib/commits?author=wlgranados}{Matplotlib}, 
+			\href{}{Pandas}
+		\end{description*}
+	\end{indentsection}
+	
+
+\end{document}
