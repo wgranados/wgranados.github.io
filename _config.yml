@@ -1,5 +1,5 @@
 owner: William Granados
-url: "wlgranados.github.io"
+url: "wgranados.github.io"
 baseurl: ""
 
 # Assets
@@ -9,7 +9,7 @@ sass:
 
 social:
     email: me@wgma.ca
-    github: wlgranados 
+    github: wgranados 
     twitter: wgma00
     linkedin: wlgranados 
     lastfm: wgma00
