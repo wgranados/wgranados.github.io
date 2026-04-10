@@ -3,7 +3,7 @@
 {% include head-default.html %}
 
 <body class="home-body">
-    <div>
+    <main>
         <div class="container home-page">
             <section class="home-hero" aria-label="Introduction">
                 <div class="home-hero-visual">
@@ -28,38 +28,40 @@
                 <a href="{{ '/tutorials' | relative_url }}" class="link home-nav-link">Tutorials</a>
                 <a href="{{ '/work' | relative_url }}" class="link home-nav-link">Work</a>
             </nav>
-            <div class="row h-100 justify-content-center align-items-center home-social-row">
-                <a class="column social-media link" title={{site.social.email}} href="mailto:{{site.social.email}}"
+            <div class="home-social-row">
+                <a class="social-media link" title={{site.social.email}} href="mailto:{{site.social.email}}"
                     aria-hidden="true">
-                    <i class="fa fa-envelope fa-2x"></i>
+                    <i class="fa fa-envelope home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="column social-media link" title={{site.social.github}}
+                <a class="social-media link" title={{site.social.github}}
                     href="https://github.com/{{site.social.github}}">
-                    <i class="fa fa-github fa-2x"></i>
+                    <i class="fa fa-github home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="column social-media link" title={{site.social.linkedin}}
+                <a class="social-media link" title={{site.social.linkedin}}
                     href="https://www.linkedin.com/in/{{site.social.linkedin}}/">
-                    <i class="fa fa-linkedin-square fa-2x"></i>
+                    <i class="fa fa-linkedin-square home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="column social-media link" title={{site.social.twitter}}
-                    href="https://twitter.com/{{site.social.twitter}}/">
-                    <i class="fa fa-twitter fa-2x"></i>
+                {% if site.social.youtube %}
+                <a class="social-media link" title="YouTube" href="{{ site.social.youtube }}">
+                    <i class="fa fa-youtube-play home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="column social-media link" title={{site.social.lastfm}}
-                    href="https://lastfm.com/user/{{site.social.lastfm}}/">
-                    <i class="fa fa-lastfm fa-2x"></i>
-                </a>
-                <a class="column social-media link" title={{site.social.yelp}}
+                {% endif %}
+                <a class="social-media link" title={{site.social.yelp}}
                     href="https://{{site.social.yelp}}.yelp.ca">
-                    <i class="fa fa-yelp fa-2x"></i>
+                    <i class="fa fa-yelp home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="column social-media link" title={{site.social.tripadvisor}}
+                <a class="social-media link" title={{site.social.tripadvisor}}
                     href="https://tripadvisor.com/{{site.social.tripadvisor}}">
-                    <i class="fa fa-tripadvisor fa-2x"></i>
+                    <i class="fa fa-tripadvisor home-social-icon" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
-    </div>
+    </main>
+    <footer>
+        <span>
+            &copy; <time datetime="{{ site.time }}">{{ site.time | date: '%Y' }}</time> {{ site.author.name }}. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme by Chester How.
+        </span>
+    </footer>
 </body>
 
 </html>

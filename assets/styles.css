@@ -1,16 +1,52 @@
+/* Shared header: Tale nav fits four section links without crowding */
+.nav li {
+    padding: 0 0.9rem 0 0;
+}
+
+/* Tutorials page: same vertical padding as Tale .post (nav shadow → title breathing room) */
+.tutorials-page {
+    padding: 3rem 0;
+}
+
+.tutorials-page h1:first-of-type {
+    margin-top: 0;
+}
+
+.tutorials-page h1:not(:first-of-type) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Work page: match tutorials / post vertical rhythm under nav */
+.work-page {
+    padding: 3rem 0;
+}
+
+.work-page #professional-experience > h2:first-of-type {
+    margin-top: 0;
+}
+
 /* --- Home landing (hero, name, nav polish) --- */
+/* Modular scale: name > icons ≈ nav caps > tagline (all fluid for mobile) */
 .home-body {
     background-color: #fff;
 }
 
 .home-page {
-    padding-top: 1.5rem;
-    padding-bottom: 2rem;
+    --home-font-name: clamp(1.6rem, 4.6vw + 0.55rem, 2.85rem);
+    --home-font-tagline: clamp(0.78rem, 1.45vw + 0.42rem, 0.94rem);
+    --home-font-nav: clamp(0.8rem, 1.55vw + 0.42rem, 0.94rem);
+    --home-icon: clamp(1.02rem, 2vw + 0.48rem, 1.2rem);
+    --home-gap-section: clamp(1rem, 2.8vw, 1.35rem);
+    padding-top: clamp(1rem, 3vw, 1.5rem);
+    padding-bottom: clamp(1.25rem, 3vw, 2rem);
+    padding-left: clamp(0.75rem, 4vw, 0);
+    padding-right: clamp(0.75rem, 4vw, 0);
 }
 
 .home-hero {
     text-align: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: var(--home-gap-section);
 }
 
 .home-hero-heading {
@@ -21,10 +57,10 @@
 .name {
     font-family: "Syne", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
     font-weight: 800;
-    font-size: clamp(2rem, 5.5vw, 3.35rem);
+    font-size: var(--home-font-name);
     letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin: 0 0 0.4rem;
+    line-height: 1.12;
+    margin: 0 0 clamp(0.35rem, 1.5vw, 0.5rem);
     color: #2a3d32;
 }
 
@@ -47,20 +83,22 @@
 
 .home-tagline {
     font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: clamp(0.875rem, 2.2vw, 1.05rem);
+    font-size: var(--home-font-tagline);
+    font-weight: 400;
     color: #6a6a6a;
-    max-width: 26rem;
+    max-width: min(26rem, 100%);
     margin: 0 auto;
-    line-height: 1.45;
+    padding: 0 clamp(0.15rem, 2vw, 0.5rem);
+    line-height: 1.5;
     background: transparent;
     box-shadow: none;
 }
 
 .home-hero-visual {
     position: relative;
-    width: min(220px, 58vw);
-    height: min(168px, 44vw);
-    margin: 0 auto 1.15rem;
+    width: min(220px, min(58vw, 16.5rem));
+    height: min(168px, min(44vw, 12.5rem));
+    margin: 0 auto clamp(0.85rem, 2.5vw, 1.15rem);
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 10px 28px rgba(22, 33, 62, 0.14);
@@ -94,27 +132,30 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.35rem 0.1rem;
-    margin: 1.5rem auto 0;
-    padding: 0 0.5rem;
-    max-width: 32rem;
+    column-gap: clamp(0.15rem, 1vw, 0.35rem);
+    row-gap: clamp(0.35rem, 1.5vw, 0.5rem);
+    margin: var(--home-gap-section) auto 0;
+    padding: 0;
+    max-width: min(32rem, 100%);
 }
 
 .home-main-nav .home-nav-link {
     font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
     font-weight: 600;
-    font-size: clamp(0.9rem, 2.4vw, 1.05rem);
-    letter-spacing: 0.01em;
+    font-size: var(--home-font-nav);
+    letter-spacing: 0.02em;
     text-decoration: none;
-    padding: 0.4rem 0.55rem;
+    padding: clamp(0.3rem, 1.2vw, 0.42rem) clamp(0.45rem, 1.8vw, 0.6rem);
     border-radius: 999px;
+    line-height: 1.2;
     transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
 .home-main-nav .home-nav-link + .home-nav-link::before {
     content: "·";
     display: inline-block;
-    margin-right: 0.55rem;
+    margin-right: clamp(0.35rem, 1.5vw, 0.55rem);
+    font-size: 0.95em;
     color: #c8c8c8;
     font-weight: 400;
     pointer-events: none;
@@ -207,16 +248,37 @@
 }
 
 .home-page .home-main-nav + .home-social-row {
-    margin-top: 1.1rem;
+    margin-top: clamp(0.85rem, 2.5vw, 1.15rem);
 }
 
-.home-page .home-social-row .fa {
-    font-size: 1.35rem;
+.home-page .home-social-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: clamp(0.2rem, 1.8vw, 0.55rem);
+    row-gap: clamp(0.35rem, 1.5vw, 0.5rem);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+.home-page .home-social-row .home-social-icon {
+    font-size: var(--home-icon);
     line-height: 1;
+    vertical-align: middle;
 }
 
 .home-page .home-social-row .link.social-media {
-    padding: 6px 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: clamp(2.35rem, 9vw, 2.65rem);
+    min-height: clamp(2.35rem, 9vw, 2.65rem);
+    padding: 0.3rem;
+    margin: 0;
+    border-radius: 999px;
 }
 
 .txt-style{

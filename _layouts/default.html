@@ -4,13 +4,7 @@
   {% include head-default.html %}
 
   <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="{{ "/" | relative_url }}">
-          <h2 class="nav-title">Home</h2>
-        </a>
-      </div>
-    </nav>
+    {% include site-nav.html %}
 
     <main>
       {{ content }}

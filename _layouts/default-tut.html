@@ -4,16 +4,7 @@
   {% include head-tut.html %}
 
   <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="{{ "/" | relative_url }}">
-          <h2 class="nav-title">Home</h2>
-        </a>
-        <ul>
-            <li><a href="{{ site.baseurl }}/tutorials">Tutorials</a></li>
-        </ul>
-      </div>
-    </nav>
+    {% include site-nav.html %}
 
     <main>
       {{ content }}
