@@ -28,6 +28,8 @@ paginate_path: "/blog/page:num/"
 sass:
   sass_dir:     _sass
   style:        compressed
+  silence_deprecations:
+    - import
 
 social:
     email: me@wgma.ca

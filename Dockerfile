@@ -1,7 +1,6 @@
-FROM ruby:2.6
+FROM ruby:3.3
 
-ENV BUNDLER_VERSION=1.17.2 \
-    BUNDLE_PATH=/usr/local/bundle \
+ENV BUNDLE_PATH=/usr/local/bundle \
     BUNDLE_BIN=/usr/local/bundle/bin \
     BUNDLE_APP_CONFIG=/usr/local/bundle \
     GEM_HOME=/usr/local/bundle \
@@ -16,11 +15,8 @@ RUN apt-get update \
     git \
   && rm -rf /var/lib/apt/lists/*
 
-RUN gem install bundler -v "${BUNDLER_VERSION}"
-
-# Cache gems first (copied before full source).
 COPY Gemfile Gemfile.lock ./
-RUN bundle _${BUNDLER_VERSION}_ install
+RUN bundle install
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
