@@ -1,0 +1,114 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Play" description="Games and experiments — coming soon.">
+  <div class="construction">
+    <div class="tape top-tape"></div>
+
+    <div class="content">
+      <div class="cone">
+        <svg viewBox="0 0 100 120" width="80" height="96" aria-hidden="true">
+          <polygon points="50,8 85,110 15,110" fill="#f5a623" stroke="#e5951a" stroke-width="3" />
+          <polygon points="50,20 77,105 23,105" fill="#f7b84e" />
+          <rect x="10" y="105" width="80" height="12" rx="3" fill="#353535" />
+          <rect x="35" y="38" width="30" height="8" rx="2" fill="#353535" />
+          <rect x="30" y="58" width="40" height="8" rx="2" fill="#353535" />
+          <rect x="25" y="78" width="50" height="8" rx="2" fill="#353535" />
+        </svg>
+      </div>
+
+      <h1>Under Construction</h1>
+      <p class="subtitle">Games and interactive experiments are on the way.</p>
+      <p class="hint">Check back soon — or poke around the rest of the site while you wait.</p>
+
+      <a href="/" class="back-link">&larr; Back to home</a>
+    </div>
+
+    <div class="tape bottom-tape"></div>
+  </div>
+</Base>
+
+<style>
+  .construction {
+    padding: 4rem 0 3rem;
+    text-align: center;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tape {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: repeating-linear-gradient(
+      -45deg,
+      #f5a623,
+      #f5a623 20px,
+      #353535 20px,
+      #353535 40px
+    );
+    opacity: 0.85;
+  }
+
+  .top-tape {
+    top: 0;
+  }
+
+  .bottom-tape {
+    bottom: 0;
+  }
+
+  .content {
+    max-width: 480px;
+  }
+
+  .cone {
+    margin-bottom: 1.5rem;
+    animation: wobble 2.5s ease-in-out infinite;
+  }
+
+  @keyframes wobble {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(4deg); }
+    75% { transform: rotate(-4deg); }
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.15rem;
+    color: #555;
+    margin: 0 0 0.75rem;
+  }
+
+  .hint {
+    color: #979797;
+    font-size: 0.95rem;
+    margin: 0 0 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    padding: 0.5rem 1.4rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    color: #555;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-out;
+  }
+
+  .back-link:hover {
+    border-color: #4a9ae1;
+    color: #4a9ae1;
+  }
+</style>

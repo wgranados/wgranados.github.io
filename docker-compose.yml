@@ -10,5 +10,14 @@ services:
       - .:/srv/jekyll
       - bundle_cache:/usr/local/bundle
 
+  play:
+    build: ./play
+    ports:
+      - "4321:4321"
+    volumes:
+      - ./play:/srv/play
+      - play_node_modules:/srv/play/node_modules
+
 volumes:
   bundle_cache:
+  play_node_modules:

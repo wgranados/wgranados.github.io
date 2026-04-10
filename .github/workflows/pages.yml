@@ -27,11 +27,25 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: play/package-lock.json
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build
+      - name: Build Jekyll
         run: JEKYLL_ENV=production bundle exec jekyll build
+
+      - name: Build Astro (play)
+        run: npm ci && npm run build
+        working-directory: play
+
+      - name: Merge Astro output into Jekyll site
+        run: cp -r play/dist/play _site/play
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

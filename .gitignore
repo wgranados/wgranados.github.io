@@ -3,3 +3,8 @@ _site/
 .jekyll-metadata
 .sass-cache/
 vendor/
+
+# Astro (play)
+play/node_modules/
+play/dist/
+play/.astro/

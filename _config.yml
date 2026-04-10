@@ -40,6 +40,9 @@ social:
     tripadvisor: Profile/wgma00
     stackoverflow: 5972611/wgma00
 
+exclude:
+  - play/
+
 defaults:
   - scope:
       path: ""

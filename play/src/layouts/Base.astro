@@ -1,0 +1,196 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Games and experiments by William Granados." } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const siteUrl = "https://wgma.ca";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} · William Granados</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${siteUrl}/assets/favicon.ico`} />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href={siteUrl}><h2 class="nav-title">Home</h2></a>
+        <ul>
+          <li><a href={`${siteUrl}/about`}>About</a></li>
+          <li><a href={`${siteUrl}/blog/`}>Blog</a></li>
+          <li><a href={`${siteUrl}/tutorials`}>Tutorials</a></li>
+          <li><a href={`${siteUrl}/work`}>Work</a></li>
+          <li><a href={`${base}/`} class="active">Play</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <span>
+        &copy; {new Date().getFullYear()} William Granados. Made with
+        <a href="https://astro.build/">Astro</a> +
+        <a href="https://react.dev/">React</a>.
+      </span>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    line-height: 1.5;
+  }
+
+  html,
+  body {
+    color: #555;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: "Libre Baskerville", "Times New Roman", Times, serif;
+    font-size: 14px;
+    overflow-y: scroll;
+  }
+
+  @media (min-width: 600px) {
+    html {
+      font-size: 16px;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #353535;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: normal;
+  }
+
+  a {
+    color: #4a9ae1;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    margin: 0 0 1rem;
+    max-width: 100%;
+  }
+
+  main,
+  footer,
+  .nav-container {
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+    width: 80%;
+  }
+
+  .nav {
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+  }
+
+  .nav-container {
+    margin: 1rem auto;
+    position: relative;
+    text-align: center;
+  }
+
+  .nav-title {
+    transition: all 0.2s ease-out;
+    color: #555;
+    display: inline-block;
+    margin: 0;
+    padding-right: 0.2rem;
+  }
+
+  .nav-title:hover,
+  .nav-title:focus {
+    opacity: 0.6;
+  }
+
+  .nav ul {
+    list-style-type: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .nav li {
+    transition: all 0.2s ease-out;
+    color: #555;
+    display: inline-block;
+    opacity: 0.6;
+    padding: 0 2rem 0 0;
+  }
+
+  .nav li:last-child {
+    padding-right: 0;
+  }
+
+  .nav li:hover,
+  .nav li:focus {
+    opacity: 1;
+  }
+
+  .nav a {
+    color: #555;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  .nav a.active {
+    opacity: 1;
+    font-weight: bold;
+  }
+
+  @media (min-width: 600px) {
+    .nav-container {
+      text-align: left;
+    }
+
+    .nav ul {
+      bottom: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  footer {
+    font-family: Palatino, "Palatino LT STD", "Palatino Linotype",
+      "Book Antiqua", Georgia, serif;
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  footer span {
+    color: #555;
+    font-size: 0.8rem;
+  }
+</style>

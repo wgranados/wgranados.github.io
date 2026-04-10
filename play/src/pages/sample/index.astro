@@ -1,0 +1,26 @@
+---
+import Base from "../../layouts/Base.astro";
+import SampleGame from "../../components/SampleGame.tsx";
+---
+
+<Base title="Sample Game" description="A simple click-counter game to test the Astro + React setup.">
+  <div class="game-page">
+    <h1>Sample Game</h1>
+    <p>A trivial click counter — replace this with a real game later.</p>
+    <SampleGame client:load />
+  </div>
+</Base>
+
+<style>
+  .game-page {
+    padding: 2rem 0;
+  }
+
+  .game-page h1 {
+    margin-bottom: 0.25rem;
+  }
+
+  .game-page > p {
+    color: #979797;
+  }
+</style>
