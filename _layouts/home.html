@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 {% include head-default.html %}
 
-<body>
+<body class="home-body">
     <div>
-        <div class="container">
-            <div id="name" class="row h-100 justify-content-center align-items-center">
-                <p class="name">{{site.owner}}</p>
-            </div>
-            <div id="about" class="row h-100 justify-content-center align-items-center">
-                <a href="/about" class="row link">
-                    <h3>About</h4>
-                </a>
-            </div>
-            <div id="blog" class="row h-100 justify-content-center align-items-center">
-                <a href="/blog/" class="row link">
-                    <h3>Blog</h4>
-                </a>
-            </div>
-            <div id="tutorials" class="row h-100 justify-content-center align-items-center">
-                <a href="/tutorials" class="row link">
-                    <h3>Tutorials</h4>
-                </a>
-            </div>
-            <div id="work" class="row h-100 justify-content-center align-items-center">
-                <a href="/work" class="row link">
-                    <h3>Work</h4>
-                </a>
-            </div>
-            <div class="row h-100 justify-content-center align-items-center">
+        <div class="container home-page">
+            <section class="home-hero" aria-label="Introduction">
+                <div class="home-hero-visual">
+                    <img class="home-hero-img"
+                        src="{{ '/images/wgma_teemo_aesthetic_one.jpg' | relative_url }}"
+                        width="800"
+                        height="600"
+                        alt=""
+                        decoding="async"
+                        fetchpriority="high">
+                </div>
+                <div class="row h-100 justify-content-center align-items-center home-hero-heading">
+                    <h1 class="name">{{ site.owner }}</h1>
+                    {% if site.tagline %}
+                    <p class="home-tagline">{{ site.tagline }}</p>
+                    {% endif %}
+                </div>
+            </section>
+            <nav class="home-main-nav" aria-label="Site sections">
+                <a href="{{ '/about' | relative_url }}" class="link home-nav-link">About</a>
+                <a href="{{ '/blog/' | relative_url }}" class="link home-nav-link">Blog</a>
+                <a href="{{ '/tutorials' | relative_url }}" class="link home-nav-link">Tutorials</a>
+                <a href="{{ '/work' | relative_url }}" class="link home-nav-link">Work</a>
+            </nav>
+            <div class="row h-100 justify-content-center align-items-center home-social-row">
                 <a class="column social-media link" title={{site.social.email}} href="mailto:{{site.social.email}}"
                     aria-hidden="true">
                     <i class="fa fa-envelope fa-2x"></i>

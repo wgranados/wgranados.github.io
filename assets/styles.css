@@ -1,6 +1,192 @@
-.name{
-    color: black; 
-    font-size: 48px;
+/* --- Home landing (hero, name, nav polish) --- */
+.home-body {
+    background-color: #fff;
+}
+
+.home-page {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.home-hero {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.home-hero-heading {
+    flex-direction: column;
+    background: transparent;
+}
+
+.name {
+    font-family: "Syne", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5.5vw, 3.35rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 0.4rem;
+    color: #2a3d32;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .name {
+        background: linear-gradient(
+            122deg,
+            #1c3628 0%,
+            #3d604a 26%,
+            #6b7f72 42%,
+            #7a5340 58%,
+            #c76f28 78%,
+            #e19a48 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+}
+
+.home-tagline {
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: clamp(0.875rem, 2.2vw, 1.05rem);
+    color: #6a6a6a;
+    max-width: 26rem;
+    margin: 0 auto;
+    line-height: 1.45;
+    background: transparent;
+    box-shadow: none;
+}
+
+.home-hero-visual {
+    position: relative;
+    width: min(220px, 58vw);
+    height: min(168px, 44vw);
+    margin: 0 auto 1.15rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(22, 33, 62, 0.14);
+}
+
+.home-hero-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 88% 80% at 50% 45%,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.12) 42%,
+        rgba(255, 255, 255, 0.55) 68%,
+        rgba(255, 255, 255, 0.88) 100%
+    );
+}
+
+.home-hero-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    margin: 0;
+}
+
+.home-main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem 0.1rem;
+    margin: 1.5rem auto 0;
+    padding: 0 0.5rem;
+    max-width: 32rem;
+}
+
+.home-main-nav .home-nav-link {
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    padding: 0.4rem 0.55rem;
+    border-radius: 999px;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.home-main-nav .home-nav-link + .home-nav-link::before {
+    content: "·";
+    display: inline-block;
+    margin-right: 0.55rem;
+    color: #c8c8c8;
+    font-weight: 400;
+    pointer-events: none;
+    transform: translateY(-0.05em);
+}
+
+.home-main-nav .home-nav-link:hover {
+    color: #4a9ae1;
+    background-color: rgba(74, 154, 225, 0.09);
+    transform: translateY(-1px);
+}
+
+.home-main-nav .home-nav-link:focus {
+    outline: none;
+}
+
+.home-main-nav .home-nav-link:focus-visible {
+    outline: 2px solid #4a9ae1;
+    outline-offset: 2px;
+}
+
+.home-page .home-social-row .link {
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.home-page .home-social-row .link:hover {
+    color: #4a9ae1;
+    transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-main-nav .home-nav-link,
+    .home-page .home-social-row .link {
+        transition: none;
+    }
+
+    .home-main-nav .home-nav-link:hover,
+    .home-page .home-social-row .link:hover {
+        transform: none;
+    }
+
+    .home-hero-heading,
+    .home-hero-visual,
+    .home-main-nav {
+        animation: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .home-hero-visual {
+        animation: homeFadeUp 0.55s ease backwards;
+    }
+
+    .home-hero-heading {
+        animation: homeFadeUp 0.55s 0.08s ease backwards;
+    }
+
+    .home-main-nav {
+        animation: homeFadeUp 0.5s 0.16s ease backwards;
+    }
+}
+
+@keyframes homeFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .githubIcon {
@@ -17,7 +203,20 @@
 }
 
 .social-media {
-    padding: 10px 10px; 
+    padding: 10px 10px;
+}
+
+.home-page .home-main-nav + .home-social-row {
+    margin-top: 1.1rem;
+}
+
+.home-page .home-social-row .fa {
+    font-size: 1.35rem;
+    line-height: 1;
+}
+
+.home-page .home-social-row .link.social-media {
+    padding: 6px 7px;
 }
 
 .txt-style{
