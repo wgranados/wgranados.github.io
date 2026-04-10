@@ -12,7 +12,7 @@ tags:
 - Nintendo 
 ---
 
-![Actual Best Grills]({{ site.url | append:site.baseurl }}/images/fire_emblem/fire_emblem2.jpeg){: .center-image}
+![Actual Best Grills](/images/fire_emblem/fire_emblem2.jpeg){: .center-image}
 
 Apostheosis is a DLC map available to fire emblem awakening afficionados wanting to test their strategizing to the fullest. This map pits you against five waves of increasingly harder enemies to face, with the last wave possessing the hardest boss: Anna.
 
@@ -21,7 +21,7 @@ Here I will be posting my Aposthesis team that helped me defeat the map on Lunat
 Pairings
 ==
 
-![Shipping lord]({{ site.url | append:site.baseurl }}/images/fire_emblem/pairingwhore.PNG){: .center-image}
+![Shipping lord](/images/fire_emblem/pairingwhore.PNG){: .center-image}
 
 Here you will find what I passed down and my reasoning for most stuff. I generally tried to give everyone Luna since it's very important on this map. You may be wondering why I passed down some skills like dual support+ and counter.  The main reason why I did this is because they gender exclusive skills and all the other passable skills can be obtained through reclassing. 
 
@@ -82,7 +82,7 @@ Here you will find what I passed down and my reasoning for most stuff. I general
 
 Individual Units
 ==
-![Shipping lord]({{ site.url | append:site.baseurl }}/images/fire_emblem/ignis.jpg){: .center-image}
+![Shipping lord](/images/fire_emblem/ignis.jpg){: .center-image}
 
 ### Chrom  
 **Class:** Paladin  
@@ -198,7 +198,7 @@ Individual Units
 Pair-ups
 ==
 
-![pairups]({{  site.url | append:site.baseurl }}/images/fire_emblem/pairup.jpg){: .center-image}
+![pairups](/images/fire_emblem/pairup.jpg){: .center-image}
 
 ### **Brady!Morgan**
 Power couple, break through enemies with magic power and gale force

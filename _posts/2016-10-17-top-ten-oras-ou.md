@@ -19,8 +19,8 @@ After years of playing smogon's [ORAS OU](http://www.smogon.com/dex/xy/formats/o
 
 Highlights
 ---
-<b><center><a href="{{  site.url | append:site.baseurl }}/images/top-ten-oras-ou/OU-2016-10-17-wgma-seiz3thed4y.html">wgma☁️ ³ ³⌚  vs seiz3 the d4y</a></center></b>
-<p style="float: left; font-size: 9pt; text-align: center; width: 66%; margin-right: 1%; margin-bottom: 0.5em;"><img src="{{  site.url | append:site.baseurl }}/images/top-ten-oras-ou/2016-10-17-crop2.png" style="width: 100%">Battle: 6-2 Win</p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="{{  site.url | append:site.baseurl }}/images/top-ten-oras-ou/2016-10-17-crop.png" style="width: 100% height: 140%">Ladder Update - 7th place overall</p>
+<b><center><a href="/images/top-ten-oras-ou/OU-2016-10-17-wgma-seiz3thed4y.html">wgma☁️ ³ ³⌚  vs seiz3 the d4y</a></center></b>
+<p style="float: left; font-size: 9pt; text-align: center; width: 66%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/top-ten-oras-ou/2016-10-17-crop2.png" style="width: 100%">Battle: 6-2 Win</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/top-ten-oras-ou/2016-10-17-crop.png" style="width: 100% height: 140%">Ladder Update - 7th place overall</p>
 
 

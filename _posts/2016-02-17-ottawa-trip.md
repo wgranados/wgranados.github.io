@@ -20,11 +20,11 @@ First day at the Nature Musuem
 
 On our first day in Ottawa we arrived rather late around 4pm. Having a thirst for adventure my roommates and I decided to look online for tourist attractions near our area. To our luck the only location open  was the Nature Musuem; and it closed at 5pm. We made haste and battled through mounds of snow that were as high as our knees. We arrived 20 mins before closing and were told by the receptionists that the musuem was free for the last 20 mins. With this knowledge we raced through each floor taking as many pictures as we could. Unfortuantely I only managed to get through three floors, but one of us did manage to get four. 
 
-![Huge Butterfly]({{ site.url | append:site.baseurl }}/images/ottawa-trip-2016/20160217_165456.jpg)
+![Huge Butterfly](/images/ottawa-trip-2016/20160217_165456.jpg)
 _Butterflies don't actually get this big do they?_
-![Seal]({{ site.url | append:site.baseurl }}/images/ottawa-trip-2016/20160217_165018.jpg) 
+![Seal](/images/ottawa-trip-2016/20160217_165018.jpg) 
 _Just can't help but to smile back:)_
-![Seal]({{ site.url | append:site.baseurl }}/images/ottawa-trip-2016/20160217_165145.jpg) 
+![Seal](/images/ottawa-trip-2016/20160217_165145.jpg) 
 _Intense_
 
 
@@ -44,9 +44,9 @@ On our way back to our hotel we passed through Ottawa Park and noticed a wonderf
 
 
 
-<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="{{ site.url | append:site.baseurl }}/images/ottawa-trip-2016/rideauriver.jpg" style="width: 100%">Me learning how to skate</p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="{{ site.url | append:site.baseurl }}/images/ottawa-trip-2016/20160217_174733.jpg" style="width: 100%">Ottawa Park</p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="{{ site.url | append:site.baseurl }}/images/ottawa-trip-2016/20160218_193254.jpg" style="width: 100%">China Town</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/ottawa-trip-2016/rideauriver.jpg" style="width: 100%">Me learning how to skate</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/ottawa-trip-2016/20160217_174733.jpg" style="width: 100%">Ottawa Park</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 32%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/ottawa-trip-2016/20160218_193254.jpg" style="width: 100%">China Town</p>
 
 Overall
 ===
