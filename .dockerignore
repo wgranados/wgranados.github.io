@@ -1,0 +1,10 @@
+.git
+.github
+.jekyll-cache
+_site
+vendor
+vendor/bundle
+node_modules
+tmp
+log
+.DS_Store

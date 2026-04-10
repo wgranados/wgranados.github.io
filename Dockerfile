@@ -1,0 +1,27 @@
+FROM ruby:2.6
+
+ENV BUNDLER_VERSION=1.17.2 \
+    BUNDLE_PATH=/usr/local/bundle \
+    BUNDLE_BIN=/usr/local/bundle/bin \
+    BUNDLE_APP_CONFIG=/usr/local/bundle \
+    GEM_HOME=/usr/local/bundle \
+    PATH=/usr/local/bundle/bin:$PATH
+
+WORKDIR /srv/jekyll
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    build-essential \
+    ca-certificates \
+    git \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN gem install bundler -v "${BUNDLER_VERSION}"
+
+# Cache gems first (copied before full source).
+COPY Gemfile Gemfile.lock ./
+RUN bundle _${BUNDLER_VERSION}_ install
+
+EXPOSE 4000 35729
+
+CMD ["bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0", "--port", "4000", "--livereload", "--livereload-port", "35729", "--incremental"]

@@ -1,6 +1,10 @@
 owner: William Granados
-url: "wgranados.github.io"
+url: "https://wgma.ca"
 baseurl: ""
+title: William Granados
+
+# Keep historical blog URLs stable under /blog/.
+permalink: /blog/:year-:month-:day/:title
 
 # Assets
 sass:
@@ -15,3 +19,10 @@ social:
     yelp: wgma
     tripadvisor: Profile/wgma00
     stackoverflow: 5972611/wgma00
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
