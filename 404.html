@@ -5,10 +5,14 @@ permalink: /404.html
 ---
 
 <div class="notfound">
+  <p class="notfound-label">Lost your way?</p>
   <h1 class="notfound-error">404: Page not found</h1>
   <div class="notfound-line"></div>
   <p class="notfound-message">
-    Oops! We can't seem to find the page you are looking for. Let's
-    <a href="{{ '/' | relative_url }}">head back home</a>.
+    The page you were looking for is missing, moved, or no longer available.
   </p>
+  <div class="notfound-actions">
+    <a class="notfound-action" href="{{ '/' | relative_url }}">Go Home</a>
+    <a class="notfound-action notfound-action-secondary" href="{{ '/blog/' | relative_url }}">Browse the Blog</a>
+  </div>
 </div>
