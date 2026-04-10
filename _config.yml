@@ -14,6 +14,12 @@ markdown: kramdown
 # Keep historical blog URLs stable under /blog/.
 permalink: /blog/:year-:month-:day/:title
 
+# Pagination
+plugins:
+  - jekyll-paginate
+paginate: 5
+paginate_path: "/blog/page:num/"
+
 # Assets
 sass:
   sass_dir:     _sass
