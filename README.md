@@ -24,6 +24,24 @@ Stop:
 docker compose down
 ```
 
+## Deployment (GitHub Actions)
+
+Pushes to `master` automatically build and deploy the site via the workflow in
+`.github/workflows/pages.yml`.
+
+### Required one-time repo settings
+
+In the repository **Settings > Pages** section:
+
+1. Set **Source** to **GitHub Actions**.
+2. If you use a custom domain, confirm it is listed under **Custom domain**
+   and that the `CNAME` file at the repo root contains the correct value.
+
+### Manual deploy
+
+You can also trigger a deploy without pushing code by going to
+**Actions > Deploy to GitHub Pages > Run workflow** in the GitHub UI.
+
 ## Troubleshooting
 
 - **Port already in use**: change the host-side port mapping in `docker-compose.yml` (e.g. `4400:4000`).
