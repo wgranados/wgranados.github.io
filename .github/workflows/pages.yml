@@ -43,7 +43,7 @@ jobs:
         working-directory: play
 
       - name: Merge Astro output into Jekyll site
-        run: cp -r play/dist/play _site/play
+        run: cp -r play/dist _site/play
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
