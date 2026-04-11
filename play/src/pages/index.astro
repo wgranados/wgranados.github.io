@@ -18,9 +18,17 @@ import Base from "../layouts/Base.astro";
         </svg>
       </div>
 
-      <h1>Under Construction</h1>
-      <p class="subtitle">Games and interactive experiments are on the way.</p>
-      <p class="hint">Check back soon — or poke around the rest of the site while you wait.</p>
+      <h1>Games</h1>
+      <p class="subtitle">Ports of old projects, now playable in the browser.</p>
+
+      <ul class="game-list">
+        <li>
+          <a href="/play/arqanoid/" class="game-card">
+            <span class="game-title">Arqanoid</span>
+            <span class="game-desc">A brick-breaker game — originally written in Java in high school.</span>
+          </a>
+        </li>
+      </ul>
 
       <a href="/" class="back-link">&larr; Back to home</a>
     </div>
@@ -94,6 +102,42 @@ import Base from "../layouts/Base.astro";
     color: #979797;
     font-size: 0.95rem;
     margin: 0 0 2rem;
+  }
+
+  .game-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    text-align: left;
+  }
+
+  .game-card {
+    display: block;
+    padding: 1rem 1.25rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .game-card:hover {
+    border-color: #4a9ae1;
+    box-shadow: 0 2px 8px rgba(74, 154, 225, 0.12);
+  }
+
+  .game-title {
+    display: block;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #353535;
+    margin-bottom: 0.25rem;
+  }
+
+  .game-desc {
+    display: block;
+    font-size: 0.9rem;
+    color: #979797;
   }
 
   .back-link {
