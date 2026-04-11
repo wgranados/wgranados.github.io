@@ -17,22 +17,21 @@ import {
   PLAYER_FOCUS_SPEED,
   PLAYER_SHOOT_COOLDOWN,
   PLAYER_BOMB_COOLDOWN,
-  INVINCIBLE_DURATION,
-  DEATH_SCORE_PENALTY,
-  INITIAL_LIVES,
   HIT_FLASH_TICKS,
   STAT_CAP,
   StatIndex,
   PLAYER_BULLET_SPEED,
-  ENEMY_BULLET_SPEED,
   BULLET_SIZE,
   POWERUP_SIZE,
   POWERUP_SPEED,
   POWERUP_KINDS,
   POWERUP_COLORS,
-  SCORE_PER_KILL,
   Phase,
   SPEED_OPTIONS,
+  Difficulty,
+  DIFFICULTY_OPTIONS,
+  getProfile,
+  type DifficultyProfile,
   type Player,
   type Bullet,
   type Enemy,
@@ -47,13 +46,13 @@ import { buildStage } from "../game/starflux/waves";
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makePlayer(): Player {
+function makePlayer(profile: DifficultyProfile): Player {
   return {
     x: (PLAY_AREA_LEFT + PLAY_AREA_RIGHT) / 2 - PLAYER_W / 2,
     y: H - PLAYER_H - 20,
     w: PLAYER_W,
     h: PLAYER_H,
-    stats: [3, 1, 0, 1, 0],
+    stats: [profile.startingHealth, 1, 0, 1, 0],
     invincibleTimer: 0,
     shootTimer: 0,
     bombTimer: 0,
@@ -75,22 +74,24 @@ function makeStars(count: number): Star[] {
   return stars;
 }
 
-function initState(bestScore = 0, speedMultiplier = 1): GameState {
+function initState(bestScore = 0, speedMultiplier = 1, difficulty: Difficulty = Difficulty.Normal): GameState {
+  const profile = getProfile(difficulty);
   return {
     phase: Phase.Menu,
-    player: makePlayer(),
+    player: makePlayer(profile),
     bullets: [],
-    enemies: buildStage(0),
+    enemies: buildStage(0, profile),
     powerUps: [],
     stars: makeStars(120),
     score: 0,
     bestScore,
     stage: 0,
-    lives: INITIAL_LIVES,
+    lives: profile.lives,
     paused: false,
     keys: {},
     speedMultiplier,
     tickCount: 0,
+    difficulty,
   };
 }
 
@@ -132,6 +133,7 @@ function loadOrInit(): GameState {
     saved.keys = {};
     saved.paused = true;
     saved.bestScore = getBestScore("starflux");
+    if (saved.difficulty == null) saved.difficulty = Difficulty.Normal;
     clearSession("starflux");
     return saved;
   }
@@ -147,6 +149,7 @@ export default function StarfluxGame() {
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
   const [activeSpeed, setActiveSpeed] = useState(() => gsRef.current.speedMultiplier);
+  const [activeDifficulty, setActiveDifficulty] = useState(() => gsRef.current.difficulty);
   const [showHighScores, setShowHighScores] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const isTouch = useIsTouch();
@@ -329,6 +332,7 @@ export default function StarfluxGame() {
     gs.tickCount++;
     const { player, keys } = gs;
     const sm = gs.speedMultiplier;
+    const prof = getProfile(gs.difficulty);
 
     // -- player movement --
     const speed = (keys["ShiftLeft"] || keys["ShiftRight"])
@@ -432,8 +436,8 @@ export default function StarfluxGame() {
 
       // enemy dead
       if (e.health <= 0) {
-        gs.score += SCORE_PER_KILL;
-        maybeDropPowerUp(gs, e);
+        gs.score += prof.scorePerKill;
+        maybeDropPowerUp(gs, e, prof);
         gs.enemies.splice(i, 1);
         continue;
       }
@@ -446,7 +450,7 @@ export default function StarfluxGame() {
           const ecy = e.y + e.h / 2;
           const pcx = player.x + player.w / 2;
           const pcy = player.y + player.h / 2;
-          const v = vectorize(ecx, ecy, pcx, pcy, ENEMY_BULLET_SPEED * sm);
+          const v = vectorize(ecx, ecy, pcx, pcy, prof.enemyBulletSpeed * sm);
           gs.bullets.push({
             x: ecx - BULLET_SIZE / 2, y: ecy, w: BULLET_SIZE, h: BULLET_SIZE,
             vx: v.vx, vy: v.vy, owner: "enemy",
@@ -522,7 +526,7 @@ export default function StarfluxGame() {
       }
 
       if (rectsIntersect(pu.x, pu.y, pu.w, pu.h, player.x, player.y, player.w, player.h)) {
-        applyPowerUp(player, pu.kind);
+        applyPowerUp(player, pu.kind, prof);
         gs.powerUps.splice(i, 1);
       }
     }
@@ -541,11 +545,11 @@ export default function StarfluxGame() {
         forceRender((n) => n + 1);
         return;
       }
-      const newPlayer = makePlayer();
-      newPlayer.invincibleTimer = INVINCIBLE_DURATION;
+      const newPlayer = makePlayer(prof);
+      newPlayer.invincibleTimer = prof.invincibleDuration;
       newPlayer.stats[StatIndex.Invincibility] = 1;
       gs.player = newPlayer;
-      gs.score = Math.max(0, gs.score - DEATH_SCORE_PENALTY);
+      gs.score = Math.max(0, gs.score - prof.deathScorePenalty);
     }
 
     if (gs.score > gs.bestScore) gs.bestScore = gs.score;
@@ -559,10 +563,10 @@ export default function StarfluxGame() {
   };
 
   // ---- power-up helpers ----
-  const maybeDropPowerUp = (gs: GameState, enemy: Enemy) => {
+  const maybeDropPowerUp = (gs: GameState, enemy: Enemy, prof: DifficultyProfile) => {
     const roll = Math.floor(Math.random() * 10);
-    if (roll < 5) {
-      const kind = POWERUP_KINDS[roll] as PowerUpKind;
+    if (roll < prof.powerUpDropThreshold) {
+      const kind = POWERUP_KINDS[roll % POWERUP_KINDS.length] as PowerUpKind;
       gs.powerUps.push({
         x: enemy.x + enemy.w / 2 - POWERUP_SIZE / 2,
         y: enemy.y + enemy.h / 2 - POWERUP_SIZE / 2,
@@ -573,20 +577,20 @@ export default function StarfluxGame() {
     }
   };
 
-  const applyPowerUp = (player: Player, kind: PowerUpKind) => {
+  const applyPowerUp = (p: Player, kind: PowerUpKind, prof: DifficultyProfile) => {
     const idx = POWERUP_KINDS.indexOf(kind);
     if (idx >= 0) {
-      player.stats[idx]++;
-      if (idx === StatIndex.Invincibility && player.stats[idx] >= 1) {
-        player.stats[idx] = 1;
-        player.invincibleTimer = INVINCIBLE_DURATION;
+      p.stats[idx]++;
+      if (idx === StatIndex.Invincibility && p.stats[idx] >= 1) {
+        p.stats[idx] = 1;
+        p.invincibleTimer = prof.invincibleDuration;
       }
     }
   };
 
   const advanceStage = (gs: GameState) => {
     gs.stage++;
-    gs.enemies = buildStage(gs.stage);
+    gs.enemies = buildStage(gs.stage, getProfile(gs.difficulty));
     gs.bullets = [];
   };
 
@@ -851,15 +855,22 @@ export default function StarfluxGame() {
 
     // invincibility indicator
     if (player.invincibleTimer > 0) {
+      const prof = getProfile(gs.difficulty);
       ctx.fillStyle = "#e040fb";
       ctx.font = "bold 14px 'Syne', sans-serif";
       ctx.fillText("INVINCIBLE", sx, 500);
-      const frac = player.invincibleTimer / INVINCIBLE_DURATION;
+      const frac = player.invincibleTimer / prof.invincibleDuration;
       ctx.fillStyle = "#222";
       ctx.fillRect(sx, 508, barW, 12);
       ctx.fillStyle = "#e040fb";
       ctx.fillRect(sx, 508, barW * frac, 12);
     }
+
+    // difficulty badge
+    const isExpert = gs.difficulty === Difficulty.Expert;
+    ctx.fillStyle = isExpert ? "#ff5252" : "#888";
+    ctx.font = "bold 14px 'Syne', sans-serif";
+    ctx.fillText(isExpert ? "EXPERT" : "NORMAL", sx, H - 50);
 
     // best score
     ctx.fillStyle = "#888";
@@ -922,7 +933,8 @@ export default function StarfluxGame() {
     clearSession("starflux");
     const best = getBestScore("starflux");
     const spd = gsRef.current.speedMultiplier;
-    gsRef.current = initState(best, spd);
+    const diff = gsRef.current.difficulty;
+    gsRef.current = initState(best, spd, diff);
     gsRef.current.phase = Phase.Play;
     setShowHighScores(false);
     lastTimeRef.current = 0;
@@ -933,6 +945,15 @@ export default function StarfluxGame() {
   const setSpeed = useCallback((value: number) => {
     gsRef.current.speedMultiplier = value;
     setActiveSpeed(value);
+  }, []);
+
+  const changeDifficulty = useCallback((value: Difficulty) => {
+    const gs = gsRef.current;
+    if (gs.phase === Phase.Play) return;
+    const best = getBestScore("starflux");
+    gsRef.current = initState(best, gs.speedMultiplier, value);
+    setActiveDifficulty(value);
+    forceRender((n) => n + 1);
   }, []);
 
   const togglePause = useCallback(() => {
@@ -1001,6 +1022,26 @@ export default function StarfluxGame() {
           </button>
         ))}
       </div>
+      <div style={styles.speedRow}>
+        <span style={styles.speedLabel}>Difficulty:</span>
+        {DIFFICULTY_OPTIONS.map((opt) => (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() => changeDifficulty(opt.value)}
+            style={{
+              ...styles.speedBtn,
+              ...(activeDifficulty === opt.value
+                ? opt.value === Difficulty.Expert
+                  ? styles.diffBtnExpert
+                  : styles.speedBtnActive
+                : {}),
+            }}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -1056,6 +1097,11 @@ const styles: Record<string, React.CSSProperties> = {
   speedBtnActive: {
     borderColor: "#4a9ae1",
     backgroundColor: "#4a9ae1",
+    color: "#fff",
+  },
+  diffBtnExpert: {
+    borderColor: "#e53935",
+    backgroundColor: "#e53935",
     color: "#fff",
   },
 };

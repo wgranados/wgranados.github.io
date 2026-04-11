@@ -155,6 +155,66 @@ export interface Star {
 }
 
 // ---------------------------------------------------------------------------
+// Difficulty
+// ---------------------------------------------------------------------------
+
+export const enum Difficulty {
+  Normal = 0,
+  Expert = 1,
+}
+
+export interface DifficultyProfile {
+  lives: number;
+  startingHealth: number;
+  powerUpDropThreshold: number; // roll < N out of 10
+  invincibleDuration: number;
+  deathScorePenalty: number;
+  enemyBulletSpeed: number;
+  shootCooldownMultiplier: number; // applied to base cooldown (< 1 = faster)
+  waveFillThreshold: number; // roll < N out of 10 spawns an enemy
+  bossBaseHp: number;
+  bossHpPerStage: number;
+  scorePerKill: number;
+}
+
+export const NORMAL_PROFILE: DifficultyProfile = {
+  lives: 3,
+  startingHealth: 3,
+  powerUpDropThreshold: 5,
+  invincibleDuration: 300,
+  deathScorePenalty: 2000,
+  enemyBulletSpeed: 5,
+  shootCooldownMultiplier: 1,
+  waveFillThreshold: 5,
+  bossBaseHp: 50,
+  bossHpPerStage: 10,
+  scorePerKill: 1000,
+};
+
+export const EXPERT_PROFILE: DifficultyProfile = {
+  lives: 2,
+  startingHealth: 2,
+  powerUpDropThreshold: 2,
+  invincibleDuration: 120,
+  deathScorePenalty: 5000,
+  enemyBulletSpeed: 7,
+  shootCooldownMultiplier: 0.75,
+  waveFillThreshold: 7,
+  bossBaseHp: 80,
+  bossHpPerStage: 20,
+  scorePerKill: 1500,
+};
+
+export const DIFFICULTY_OPTIONS: { label: string; value: Difficulty }[] = [
+  { label: "Normal", value: Difficulty.Normal },
+  { label: "Expert", value: Difficulty.Expert },
+];
+
+export function getProfile(d: Difficulty): DifficultyProfile {
+  return d === Difficulty.Expert ? EXPERT_PROFILE : NORMAL_PROFILE;
+}
+
+// ---------------------------------------------------------------------------
 // Game state
 // ---------------------------------------------------------------------------
 
@@ -188,4 +248,5 @@ export interface GameState {
   keys: Record<string, boolean>;
   speedMultiplier: number;
   tickCount: number;
+  difficulty: Difficulty;
 }

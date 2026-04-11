@@ -1,10 +1,12 @@
 import {
   type Enemy,
   type EnemyType,
+  type DifficultyProfile,
   ENEMY_CONFIGS,
   H,
   PLAY_AREA_LEFT,
   WAVES_PER_STAGE,
+  NORMAL_PROFILE,
 } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -20,7 +22,7 @@ const CELL_SPACING_Y = 50;
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeEnemy(x: number, y: number, type: EnemyType): Enemy {
+function makeEnemy(x: number, y: number, type: EnemyType, cooldownMul: number): Enemy {
   const cfg = ENEMY_CONFIGS[type];
   return {
     x,
@@ -30,7 +32,7 @@ function makeEnemy(x: number, y: number, type: EnemyType): Enemy {
     health: cfg.health,
     maxHealth: cfg.health,
     speed: cfg.speed,
-    shootCooldown: cfg.shootCooldown,
+    shootCooldown: Math.round(cfg.shootCooldown * cooldownMul),
     shootTimer: 0,
     type,
     active: false,
@@ -45,12 +47,14 @@ interface WaveResult {
 
 /**
  * Generate a single wave — a 5x3 grid of random enemies.
- * Probability distribution matches the Java source:
- *   0-2 (30%) → medium, 3 (10%) → heavy, 4 (10%) → light, 5-9 (50%) → empty
+ *
+ * Base distribution (Normal): rolls 0-2 medium, 3 heavy, 4 light, 5-9 empty.
+ * `fillThreshold` shifts the empty boundary so Expert fills more cells.
  */
-function generateWave(): WaveResult {
+function generateWave(profile: DifficultyProfile): WaveResult {
   const enemies: Enemy[] = [];
   let difficulty = 0;
+  const fill = profile.waveFillThreshold;
 
   for (let col = 0; col < GRID_COLS; col++) {
     for (let row = 0; row < GRID_ROWS; row++) {
@@ -59,12 +63,12 @@ function generateWave(): WaveResult {
 
       if (roll < 3) type = "medium";
       else if (roll < 4) type = "heavy";
-      else if (roll < 5) type = "light";
+      else if (roll < fill) type = "light";
 
       if (type) {
         const x = PLAY_AREA_LEFT + col * CELL_SPACING_X + 51;
         const y = row * CELL_SPACING_Y;
-        enemies.push(makeEnemy(x, y, type));
+        enemies.push(makeEnemy(x, y, type, profile.shootCooldownMultiplier));
         difficulty += ENEMY_CONFIGS[type].difficulty;
       }
     }
@@ -86,12 +90,12 @@ function generateWave(): WaveResult {
  * Each wave is positioned at increasing screen-height offsets above the
  * viewport so they scroll into view sequentially.
  */
-export function buildStage(stageNumber: number): Enemy[] {
-  const waveCount = WAVES_PER_STAGE + stageNumber; // harder stages get more waves
+export function buildStage(stageNumber: number, profile: DifficultyProfile = NORMAL_PROFILE): Enemy[] {
+  const waveCount = WAVES_PER_STAGE + stageNumber;
 
   const waves: WaveResult[] = [];
   for (let i = 0; i < waveCount; i++) {
-    waves.push(generateWave());
+    waves.push(generateWave(profile));
   }
 
   waves.sort((a, b) => a.difficulty - b.difficulty);
@@ -108,11 +112,12 @@ export function buildStage(stageNumber: number): Enemy[] {
 
   const bossOffsetY = -(waves.length + 1) * H + H / 2;
   const bossCfg = ENEMY_CONFIGS.boss;
-  const bossHealth = bossCfg.health + stageNumber * 10;
+  const bossHealth = profile.bossBaseHp + stageNumber * profile.bossHpPerStage;
   const boss = makeEnemy(
     (PLAY_AREA_LEFT + 665) / 2 - bossCfg.w / 2,
     bossOffsetY,
     "boss",
+    profile.shootCooldownMultiplier,
   );
   boss.health = bossHealth;
   boss.maxHealth = bossHealth;
