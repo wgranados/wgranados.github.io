@@ -28,6 +28,12 @@ import Base from "../layouts/Base.astro";
             <span class="game-desc">A brick-breaker game — originally written in Java in high school.</span>
           </a>
         </li>
+        <li>
+          <a href="/play/bomberman/" class="game-card">
+            <span class="game-title">Bomberman</span>
+            <span class="game-desc">A 2-player bomberman game — blow up walls, collect power-ups, outscore your opponent.</span>
+          </a>
+        </li>
       </ul>
 
       <a href="/" class="back-link">&larr; Back to home</a>
@@ -109,6 +115,9 @@ import Base from "../layouts/Base.astro";
     padding: 0;
     margin: 0 0 2rem;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .game-card {
