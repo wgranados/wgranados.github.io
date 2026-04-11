@@ -41,7 +41,7 @@ social:
     stackoverflow: 5972611/wgma00
 
 exclude:
-  - play/
+  - arcade/
 
 defaults:
   - scope:

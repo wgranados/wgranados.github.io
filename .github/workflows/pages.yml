@@ -38,12 +38,12 @@ jobs:
       - name: Build Jekyll
         run: JEKYLL_ENV=production bundle exec jekyll build
 
-      - name: Build Astro (play)
+      - name: Build Astro (arcade)
         run: npm install && npm run build
-        working-directory: play
+        working-directory: arcade
 
       - name: Merge Astro output into Jekyll site
-        run: rm -rf _site/play && cp -r play/dist _site/play
+        run: rm -rf _site/arcade && cp -r arcade/dist _site/arcade
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

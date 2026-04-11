@@ -4,7 +4,7 @@ _site/
 .sass-cache/
 vendor/
 
-# Astro (play)
-play/node_modules/
-play/dist/
-play/.astro/
+# Astro (arcade)
+arcade/node_modules/
+arcade/dist/
+arcade/.astro/

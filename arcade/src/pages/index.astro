@@ -1,0 +1,267 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Arcade" description="Retro games ported to the browser.">
+  <div class="arcade">
+    <div class="scanlines"></div>
+
+    <header class="arcade-header">
+      <h1 class="arcade-title">
+        <span class="flicker">A</span>rcade
+      </h1>
+      <p class="arcade-sub">Old projects, now playable in the browser.</p>
+    </header>
+
+    <div class="game-grid">
+      <a href="/arcade/arqanoid/" class="game-card">
+        <div class="card-screen">
+          <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="8" y="6" width="10" height="6" rx="1" fill="#ff6b6b" />
+            <rect x="20" y="6" width="10" height="6" rx="1" fill="#feca57" />
+            <rect x="32" y="6" width="10" height="6" rx="1" fill="#48dbfb" />
+            <rect x="44" y="6" width="10" height="6" rx="1" fill="#ff9ff3" />
+            <rect x="8" y="14" width="10" height="6" rx="1" fill="#feca57" />
+            <rect x="20" y="14" width="10" height="6" rx="1" fill="#48dbfb" />
+            <rect x="32" y="14" width="10" height="6" rx="1" fill="#ff9ff3" />
+            <rect x="44" y="14" width="10" height="6" rx="1" fill="#ff6b6b" />
+            <rect x="8" y="22" width="10" height="6" rx="1" fill="#48dbfb" />
+            <rect x="20" y="22" width="10" height="6" rx="1" fill="#ff9ff3" />
+            <rect x="32" y="22" width="10" height="6" rx="1" fill="#ff6b6b" />
+            <rect x="44" y="22" width="10" height="6" rx="1" fill="#feca57" />
+            <circle cx="32" cy="44" r="4" fill="#fff" />
+            <rect x="20" y="54" width="24" height="5" rx="2" fill="#e0e0e0" />
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-title">Arqanoid</span>
+          <span class="card-genre">Brick Breaker</span>
+          <span class="card-desc">Break all the bricks with a bouncing ball — originally written in Java in high school.</span>
+        </div>
+        <span class="card-cta">Play</span>
+      </a>
+
+      <a href="/arcade/starflux/" class="game-card">
+        <div class="card-screen">
+          <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="12" cy="10" r="1.5" fill="#fff" opacity="0.5" />
+            <circle cx="50" cy="18" r="1" fill="#fff" opacity="0.4" />
+            <circle cx="28" cy="8" r="1" fill="#fff" opacity="0.6" />
+            <circle cx="44" cy="52" r="1.5" fill="#fff" opacity="0.3" />
+            <circle cx="8" cy="40" r="1" fill="#fff" opacity="0.5" />
+            <circle cx="56" cy="34" r="1" fill="#fff" opacity="0.4" />
+            <polygon points="32,20 36,34 28,34" fill="#48dbfb" />
+            <polygon points="32,20 28,34 24,30" fill="#0abde3" />
+            <polygon points="32,20 36,34 40,30" fill="#0abde3" />
+            <rect x="29" y="34" width="6" height="4" rx="1" fill="#ff6b6b" />
+            <polygon points="30,38 27,44 33,44" fill="#feca57" opacity="0.8" />
+            <polygon points="34,38 31,44 37,44" fill="#ff6b6b" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-title">Starflux</span>
+          <span class="card-genre">Space Shooter</span>
+          <span class="card-desc">Dodge asteroids and blast enemies in a vertical-scrolling space shooter — originally written in Verilog.</span>
+        </div>
+        <span class="card-cta">Play</span>
+      </a>
+    </div>
+
+    <div class="arcade-footer">
+      <a href="/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to home
+      </a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .arcade {
+    position: relative;
+    min-height: 80vh;
+    padding: 3rem 0 2rem;
+    overflow: hidden;
+  }
+
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .arcade-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .arcade-title {
+    font-family: "Syne", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 0.5rem;
+    text-shadow:
+      0 0 10px rgba(72, 219, 251, 0.5),
+      0 0 40px rgba(72, 219, 251, 0.2);
+  }
+
+  .flicker {
+    animation: flicker 4s ease-in-out infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.4; }
+    94% { opacity: 1; }
+    96% { opacity: 0.3; }
+    97% { opacity: 1; }
+  }
+
+  .arcade-sub {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    padding: 0 1rem;
+  }
+
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+  }
+
+  .game-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(72, 219, 251, 0.4);
+    box-shadow:
+      0 8px 32px rgba(72, 219, 251, 0.1),
+      0 0 0 1px rgba(72, 219, 251, 0.15);
+  }
+
+  .game-card:hover .card-cta {
+    background: #48dbfb;
+    color: #0a0a1a;
+  }
+
+  .game-card:hover .card-screen {
+    background: rgba(72, 219, 251, 0.08);
+  }
+
+  .card-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 140px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: background 0.25s ease;
+  }
+
+  .card-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .card-info {
+    padding: 1rem 1.25rem 0.75rem;
+    flex: 1;
+  }
+
+  .card-title {
+    display: block;
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 0.15rem;
+  }
+
+  .card-genre {
+    display: block;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #48dbfb;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.5;
+  }
+
+  .card-cta {
+    display: block;
+    text-align: center;
+    padding: 0.6rem;
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .arcade-footer {
+    text-align: center;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+
+  .back-link:hover {
+    border-color: rgba(72, 219, 251, 0.4);
+    color: #48dbfb;
+  }
+</style>

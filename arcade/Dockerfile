@@ -1,6 +1,6 @@
 FROM node:22-slim
 
-WORKDIR /srv/play
+WORKDIR /srv/arcade
 
 COPY package.json package-lock.json* ./
 RUN npm install
