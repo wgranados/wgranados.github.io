@@ -25,5 +25,5 @@ wait "$npm_pid"
 sleep 2
 npm run pagefind
 
-echo "pagefind-watch: watching _site/**/*.html (debounced); Ctrl+C to stop"
+echo "pagefind-watch: watching _site/blog/**/*.html (debounced); Ctrl+C to stop"
 exec npm run pagefind:watch
