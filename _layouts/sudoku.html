@@ -106,7 +106,7 @@ layout: default
         <input id="9" type="number" min="1" max="9" maxlength="1" class="sudokuCell" /> 
     </div>
 
-    <script src="{{ base.url | prepend: site.url }}/js/mystery.js"></script>.
+    <script src="{{ '/js/mystery.js' | absolute_url }}"></script>
     <button onClick={getSolution()}>solve me!</button>
     <button onClick={populate()}>populate with example</button>
     </br>

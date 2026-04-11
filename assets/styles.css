@@ -134,6 +134,41 @@
     margin-top: 0;
 }
 
+.about-links-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1.5rem;
+}
+
+.about-links-table td {
+    padding: 0.4rem 0.75rem;
+    vertical-align: top;
+}
+
+.about-links-site {
+    white-space: nowrap;
+    padding-left: 0 !important;
+}
+
+.about-links-site i {
+    width: 1.2em;
+    text-align: center;
+    margin-right: 0.3rem;
+    opacity: 0.7;
+}
+
+.about-links-desc {
+    opacity: 0.6;
+    padding-right: 0 !important;
+}
+
+@media (max-width: 600px) {
+    .about-links-desc {
+        display: none;
+    }
+}
+
 /* Blog: archive, tags, post meta */
 .blog-index-tools {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

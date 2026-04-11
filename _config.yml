@@ -44,12 +44,64 @@ sass:
 
 social:
     email: me@wgma.ca
-    github: wgranados 
+    github: wgranados
     linkedin: wlgranados
     youtube: "https://www.youtube.com/@wgmamoments/videos"
     yelp: wgma
     tripadvisor: Profile/wgma00
     stackoverflow: 5972611/wgma00
+
+social_links:
+  - name: GitHub
+    icon: fa-github
+    url: "https://github.com/wgranados"
+    label: github.com/wgranados
+    desc: Code and projects
+  - name: LinkedIn
+    icon: fa-linkedin-square
+    url: "https://www.linkedin.com/in/wlgranados/"
+    label: linkedin.com/in/wlgranados
+    desc: Professional network
+  - name: Stack Overflow
+    icon: fa-stack-overflow
+    url: "https://stackoverflow.com/users/5972611/wgma00"
+    label: stackoverflow.com/users/5972611
+    desc: "Programming Q&A"
+  - name: YouTube
+    icon: fa-youtube-play
+    url: "https://www.youtube.com/@wgmamoments/videos"
+    label: "@wgmamoments"
+    desc: Guitar clips and moments
+  - name: OP.GG
+    icon: fa-gamepad
+    url: "https://op.gg/lol/summoners/na/wgmeister-NA1"
+    label: wgmeister
+    desc: League of Legends
+  - name: Tracker.gg
+    icon: fa-gamepad
+    url: "https://tracker.gg/valorant/profile/riot/wgmeister%23NA1/overview"
+    label: wgmeister
+    desc: Valorant
+  - name: LolChess
+    icon: fa-gamepad
+    url: "https://lolchess.gg/profile/na/wgmeister"
+    label: wgmeister
+    desc: Teamfight Tactics
+  - name: Yelp
+    icon: fa-yelp
+    url: "https://wgma.yelp.ca"
+    label: wgma
+    desc: Food reviews
+  - name: AllTrails
+    icon: fa-map-signs
+    url: "https://www.alltrails.com/members/william-granados"
+    label: william-granados
+    desc: Hiking and biking
+  - name: Tripadvisor
+    icon: fa-tripadvisor
+    url: "https://tripadvisor.com/Profile/wgma00"
+    label: Profile/wgma00
+    desc: Travel reviews
 
 exclude:
   - arcade/

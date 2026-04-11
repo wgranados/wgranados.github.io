@@ -1,50 +1,43 @@
 ---
 layout: default
-title: about
 ---
 
 <div id="about" class="container about-page">
     <h1>About</h1>
 
-    <p>Hey, I'm William!</p>
-
-    <h2>Background</h2>
-
     <p>
-        I'm a Computer Science and Statistics alumni from the University of Toronto.
-        Here's what I've been up to these past few years:
+        Hey there! I'm William, a software developer based in Toronto, Canada.
+        I studied Computer Science and Statistics at the University of Toronto.
+        Besides programming, I'm interested in competitive gaming, board games,
+        guitar, TV shows, and staying active with hiking and biking. For the professional side of things, check out my
+        <a href="{{ '/work' | relative_url }}">resume</a>.
     </p>
 
-    <ul>
-        <li>I competed/coached twice in the East Central ACM-ICPC, representing UTSC</li>
-        <li>I co-founded <a href="https://csec.page/">CSEC</a>, a club intended to enrich the CS experience</li>
-        <li>I have TA'd for the following courses:
-            <a href="{{site.url}}/csca08f17">CSCA08</a>,
-            <a href="{{site.url}}/csca48w18">CSCA48</a>,
-            <a href="{{site.url}}/cscb63w19">CSCB63</a>,
-            and <a href="{{site.url}}/cscc73f18">CSCC73</a>
-        </li>
-        <li>I interned at <a href="https://rubikloud.com">Rubikloud</a> for summer 2018,
-            and <a href="https://www.rbc.com/">RBC</a> in summer 2019</li>
-        <li>I worked fulltime at <a href="https://tripadvisor.com">TripAdvisor</a> 2020-2022,
-            and am now working at <a href="https://www.reddit.com/">Reddit</a>!</li>
-    </ul>
-
-    <h2>Hobbies</h2>
-
     <p>
-        My hobbies include: TV shows, smash bros,
-        <a href="https://www.op.gg/summoners/na/wgmeister">league</a>,
-        <a href="https://tracker.gg/valorant/profile/riot/wgmeister%23NA1/overview?platform=pc&playlist=competitive&season=4c4b8cff-43eb-13d3-8f14-96b783c90cd2">valorant</a>,
-        <a href="https://lolchess.gg/profile/na/wgmeister">tft</a>,
-        board games (like avalon, code names, and bang!),
-        and playing guitar (sub to my <a href="https://www.youtube.com/@wgmamoments/videos">yt</a> channel)!
+        I maintain this website to share things that are meaningful to me: the occasional
+        <a href="{{ '/blog/' | relative_url }}">blog post</a>, course
+        <a href="{{ '/tutorials' | relative_url }}">tutorials</a> from my TA days,
+        and some old projects ported to the browser in the
+        <a href="{{ '/arcade/' | relative_url }}">arcade</a>.
     </p>
+
+    <h2>Elsewhere on the web</h2>
+
+    <table class="about-links-table">
+        <tbody>
+            {% for link in site.social_links %}
+            <tr>
+                <td class="about-links-site"><i class="fa {{ link.icon }}" aria-hidden="true"></i> {{ link.name }}</td>
+                <td class="about-links-url"><a href="{{ link.url }}">{{ link.label }}</a></td>
+                <td class="about-links-desc">{{ link.desc }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <h2>Contact</h2>
 
     <p>
         The easiest way to reach me is the <a href="{{ '/contact/' | relative_url }}">contact form</a>.
-        For OpenPGP, see my <a href="https://keys.openpgp.org/search?q=59CBA9C8BDCB7D776ACCD24D42269B11EB26C3A1">public key</a>.
     </p>
 </div>
