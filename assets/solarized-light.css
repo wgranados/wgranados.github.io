@@ -153,10 +153,6 @@ html[data-theme="light"] body {
     color: #586e75;
 }
 
-[data-theme="light"] .nav-item-search pagefind-modal-trigger {
-    color: #586e75;
-}
-
 /* --- Tale footer --- */
 
 [data-theme="light"] footer span {

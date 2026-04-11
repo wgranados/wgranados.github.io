@@ -148,22 +148,18 @@
     padding: 0.1em 0.35em;
 }
 
-/* Pagefind: nav trigger aligns with Tale .nav li */
-.nav-item-search {
-    align-items: center;
-    display: inline-flex;
-    list-style: none;
-    padding: 0 0.9rem 0 0;
-}
-
-.home-nav-link--search {
-    align-items: center;
+.blog-search-trigger {
     display: inline-flex;
     vertical-align: middle;
 }
 
-.home-nav-link--search pagefind-modal-trigger {
+.blog-search-trigger pagefind-modal-trigger {
     line-height: 1;
+}
+
+.blog-post-search-tools {
+    margin-bottom: 1rem;
+    margin-top: 0;
 }
 
 /* --- Home landing (hero, name, nav polish) --- */
