@@ -1,4 +1,6 @@
 # Blog index previews. Match on slug (front matter), path (file), url (permalink), or id (Jekyll id).
+- slug: refactor-week
+  text: "A week touching Jekyll, GitHub Actions, Pagefind, Astro, fonts, and SEO—what the pipeline looks like and the config footguns that only bite locally."
 # Fire Emblem: multiple matchers so pagination / GH Pages still finds the row.
 - slug: fire-emblem-awakening-apostheosis
   path_contains: fire-emblem-apostheosis-team
