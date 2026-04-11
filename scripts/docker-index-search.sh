@@ -1,13 +1,13 @@
 #!/bin/sh
 # Build Jekyll _site, merge Astro arcade output, run Pagefind — all via Docker Compose.
-# After this, /search/ works for the current _site/ tree (see README for how to serve it).
+# After this, blog Pagefind search works for the current _site/ tree (see README for how to serve it).
 set -eu
 cd "$(dirname "$0")/.."
 
 docker compose run --rm site bundle exec jekyll build
 docker compose run --rm arcade npm run build
 docker compose run --rm site sh -c 'rm -rf _site/arcade && mkdir -p _site && cp -r arcade/dist _site/arcade'
-docker compose run --rm pagefind
+docker compose --profile index run --rm pagefind
 
 echo ""
 echo "Pagefind index written under _site/pagefind/"

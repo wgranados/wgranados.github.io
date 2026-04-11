@@ -13,6 +13,11 @@ author:
 # Build settings
 markdown: kramdown
 
+# Keep Pagefind’s static bundle when Jekyll regenerates `_site` (e.g. `jekyll serve`).
+# Without this, every rebuild removes `_site/pagefind/` and `/pagefind/*.js` 404s until you re-run Pagefind.
+keep_files:
+  - pagefind
+
 # Keep historical blog URLs stable under /blog/.
 permalink: /blog/:year-:month-:day/:title
 

@@ -13,6 +13,10 @@ Build and start both the Jekyll site and the Astro arcade section:
 docker compose up --build
 ```
 
+That starts **Jekyll**, **Astro arcade**, and **`pagefind-watch`** (Node). The watcher creates `_site/pagefind/` after the first Jekyll build and re-runs Pagefind when HTML under `_site/` changes, so `/pagefind/*` assets are served and blog search works. The first index may take a few seconds after Jekyll finishes; watch the `pagefind-watch` logs for `watching _site`.
+
+To **skip** the Pagefind container (e.g. you only care about arcade): `docker compose up site arcade`.
+
 On the first run the containers will install dependencies into cached volumes, so subsequent starts are faster.
 
 Then open:
@@ -41,7 +45,7 @@ Create a new directory under `arcade/src/pages/<game-slug>/` with an `index.astr
 
 ### Search (Pagefind)
 
-Search uses [Pagefind](https://pagefind.app/). A **Search** link in the **blog** toolbar (index, archive, tags, each post) goes to [`/search/`](https://wgma.ca/search/), where the search **modal** and keyboard shortcut (**Ctrl+K** / **Cmd+K**) work. It is not in the main site nav. The index lives under `_site/pagefind/` and is created **after** Jekyll (and the arcade merge into `_site/arcade/`).
+Search uses [Pagefind](https://pagefind.app/). The **Search** link (same style as the other toolbar links) appears on the **blog index** (including paginated URLs like `/blog/page2/`), **Archive**, and **Tags**; individual posts use a minimal row without search. The index only includes HTML under **`/blog/`**. **Ctrl+K** / **Cmd+K** opens the modal on those pages after the Pagefind bundle has loaded. The old `/search/` URL redirects to `/blog/`. The bundle lives under `_site/pagefind/` and is created **after** Jekyll builds (and after the arcade merge into `_site/arcade/` if you run the full Docker index script).
 
 **Docker (no local Node required):** from the repo root:
 
@@ -56,11 +60,13 @@ docker compose run --rm -p 4000:4000 site bundle exec jekyll serve \
   --host 0.0.0.0 --port 4000 --skip-initial-build --no-watch
 ```
 
-Open `http://localhost:4000/search/`. Re-run `./scripts/docker-index-search.sh` when you want to refresh the index.
+Open `http://localhost:4000/blog/` and use **Search** in the toolbar (after indexing). Re-run `./scripts/docker-index-search.sh` when you want to refresh the index.
+
+**One-shot index in Docker** (after `_site/` is already built): `docker compose --profile index run --rm pagefind`.
 
 **Without Docker:** `bundle exec jekyll build`, build arcade into `arcade/dist`, merge into `_site/arcade/`, then `npm ci && npm run pagefind` from the repo root.
 
-`docker compose up site` runs a normal `jekyll serve` with a fresh build on start, which typically **removes** the Pagefind bundle—use the command above for search testing, or re-index after edits.
+Jekyll is configured with **`keep_files: [pagefind]`** so `jekyll serve` **keeps** `_site/pagefind/` across regenerations once it exists. With **`docker compose up`**, `pagefind-watch` creates and refreshes that folder. For a **one-shot** index without the watcher: **`docker compose --profile index run --rm pagefind`** or **`./scripts/docker-index-search.sh`**. **Production** still runs Pagefind once in GitHub Actions after the full build.
 
 ## Deployment (GitHub Actions)
 

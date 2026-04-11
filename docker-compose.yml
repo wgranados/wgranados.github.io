@@ -18,12 +18,25 @@ services:
       - ./arcade:/srv/arcade
       - arcade_node_modules:/srv/arcade/node_modules
 
+  # One-shot index (used by scripts/docker-index-search.sh). Not started by plain `docker compose up`.
   pagefind:
     image: node:22-bookworm-slim
     working_dir: /work
     volumes:
       - .:/work
     command: ["sh", "-c", "npm ci && npm run pagefind"]
+    profiles:
+      - index
+
+  # Runs after Jekyll has HTML in _site/, writes _site/pagefind/ (blog search). Re-indexes on HTML changes.
+  pagefind-watch:
+    image: node:22-bookworm-slim
+    working_dir: /work
+    volumes:
+      - .:/work
+    depends_on:
+      - site
+    command: ["sh", "/work/scripts/pagefind-watch-entry.sh"]
 
 volumes:
   bundle_cache:

@@ -1,0 +1,8 @@
+{% assign show_pagefind_blog = false %}
+{% if page.path == 'blog/index.html' %}
+  {% assign show_pagefind_blog = true %}
+{% elsif page.path == 'blog/archive.html' %}
+  {% assign show_pagefind_blog = true %}
+{% elsif page.path == 'blog/tags.html' %}
+  {% assign show_pagefind_blog = true %}
+{% endif %}

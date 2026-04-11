@@ -15,6 +15,24 @@
         &copy; <time datetime="{{ site.time }}">{{ site.time | date: '%Y' }}</time> {{ site.author.name }}. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme by Chester How.
       </span>
     </footer>
+    {% include blog-pagefind-gate.html %}
+    {% if show_pagefind_blog %}
     {% include pagefind-modal.html %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var link = document.querySelector(".blog-toolbar-search");
+        if (!link) return;
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          customElements.whenDefined("pagefind-modal").then(function () {
+            var modal = document.querySelector("pagefind-modal");
+            if (modal && typeof modal.open === "function") {
+              modal.open();
+            }
+          });
+        });
+      });
+    </script>
+    {% endif %}
   </body>
 </html>

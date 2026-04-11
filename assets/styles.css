@@ -43,12 +43,15 @@
     text-align: center;
 }
 
-.blog-index-tools a {
+.blog-index-tools a,
+.blog-index-tools .blog-toolbar-search {
     text-decoration: none;
 }
 
 .blog-index-tools a:hover,
-.blog-index-tools a:focus {
+.blog-index-tools a:focus,
+.blog-index-tools .blog-toolbar-search:hover,
+.blog-index-tools .blog-toolbar-search:focus {
     text-decoration: underline;
 }
 
@@ -125,27 +128,18 @@
     opacity: 0.6;
 }
 
-.search-page {
-    padding-bottom: 2rem;
-}
-
-.search-page-intro {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0 0 1rem;
-    max-width: 40rem;
-}
-
-.search-page-actions {
-    margin: 1.25rem 0 0;
-}
-
-.search-page-intro kbd {
-    background: rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    font-family: ui-monospace, monospace;
-    font-size: 0.85em;
-    padding: 0.1em 0.35em;
+/* Visually hidden Pagefind trigger; “Search” <a> forwards clicks (see default-blog layout) */
+.blog-pagefind-trigger-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    border: 0;
+    white-space: nowrap;
 }
 
 .blog-post-search-tools {

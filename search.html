@@ -1,25 +1,17 @@
 ---
-layout: default-blog
-title: Search
+layout: null
 permalink: /search/
 ---
-
-<div class="search-page">
-  <p class="search-page-intro">
-    Use the <strong>Search</strong> link in the blog toolbar (on the blog index, archive, tags, and each post) to open this page, then use the button below for the search overlay. Search is not in the main site navigation.
-    On this page you can also press <kbd>Ctrl</kbd>+<kbd>K</kbd> (Windows/Linux) or <kbd>Cmd</kbd>+<kbd>K</kbd> (Mac) when the search bundle has loaded.
-  </p>
-  <p class="search-page-intro">
-    Indexing uses <a href="https://pagefind.app/">Pagefind</a> on the built site; run <code>./scripts/docker-index-search.sh</code> locally after a full build, or rely on production deploy.
-  </p>
-  <p class="blog-index-tools">
-    <a href="{{ '/blog/' | relative_url }}">Blog</a>
-    ·
-    <a href="{{ '/blog/archive/' | relative_url }}">Archive</a>
-    ·
-    <a href="{{ '/blog/tags/' | relative_url }}">Tags</a>
-  </p>
-  <p class="search-page-actions">
-    <pagefind-modal-trigger placeholder="Open search"></pagefind-modal-trigger>
-  </p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url={{ '/blog/' | relative_url }}">
+  <link rel="canonical" href="{{ '/blog/' | absolute_url }}">
+  <meta name="robots" content="noindex">
+  <title>Redirecting…</title>
+</head>
+<body>
+  <p>Search is on the blog. <a href="{{ '/blog/' | relative_url }}">Continue to the blog</a>.</p>
+</body>
+</html>

@@ -197,6 +197,7 @@ html[data-theme="light"] body {
 }
 
 [data-theme="light"] .blog-index-tools a,
+[data-theme="light"] .blog-index-tools .blog-toolbar-search,
 [data-theme="light"] .post-tags a {
     color: #268bd2;
 }
