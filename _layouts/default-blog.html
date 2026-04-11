@@ -18,6 +18,8 @@
     {% include blog-pagefind-gate.html %}
     {% if show_pagefind_blog %}
     {% include pagefind-modal.html %}
+    {% comment %}Trigger must not sit inside blog-index-tools &lt;p&gt;; hidden host for Ctrl/Cmd+K only.{% endcomment %}
+    <pagefind-modal-trigger id="blog-pagefind-trigger" hide-shortcut="true" placeholder="Search" class="blog-pagefind-trigger-sr" tabindex="-1" aria-hidden="true"></pagefind-modal-trigger>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var link = document.querySelector(".blog-toolbar-search");

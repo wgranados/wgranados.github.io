@@ -128,18 +128,41 @@
     opacity: 0.6;
 }
 
-/* Visually hidden Pagefind trigger; “Search” <a> forwards clicks (see default-blog layout) */
+/*
+ * Visually hidden Pagefind trigger (keyboard shortcut only). The visible control is
+ * .blog-toolbar-search in the blog toolbar. Host + ::part(button): Pagefind’s shadow
+ * button must be collapsed or it still paints the white “Search” chip on some browsers.
+ */
 .blog-pagefind-trigger-sr {
     position: absolute;
+    left: -10000px;
+    top: 0;
     width: 1px;
     height: 1px;
     padding: 0;
-    margin: -1px;
+    margin: 0;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     clip-path: inset(50%);
     border: 0;
     white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.blog-pagefind-trigger-sr::part(button) {
+    width: 0 !important;
+    min-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
 }
 
 .blog-post-search-tools {
