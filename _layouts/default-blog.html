@@ -4,9 +4,10 @@
   {% include head-blog.html %}
 
   <body>
+    {% include skip-to-main.html %}
     {% include site-nav.html %}
 
-    <main>
+    <main id="site-main">
       {{ content }}
     </main>
 

@@ -3,7 +3,8 @@
 {% include head-default.html %}
 
 <body class="home-body">
-    <main>
+    {% include skip-to-main.html %}
+    <main id="site-main">
         <div class="container home-page">
             <section class="home-hero" aria-label="Introduction">
                 <div class="home-hero-visual">
@@ -37,29 +38,33 @@
                 <a href="{{ '/arcade/' | relative_url }}" class="link home-nav-link">Arcade</a>
             </nav>
             <div class="home-social-row">
-                <a class="social-media link" title={{site.social.email}} href="mailto:{{site.social.email}}"
-                    aria-hidden="true">
+                <a class="social-media link" href="mailto:{{site.social.email}}"
+                    aria-label="Email {{ site.social.email }}">
                     <i class="fa fa-envelope home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="social-media link" title={{site.social.github}}
-                    href="https://github.com/{{site.social.github}}">
+                <a class="social-media link"
+                    href="https://github.com/{{site.social.github}}"
+                    aria-label="GitHub ({{ site.social.github }})">
                     <i class="fa fa-github home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="social-media link" title={{site.social.linkedin}}
-                    href="https://www.linkedin.com/in/{{site.social.linkedin}}/">
+                <a class="social-media link"
+                    href="https://www.linkedin.com/in/{{site.social.linkedin}}/"
+                    aria-label="LinkedIn">
                     <i class="fa fa-linkedin-square home-social-icon" aria-hidden="true"></i>
                 </a>
                 {% if site.social.youtube %}
-                <a class="social-media link" title="YouTube" href="{{ site.social.youtube }}">
+                <a class="social-media link" href="{{ site.social.youtube }}" aria-label="YouTube">
                     <i class="fa fa-youtube-play home-social-icon" aria-hidden="true"></i>
                 </a>
                 {% endif %}
-                <a class="social-media link" title={{site.social.yelp}}
-                    href="https://{{site.social.yelp}}.yelp.ca">
+                <a class="social-media link"
+                    href="https://{{site.social.yelp}}.yelp.ca"
+                    aria-label="Yelp profile">
                     <i class="fa fa-yelp home-social-icon" aria-hidden="true"></i>
                 </a>
-                <a class="social-media link" title={{site.social.tripadvisor}}
-                    href="https://tripadvisor.com/{{site.social.tripadvisor}}">
+                <a class="social-media link"
+                    href="https://tripadvisor.com/{{site.social.tripadvisor}}"
+                    aria-label="Tripadvisor profile">
                     <i class="fa fa-tripadvisor home-social-icon" aria-hidden="true"></i>
                 </a>
             </div>
