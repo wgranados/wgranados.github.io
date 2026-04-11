@@ -183,6 +183,14 @@ function bombCounter(b: Bomb, now: number): number {
 // Component
 // ---------------------------------------------------------------------------
 
+function useIsTouch(): boolean {
+  const [touch, setTouch] = useState(false);
+  useEffect(() => {
+    setTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
+  return touch;
+}
+
 export default function BombermanGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gsRef = useRef<GameState>(initState());
@@ -190,14 +198,23 @@ export default function BombermanGame() {
   const lastTimeRef = useRef<number>(0);
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
+  const isTouch = useIsTouch();
+  const mobileRef = useRef(false);
+  mobileRef.current = isTouch;
 
-  // ---- load best score ----
+  // ---- load best score + apply mobile mode ----
   useEffect(() => {
     try {
       const saved = localStorage.getItem("bomberman_best");
       if (saved) gsRef.current.bestScore = Number(saved);
     } catch { /* ignore */ }
   }, []);
+
+  useEffect(() => {
+    if (isTouch) {
+      gsRef.current.p2.alive = false;
+    }
+  }, [isTouch]);
 
   // ---- keyboard ----
   useEffect(() => {
@@ -239,6 +256,28 @@ export default function BombermanGame() {
       window.removeEventListener("keydown", onDown);
       window.removeEventListener("keyup", onUp);
     };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ---- touch: tap canvas to start / restart ----
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const onTouchEnd = (e: TouchEvent) => {
+      e.preventDefault();
+      const gs = gsRef.current;
+      if (gs.phase === Phase.Menu) {
+        gs.phase = Phase.Play;
+        gs.gameStartedAt = performance.now();
+        if (mobileRef.current) gs.p2.alive = false;
+        forceRender((n) => n + 1);
+      } else if (gs.phase === Phase.GameOver) {
+        restartGame();
+      }
+    };
+
+    canvas.addEventListener("touchend", onTouchEnd, { passive: false });
+    return () => { canvas.removeEventListener("touchend", onTouchEnd); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- game loop ----
@@ -292,18 +331,20 @@ export default function BombermanGame() {
       return;
     }
 
+    const mobile = mobileRef.current;
+
     // P1 movement (WASD)
     movePlayer(gs.p1, grid, keys, "KeyW", "KeyS", "KeyA", "KeyD");
-    // P2 movement (Arrows)
-    movePlayer(gs.p2, grid, keys, "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight");
+    if (!mobile) {
+      movePlayer(gs.p2, grid, keys, "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight");
+    }
 
     // P1 bomb placement (Space)
     if (keys["Space"]) {
       keys["Space"] = false;
       placeBomb(gs, gs.p1, 1, now);
     }
-    // P2 bomb placement (Backslash)
-    if (keys["Backslash"]) {
+    if (!mobile && keys["Backslash"]) {
       keys["Backslash"] = false;
       placeBomb(gs, gs.p2, 2, now);
     }
@@ -313,7 +354,7 @@ export default function BombermanGame() {
 
     // power-up collection
     checkPowerUps(gs, gs.p1);
-    checkPowerUps(gs, gs.p2);
+    if (!mobile) checkPowerUps(gs, gs.p2);
 
     // expire old pickup flash events
     gs.pickups = gs.pickups.filter((p) => now - p.time < PICKUP_FLASH_MS);
@@ -333,10 +374,12 @@ export default function BombermanGame() {
       gs.bombs = [];
       gs.p1.x = GRID_X0 + P1_START_COL * TILE + (TILE - PLAYER_W) / 2;
       gs.p1.y = GRID_Y0 + P1_START_ROW * TILE + (TILE - PLAYER_H) / 2;
-      gs.p2.x = GRID_X0 + P2_START_COL * TILE + (TILE - PLAYER_W) / 2;
-      gs.p2.y = GRID_Y0 + P2_START_ROW * TILE + (TILE - PLAYER_H) / 2;
       gs.p1.tempBombCount = gs.p1.bombCount;
-      gs.p2.tempBombCount = gs.p2.bombCount;
+      if (!mobileRef.current) {
+        gs.p2.x = GRID_X0 + P2_START_COL * TILE + (TILE - PLAYER_W) / 2;
+        gs.p2.y = GRID_Y0 + P2_START_ROW * TILE + (TILE - PLAYER_H) / 2;
+        gs.p2.tempBombCount = gs.p2.bombCount;
+      }
       gs.phase = Phase.Play;
     }
   }
@@ -491,6 +534,7 @@ export default function BombermanGame() {
   // ---- draw ----
   const draw = (ctx: CanvasRenderingContext2D, gs: GameState) => {
     const now = performance.now();
+    const mobile = mobileRef.current;
 
     ctx.fillStyle = CLR_BG;
     ctx.fillRect(0, 0, W, H);
@@ -503,17 +547,16 @@ export default function BombermanGame() {
 
     if (gs.phase === Phase.Play || gs.phase === Phase.Paused || gs.phase === Phase.LevelTransition) {
       drawPlayer(ctx, gs.p1, CLR_P1, CLR_P1_ACCENT);
-      drawPlayer(ctx, gs.p2, CLR_P2, CLR_P2_ACCENT);
+      if (!mobile) drawPlayer(ctx, gs.p2, CLR_P2, CLR_P2_ACCENT);
     }
 
-    // [Improvement #7] draw pickup flash events
     drawPickups(ctx, gs.pickups, now);
 
-    drawHUD(ctx, gs, now);
+    drawHUD(ctx, gs, now, mobile);
 
-    if (gs.phase === Phase.Menu) drawMenuOverlay(ctx);
-    if (gs.paused && gs.phase === Phase.Play) drawPauseOverlay(ctx);
-    if (gs.phase === Phase.GameOver) drawGameOverOverlay(ctx, gs);
+    if (gs.phase === Phase.Menu) drawMenuOverlay(ctx, mobile);
+    if (gs.paused && gs.phase === Phase.Play) drawPauseOverlay(ctx, mobile);
+    if (gs.phase === Phase.GameOver) drawGameOverOverlay(ctx, gs, mobile);
     if (gs.phase === Phase.LevelTransition) drawLevelTransitionOverlay(ctx, gs, now);
   };
 
@@ -677,21 +720,18 @@ export default function BombermanGame() {
     }
   }
 
-  // [Improvement #3] HUD with per-player stats
-  function drawHUD(ctx: CanvasRenderingContext2D, gs: GameState, now: number) {
+  function drawHUD(ctx: CanvasRenderingContext2D, gs: GameState, now: number, mobile: boolean) {
     ctx.fillStyle = CLR_HUD_BG;
     ctx.fillRect(0, 0, W, GRID_Y0 - 4);
 
     const midY = (GRID_Y0 - 4) / 2 - 6;
 
-    // P1 score
     ctx.font = "bold 20px 'Syne', sans-serif";
     ctx.textBaseline = "middle";
     ctx.fillStyle = CLR_P1_ACCENT;
     ctx.textAlign = "left";
-    ctx.fillText(`P1: ${gs.p1.score}`, 16, midY);
+    ctx.fillText(mobile ? `Score: ${gs.p1.score}` : `P1: ${gs.p1.score}`, 16, midY);
 
-    // P1 stats line
     ctx.font = "12px 'Helvetica Neue', sans-serif";
     ctx.fillStyle = "rgba(231,76,60,0.7)";
     ctx.fillText(
@@ -699,27 +739,25 @@ export default function BombermanGame() {
       16, midY + 16,
     );
 
-    // level (center)
     ctx.fillStyle = CLR_HUD_TEXT;
     ctx.font = "bold 22px 'Syne', sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(`Level ${gs.level + 1}`, W / 2, (GRID_Y0 - 4) / 2);
 
-    // P2 score
-    ctx.font = "bold 20px 'Syne', sans-serif";
-    ctx.fillStyle = CLR_P2_ACCENT;
-    ctx.textAlign = "right";
-    ctx.fillText(`P2: ${gs.p2.score}`, W - 16, midY);
+    if (!mobile) {
+      ctx.font = "bold 20px 'Syne', sans-serif";
+      ctx.fillStyle = CLR_P2_ACCENT;
+      ctx.textAlign = "right";
+      ctx.fillText(`P2: ${gs.p2.score}`, W - 16, midY);
 
-    // P2 stats line
-    ctx.font = "12px 'Helvetica Neue', sans-serif";
-    ctx.fillStyle = "rgba(52,152,219,0.7)";
-    ctx.fillText(
-      `\uD83D\uDCA3${gs.p2.tempBombCount}/${gs.p2.bombCount}  \uD83D\uDD25${gs.p2.bombRadius}  \uD83D\uDC5F${gs.p2.speed}`,
-      W - 16, midY + 16,
-    );
+      ctx.font = "12px 'Helvetica Neue', sans-serif";
+      ctx.fillStyle = "rgba(52,152,219,0.7)";
+      ctx.fillText(
+        `\uD83D\uDCA3${gs.p2.tempBombCount}/${gs.p2.bombCount}  \uD83D\uDD25${gs.p2.bombRadius}  \uD83D\uDC5F${gs.p2.speed}`,
+        W - 16, midY + 16,
+      );
+    }
 
-    // timer at bottom
     if (gs.phase === Phase.Play || gs.phase === Phase.LevelTransition) {
       const remaining = Math.max(0, Math.ceil(gs.timeLimitSec - (now - gs.gameStartedAt) / 1000));
       const mins = Math.floor(remaining / 60);
@@ -732,18 +770,19 @@ export default function BombermanGame() {
       ctx.fillText(timerStr, W / 2, GRID_Y0 + ROWS * TILE + 8);
     }
 
-    // controls legend
-    ctx.font = "12px 'Helvetica Neue', sans-serif";
-    ctx.fillStyle = "#666";
-    ctx.textBaseline = "top";
-    const legendY = GRID_Y0 + ROWS * TILE + 8;
-    ctx.textAlign = "left";
-    ctx.fillText("P1: WASD + Space", 16, legendY);
-    ctx.textAlign = "right";
-    ctx.fillText("P2: Arrows + \\", W - 16, legendY);
+    if (!mobile) {
+      ctx.font = "12px 'Helvetica Neue', sans-serif";
+      ctx.fillStyle = "#666";
+      ctx.textBaseline = "top";
+      const legendY = GRID_Y0 + ROWS * TILE + 8;
+      ctx.textAlign = "left";
+      ctx.fillText("P1: WASD + Space", 16, legendY);
+      ctx.textAlign = "right";
+      ctx.fillText("P2: Arrows + \\", W - 16, legendY);
+    }
   }
 
-  function drawMenuOverlay(ctx: CanvasRenderingContext2D) {
+  function drawMenuOverlay(ctx: CanvasRenderingContext2D, mobile: boolean) {
     ctx.fillStyle = "rgba(0,0,0,0.75)";
     ctx.fillRect(0, 0, W, H);
 
@@ -755,21 +794,27 @@ export default function BombermanGame() {
 
     ctx.fillStyle = "#ecf0f1";
     ctx.font = "24px 'Syne', sans-serif";
-    ctx.fillText("2-Player Local Multiplayer", W / 2, H / 2 - 10);
+    ctx.fillText(mobile ? "Single Player" : "2-Player Local Multiplayer", W / 2, H / 2 - 10);
 
-    ctx.fillStyle = CLR_P1_ACCENT;
-    ctx.font = "18px 'Syne', sans-serif";
-    ctx.fillText("P1: WASD to move, Space to bomb", W / 2, H / 2 + 40);
+    if (mobile) {
+      ctx.fillStyle = CLR_P1_ACCENT;
+      ctx.font = "18px 'Syne', sans-serif";
+      ctx.fillText("Use D-pad to move, tap BOMB to place", W / 2, H / 2 + 40);
+    } else {
+      ctx.fillStyle = CLR_P1_ACCENT;
+      ctx.font = "18px 'Syne', sans-serif";
+      ctx.fillText("P1: WASD to move, Space to bomb", W / 2, H / 2 + 40);
 
-    ctx.fillStyle = CLR_P2_ACCENT;
-    ctx.fillText("P2: Arrow keys to move, \\ to bomb", W / 2, H / 2 + 70);
+      ctx.fillStyle = CLR_P2_ACCENT;
+      ctx.fillText("P2: Arrow keys to move, \\ to bomb", W / 2, H / 2 + 70);
+    }
 
     ctx.fillStyle = "#bbb";
     ctx.font = "bold 22px 'Syne', sans-serif";
-    ctx.fillText("Press SPACE to start", W / 2, H / 2 + 130);
+    ctx.fillText(mobile ? "Tap to start" : "Press SPACE to start", W / 2, H / 2 + 130);
   }
 
-  function drawPauseOverlay(ctx: CanvasRenderingContext2D) {
+  function drawPauseOverlay(ctx: CanvasRenderingContext2D, mobile: boolean) {
     ctx.fillStyle = "rgba(0,0,0,0.55)";
     ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = "rgba(255,255,255,0.9)";
@@ -779,10 +824,10 @@ export default function BombermanGame() {
     ctx.fillText("PAUSED", W / 2, H / 2 - 10);
     ctx.font = "22px 'Syne', sans-serif";
     ctx.fillStyle = "#bbb";
-    ctx.fillText("Press ESC or P to resume", W / 2, H / 2 + 35);
+    ctx.fillText(mobile ? "Tap Resume to continue" : "Press ESC or P to resume", W / 2, H / 2 + 35);
   }
 
-  function drawGameOverOverlay(ctx: CanvasRenderingContext2D, gs: GameState) {
+  function drawGameOverOverlay(ctx: CanvasRenderingContext2D, gs: GameState, mobile: boolean) {
     ctx.fillStyle = "rgba(0,0,0,0.7)";
     ctx.fillRect(0, 0, W, H);
 
@@ -792,24 +837,30 @@ export default function BombermanGame() {
     ctx.fillStyle = "#f5a623";
     ctx.fillText("TIME'S UP!", W / 2, H / 2 - 80);
 
-    const winner = gs.p1.score > gs.p2.score ? "P1 Wins!" :
-                   gs.p2.score > gs.p1.score ? "P2 Wins!" : "It's a Tie!";
-    ctx.fillStyle = "#ecf0f1";
-    ctx.font = "bold 36px 'Syne', sans-serif";
-    ctx.fillText(winner, W / 2, H / 2 - 20);
+    if (mobile) {
+      ctx.fillStyle = "#ecf0f1";
+      ctx.font = "bold 36px 'Syne', sans-serif";
+      ctx.fillText(`Score: ${gs.p1.score}`, W / 2, H / 2 - 10);
+    } else {
+      const winner = gs.p1.score > gs.p2.score ? "P1 Wins!" :
+                     gs.p2.score > gs.p1.score ? "P2 Wins!" : "It's a Tie!";
+      ctx.fillStyle = "#ecf0f1";
+      ctx.font = "bold 36px 'Syne', sans-serif";
+      ctx.fillText(winner, W / 2, H / 2 - 20);
 
-    ctx.font = "26px 'Syne', sans-serif";
-    ctx.fillStyle = CLR_P1_ACCENT;
-    ctx.fillText(`P1: ${gs.p1.score}`, W / 2 - 100, H / 2 + 30);
-    ctx.fillStyle = CLR_P2_ACCENT;
-    ctx.fillText(`P2: ${gs.p2.score}`, W / 2 + 100, H / 2 + 30);
+      ctx.font = "26px 'Syne', sans-serif";
+      ctx.fillStyle = CLR_P1_ACCENT;
+      ctx.fillText(`P1: ${gs.p1.score}`, W / 2 - 100, H / 2 + 30);
+      ctx.fillStyle = CLR_P2_ACCENT;
+      ctx.fillText(`P2: ${gs.p2.score}`, W / 2 + 100, H / 2 + 30);
+    }
 
     ctx.fillStyle = "#bbb";
     ctx.font = "20px 'Syne', sans-serif";
     ctx.fillText(`Best: ${gs.bestScore}`, W / 2, H / 2 + 70);
 
     ctx.font = "bold 22px 'Syne', sans-serif";
-    ctx.fillText("Press SPACE to play again", W / 2, H / 2 + 120);
+    ctx.fillText(mobile ? "Tap to play again" : "Press SPACE to play again", W / 2, H / 2 + 120);
   }
 
   // [Improvement #6] Level transition overlay
@@ -834,7 +885,7 @@ export default function BombermanGame() {
 
   // ---- helpers ----
   const saveBest = (gs: GameState) => {
-    const top = Math.max(gs.p1.score, gs.p2.score);
+    const top = mobileRef.current ? gs.p1.score : Math.max(gs.p1.score, gs.p2.score);
     if (top > gs.bestScore) {
       gs.bestScore = top;
       try { localStorage.setItem("bomberman_best", String(gs.bestScore)); } catch { /* ignore */ }
@@ -844,9 +895,30 @@ export default function BombermanGame() {
   const restartGame = useCallback(() => {
     const best = gsRef.current.bestScore;
     gsRef.current = initState(best);
+    if (mobileRef.current) gsRef.current.p2.alive = false;
     lastTimeRef.current = 0;
     accumulatorRef.current = 0;
     forceRender((n) => n + 1);
+  }, []);
+
+  const togglePause = useCallback(() => {
+    const gs = gsRef.current;
+    if (gs.phase === Phase.Play) {
+      gs.paused = !gs.paused;
+      if (!gs.paused) {
+        lastTimeRef.current = 0;
+        accumulatorRef.current = 0;
+      }
+      forceRender((n) => n + 1);
+    }
+  }, []);
+
+  const dpadDown = useCallback((key: string) => {
+    gsRef.current.keys[key] = true;
+  }, []);
+
+  const dpadUp = useCallback((key: string) => {
+    gsRef.current.keys[key] = false;
   }, []);
 
   return (
@@ -858,14 +930,96 @@ export default function BombermanGame() {
         style={styles.canvas}
         tabIndex={0}
       />
-      <p style={styles.hint}>
-        <kbd>WASD</kbd> + <kbd>Space</kbd> for P1&ensp;|&ensp;
-        <kbd>←↑→↓</kbd> + <kbd>\</kbd> for P2&ensp;|&ensp;
-        <kbd>Esc</kbd> to pause
-      </p>
+      {isTouch ? (
+        <>
+          <div style={styles.touchControls}>
+            <div style={styles.dpad}>
+              <div style={styles.dpadRow}>
+                <DpadButton label="\u25B2" keyCode="KeyW" onDown={dpadDown} onUp={dpadUp} />
+              </div>
+              <div style={styles.dpadRow}>
+                <DpadButton label="\u25C0" keyCode="KeyA" onDown={dpadDown} onUp={dpadUp} />
+                <div style={styles.dpadSpacer} />
+                <DpadButton label="\u25B6" keyCode="KeyD" onDown={dpadDown} onUp={dpadUp} />
+              </div>
+              <div style={styles.dpadRow}>
+                <DpadButton label="\u25BC" keyCode="KeyS" onDown={dpadDown} onUp={dpadUp} />
+              </div>
+            </div>
+            <div style={styles.actionButtons}>
+              <DpadButton label="BOMB" keyCode="Space" onDown={dpadDown} onUp={dpadUp} large />
+              <button type="button" onClick={togglePause} style={styles.pauseBtn}>
+                {gsRef.current.paused ? "Resume" : "Pause"}
+              </button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <p style={styles.hint}>
+          <kbd>WASD</kbd> + <kbd>Space</kbd> for P1&ensp;|&ensp;
+          <kbd>←↑→↓</kbd> + <kbd>\</kbd> for P2&ensp;|&ensp;
+          <kbd>Esc</kbd> to pause
+        </p>
+      )}
     </div>
   );
 }
+
+// ---------------------------------------------------------------------------
+// D-pad button component
+// ---------------------------------------------------------------------------
+
+function DpadButton({ label, keyCode, onDown, onUp, large }: {
+  label: string;
+  keyCode: string;
+  onDown: (key: string) => void;
+  onUp: (key: string) => void;
+  large?: boolean;
+}) {
+  const btnStyle: React.CSSProperties = large ? {
+    ...dpadStyles.btn,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    fontSize: "0.85rem",
+    fontWeight: "bold",
+    backgroundColor: CLR_P1_ACCENT,
+    color: "#fff",
+    border: "2px solid rgba(255,255,255,0.3)",
+  } : dpadStyles.btn;
+
+  return (
+    <button
+      type="button"
+      style={btnStyle}
+      onPointerDown={(e) => { e.preventDefault(); onDown(keyCode); }}
+      onPointerUp={(e) => { e.preventDefault(); onUp(keyCode); }}
+      onPointerLeave={(e) => { e.preventDefault(); onUp(keyCode); }}
+      onPointerCancel={(e) => { e.preventDefault(); onUp(keyCode); }}
+    >
+      {label}
+    </button>
+  );
+}
+
+const dpadStyles: Record<string, React.CSSProperties> = {
+  btn: {
+    width: 56,
+    height: 56,
+    borderRadius: 8,
+    border: "1px solid rgba(255,255,255,0.2)",
+    backgroundColor: "rgba(255,255,255,0.12)",
+    color: "#ddd",
+    fontSize: "1.3rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    touchAction: "none",
+    userSelect: "none",
+    WebkitUserSelect: "none",
+    cursor: "pointer",
+  },
+};
 
 const styles: Record<string, React.CSSProperties> = {
   wrapper: {
@@ -881,10 +1035,54 @@ const styles: Record<string, React.CSSProperties> = {
     aspectRatio: `${W} / ${H}`,
     borderRadius: 8,
     display: "block",
+    touchAction: "none",
   },
   hint: {
     marginTop: "0.75rem",
     color: "#888",
     fontSize: "0.9rem",
   },
+  touchControls: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "2rem",
+    marginTop: "0.75rem",
+    width: "100%",
+    maxWidth: W,
+    touchAction: "none",
+  },
+  dpad: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 4,
+  },
+  dpadRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 4,
+  },
+  dpadSpacer: {
+    width: 56,
+    height: 56,
+  },
+  actionButtons: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 12,
+  },
+  pauseBtn: {
+    padding: "0.4rem 1.2rem",
+    fontSize: "0.85rem",
+    border: "1px solid rgba(255,255,255,0.2)",
+    borderRadius: 6,
+    backgroundColor: "rgba(255,255,255,0.12)",
+    color: "#ddd",
+    cursor: "pointer",
+    touchAction: "none",
+    userSelect: "none",
+    WebkitUserSelect: "none",
+  } as React.CSSProperties,
 };

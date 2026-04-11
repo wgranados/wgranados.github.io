@@ -164,6 +164,14 @@ function initState(bestScore = 0, speedMultiplier = 1): GameState {
 // Component
 // ---------------------------------------------------------------------------
 
+function useIsTouch(): boolean {
+  const [touch, setTouch] = useState(false);
+  useEffect(() => {
+    setTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
+  return touch;
+}
+
 export default function ArqanoidGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gsRef = useRef<GameState>(initState());
@@ -172,6 +180,10 @@ export default function ArqanoidGame() {
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
   const [activeSpeed, setActiveSpeed] = useState(1);
+  const isTouch = useIsTouch();
+  const isTouchRef = useRef(false);
+  isTouchRef.current = isTouch;
+  const touchStartXRef = useRef<number | null>(null);
 
   // ---- load best score from localStorage on mount ----
   useEffect(() => {
@@ -222,6 +234,64 @@ export default function ArqanoidGame() {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ---- touch controls ----
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    function gameXFromTouch(clientX: number): number {
+      const rect = canvas!.getBoundingClientRect();
+      return ((clientX - rect.left) / rect.width) * W;
+    }
+
+    const onTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      touchStartXRef.current = touch.clientX;
+      const gs = gsRef.current;
+      if (gs.phase === Phase.Play && !gs.paused) {
+        const gameX = gameXFromTouch(touch.clientX);
+        gs.paddle.x = Math.max(0, Math.min(W - gs.paddle.w, gameX - gs.paddle.w / 2));
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const gs = gsRef.current;
+      if (gs.phase === Phase.Play && !gs.paused) {
+        const gameX = gameXFromTouch(touch.clientX);
+        gs.paddle.x = Math.max(0, Math.min(W - gs.paddle.w, gameX - gs.paddle.w / 2));
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      e.preventDefault();
+      const startX = touchStartXRef.current;
+      const endTouch = e.changedTouches[0];
+      const movedX = startX !== null ? Math.abs(endTouch.clientX - startX) : 0;
+      touchStartXRef.current = null;
+
+      if (movedX < 15) {
+        const gs = gsRef.current;
+        if (gs.phase === Phase.Play && gs.ballMode === BallMode.Waiting) {
+          gs.ballMode = BallMode.Moving;
+        } else if (gs.phase === Phase.Lose) {
+          restartGame();
+        }
+      }
+    };
+
+    canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+    canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+    canvas.addEventListener("touchend", onTouchEnd, { passive: false });
+    return () => {
+      canvas.removeEventListener("touchstart", onTouchStart);
+      canvas.removeEventListener("touchmove", onTouchMove);
+      canvas.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ---- game loop with fixed timestep ----
   useEffect(() => {
     let running = true;
@@ -265,11 +335,12 @@ export default function ArqanoidGame() {
     const { ball, paddle, keys } = gs;
     const spd = BALL_SPEED * gs.speedMultiplier;
 
-    // paddle
     if (keys["ArrowLeft"]) paddle.vx = -PADDLE_SPEED;
     else if (keys["ArrowRight"]) paddle.vx = PADDLE_SPEED;
     else paddle.vx = 0;
-    paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x + paddle.vx));
+    if (paddle.vx !== 0) {
+      paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x + paddle.vx));
+    }
 
     // ball waiting on paddle
     if (gs.ballMode === BallMode.Waiting) {
@@ -373,13 +444,15 @@ export default function ArqanoidGame() {
     ctx.textAlign = "center";
     ctx.fillText(`Level ${gs.level + 1}`, W / 2, 40);
 
+    const touch = isTouchRef.current;
+
     if (gs.phase === Phase.Play && gs.ballMode === BallMode.Waiting) {
       ctx.fillStyle = "rgba(255,255,255,0.85)";
       ctx.font = "bold 36px 'Syne', sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("Press SPACE to launch", W / 2, H / 2);
+      ctx.fillText(touch ? "Tap to launch" : "Press SPACE to launch", W / 2, H / 2);
       ctx.font = "20px 'Syne', sans-serif";
-      ctx.fillText("\u2190 \u2192 to move paddle", W / 2, H / 2 + 40);
+      ctx.fillText(touch ? "Slide to move paddle" : "\u2190 \u2192 to move paddle", W / 2, H / 2 + 40);
     }
 
     if (gs.paused) {
@@ -391,7 +464,7 @@ export default function ArqanoidGame() {
       ctx.fillText("PAUSED", W / 2, H / 2 - 10);
       ctx.font = "22px 'Syne', sans-serif";
       ctx.fillStyle = "#bbb";
-      ctx.fillText("Press ESC or P to resume", W / 2, H / 2 + 35);
+      ctx.fillText(touch ? "Tap Resume to continue" : "Press ESC or P to resume", W / 2, H / 2 + 35);
     }
 
     if (gs.phase === Phase.Lose) {
@@ -407,7 +480,7 @@ export default function ArqanoidGame() {
       ctx.fillText(`Best: ${gs.bestScore}`, W / 2, H / 2 + 60);
       ctx.font = "24px 'Syne', sans-serif";
       ctx.fillStyle = "#bbb";
-      ctx.fillText("Press SPACE to restart", W / 2, H / 2 + 110);
+      ctx.fillText(touch ? "Tap to restart" : "Press SPACE to restart", W / 2, H / 2 + 110);
     }
   };
 
@@ -440,6 +513,18 @@ export default function ArqanoidGame() {
     setActiveSpeed(value);
   }, []);
 
+  const togglePause = useCallback(() => {
+    const gs = gsRef.current;
+    if (gs.phase === Phase.Play && gs.ballMode === BallMode.Moving) {
+      gs.paused = !gs.paused;
+      if (!gs.paused) {
+        lastTimeRef.current = 0;
+        accumulatorRef.current = 0;
+      }
+      forceRender((n) => n + 1);
+    }
+  }, []);
+
   return (
     <div style={styles.wrapper}>
       <canvas
@@ -449,10 +534,25 @@ export default function ArqanoidGame() {
         style={styles.canvas}
         tabIndex={0}
       />
-      <p style={styles.hint}>
-        Use <kbd>←</kbd> <kbd>→</kbd> to move&ensp;|&ensp;<kbd>Space</kbd> to launch&ensp;|&ensp;<kbd>Esc</kbd> to pause
-      </p>
+      {isTouch ? (
+        <p style={styles.hint}>
+          Slide to move&ensp;|&ensp;Tap to launch
+        </p>
+      ) : (
+        <p style={styles.hint}>
+          Use <kbd>←</kbd> <kbd>→</kbd> to move&ensp;|&ensp;<kbd>Space</kbd> to launch&ensp;|&ensp;<kbd>Esc</kbd> to pause
+        </p>
+      )}
       <div style={styles.speedRow}>
+        {isTouch && (
+          <button
+            type="button"
+            onClick={togglePause}
+            style={{ ...styles.speedBtn, marginRight: "0.5rem" }}
+          >
+            {gsRef.current.paused ? "Resume" : "Pause"}
+          </button>
+        )}
         <span style={styles.speedLabel}>Speed:</span>
         {SPEED_OPTIONS.map((opt) => (
           <button
@@ -486,6 +586,7 @@ const styles: Record<string, React.CSSProperties> = {
     aspectRatio: `${W} / ${H}`,
     borderRadius: 8,
     display: "block",
+    touchAction: "none",
   },
   hint: {
     marginTop: "0.75rem",
