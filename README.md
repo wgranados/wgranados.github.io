@@ -41,19 +41,26 @@ Create a new directory under `arcade/src/pages/<game-slug>/` with an `index.astr
 
 ### Search (Pagefind)
 
-The site search at [`/search/`](https://wgma.ca/search/) uses [Pagefind](https://pagefind.app/) on the **built** output. The index is **not** present until you run Pagefind after Jekyll (and optionally the arcade merge).
+The site search at [`/search/`](https://wgma.ca/search/) uses [Pagefind](https://pagefind.app/) on the **built** output. The index lives under `_site/pagefind/` and is created **after** Jekyll (and the arcade merge into `_site/arcade/`).
 
-From the repo root, after a full static build:
+**Docker (no local Node required):** from the repo root:
 
 ```bash
-bundle exec jekyll build
-(cd arcade && npm install && npm run build)
-rm -rf _site/arcade && cp -r arcade/dist _site/arcade
-npm install
-npm run pagefind
+./scripts/docker-index-search.sh
 ```
 
-Then serve `_site` (for example `npx serve _site`) and open `/search/`. The same `npm run pagefind` step runs in GitHub Actions before deploy.
+Then serve **without** an initial rebuild (otherwise Jekyll may wipe `_site/pagefind/`):
+
+```bash
+docker compose run --rm -p 4000:4000 site bundle exec jekyll serve \
+  --host 0.0.0.0 --port 4000 --skip-initial-build --no-watch
+```
+
+Open `http://localhost:4000/search/`. Re-run `./scripts/docker-index-search.sh` when you want to refresh the index.
+
+**Without Docker:** `bundle exec jekyll build`, build arcade into `arcade/dist`, merge into `_site/arcade/`, then `npm ci && npm run pagefind` from the repo root.
+
+`docker compose up site` runs a normal `jekyll serve` with a fresh build on start, which typically **removes** the Pagefind bundle—use the command above for search testing, or re-index after edits.
 
 ## Deployment (GitHub Actions)
 

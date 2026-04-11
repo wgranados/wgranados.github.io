@@ -18,6 +18,13 @@ services:
       - ./arcade:/srv/arcade
       - arcade_node_modules:/srv/arcade/node_modules
 
+  pagefind:
+    image: node:22-bookworm-slim
+    working_dir: /work
+    volumes:
+      - .:/work
+    command: ["sh", "-c", "npm ci && npm run pagefind"]
+
 volumes:
   bundle_cache:
   arcade_node_modules:
