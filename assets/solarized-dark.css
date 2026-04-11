@@ -474,8 +474,12 @@ code,
 }
 
 /* Blog index: full-width catalogue rows (loads after main.css + styles.css) */
-main .catalogue > a.catalogue-item {
+main .catalogue > .catalogue-item {
     box-sizing: border-box;
     display: block !important;
     width: 100% !important;
+}
+
+[data-theme="dark"] .catalogue-excerpt {
+    color: #586e75;
 }

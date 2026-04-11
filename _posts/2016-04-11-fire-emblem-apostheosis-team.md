@@ -2,7 +2,9 @@
 date: 2016-09-22 06:41:39+00:00
 layout: post
 slug: fire-emblem-awakening-apostheosis
-title: Fire Emblem Awakening - Apostheosis
+title: Fire Emblem Awakening - Apotheosis
+description: "Lunatic+ Apotheosis DLC team: maxed stats, forged gear, pairings, and skill inheritance that cleared five waves through Anna."
+excerpt_separator: "<!--more-->"
 categories:
 - Gaming
 tags:
@@ -11,18 +13,22 @@ tags:
 - Nintendo
 ---
 
+My Lunatic+ Apotheosis clear: everyone maxed, weapons forged to cap, and the pairings/skills below that made the five waves (and Anna) manageable.
+
+<!--more-->
+
 ![Actual Best Grills](/images/fire_emblem/fire_emblem2.jpeg){: .center-image}
 
-Apostheosis is a DLC map available to fire emblem awakening afficionados wanting to test their strategizing to the fullest. This map pits you against five waves of increasingly harder enemies to face, with the last wave possessing the hardest boss: Anna.
+Apotheosis is a DLC map for *Fire Emblem Awakening* fans who want to push strategy to the limit. The map pits you against five waves of increasingly tough enemies, ending with Anna as the last boss.
 
-Here I will be posting my Aposthesis team that helped me defeat the map on Lunatic+.  Take note that everyone has maxed out stats and all of their weapons are forged with max damage/accuracy.  
+Here is the Apotheosis team that got me through on Lunatic+. Everyone has capped stats and forged weapons for max damage and accuracy.  
 
 Pairings
 ==
 
 ![Shipping lord](/images/fire_emblem/pairingwhore.PNG){: .center-image}
 
-Here you will find what I passed down and my reasoning for most stuff. I generally tried to give everyone Luna since it's very important on this map. You may be wondering why I passed down some skills like dual support+ and counter.  The main reason why I did this is because they gender exclusive skills and all the other passable skills can be obtained through reclassing. 
+Here you will find what I passed down and my reasoning for most stuff. I generally tried to give everyone Luna since it's very important on this map. You may be wondering why I passed down some skills like dual support+ and counter.  The main reason why I did this is because they are gender-exclusive skills and all the other passable skills can be obtained through reclassing. 
 
 ### Chrom!Olivia  
 **Comments:** Luna and decent mods.  

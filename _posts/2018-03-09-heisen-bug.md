@@ -14,6 +14,9 @@ tags:
 - Compiler Optimization
 - Heisenbug
 ---
+
+While debugging a contest solution, adding print statements “fixed” the wrong answer—classic Heisenbug territory with C++ optimizations. Below: the problem, the symptom, and why `volatile` helped.
+
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 Solution for [NOI00P1 - Ceramic Necklace](http://wcipeg.com/problem/noi00p1) 

@@ -13,6 +13,7 @@ tags:
 - Technology
 ---
 
+How enterprises benefit from open source, what licensing and security imply in practice, and why community software has become the default.
 
 # Abstract
 

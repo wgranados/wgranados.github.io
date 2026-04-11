@@ -8,13 +8,19 @@
     width: 100%;
 
     &:hover .catalogue-line,
-    &:focus .catalogue-line {
+    &:focus-within .catalogue-line {
       width: 5rem;
     }
 
     &:last-child {
       border: 0;
     }
+  }
+
+  &-item-link {
+    color: inherit;
+    display: block;
+    text-decoration: none;
   }
 
   &-time {
@@ -37,5 +43,13 @@
     border-top: .2rem solid $default-shade;
     display: block;
     width: 2rem;
+  }
+
+  &-excerpt {
+    color: $default-tint;
+    font-family: $serif-secondary;
+    font-size: .95rem;
+    line-height: 1.5;
+    margin: .75rem 0 0;
   }
 }

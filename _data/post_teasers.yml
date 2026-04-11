@@ -1,0 +1,27 @@
+# Blog index previews. Match on slug (front matter), path (file), url (permalink), or id (Jekyll id).
+# Fire Emblem: multiple matchers so pagination / GH Pages still finds the row.
+- slug: fire-emblem-awakening-apostheosis
+  path_contains: fire-emblem-apostheosis-team
+  url_contains: fire-emblem-apostheosis-team
+  id_contains: fire-emblem-apostheosis
+  text: "Lunatic+ Apotheosis DLC team: maxed stats, forged gear, pairings, and skill inheritance that cleared five waves through Anna."
+- slug: ccosolutions
+  text: "Archived solutions and explanations for selected CCC and CCO problems from 2010–2014, with code and complexity notes."
+- slug: heisenbug
+  text: "A contest solution that broke under optimization and behaved correctly only when debug prints were added—and how volatile fixed it."
+- slug: opensourceenterprise
+  text: "Open source adoption in the enterprise: hiring, licensing, security, and why companies contribute to—and consume—community software."
+- slug: toptenorasou
+  text: "Smogon ORAS OU: hitting top 10, ladder stats, the Medi squad team, and battle highlights."
+- slug: torncity
+  text: "A decade with Torn City: why a text-based MMORPG stayed interesting, and what the game is like."
+- slug: ottawatrip
+  text: "Winter reading week in Ottawa with UofT CS: cold weather, museums, Parliament, skating, and photos."
+- slug: investments
+  text: "After graduation: income, how tech comp works, and a practical angle on investing and taxes."
+- slug: welcome
+  text: "Moving the blog to wgma.ca, Jekyll and markdown, and an xkcd nod to real programmers."
+- path_contains: 2014-10-30-first-post
+  text: "Moving the blog to wgma.ca, Jekyll and markdown, and an xkcd nod to real programmers."
+- path_contains: 2015-10-27-pokemon-rant
+  text: "Pokémon ORAS competitive meta: status spam, how we got here from DPP and BW, and why the tier feels worse."

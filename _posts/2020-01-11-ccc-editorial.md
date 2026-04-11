@@ -14,6 +14,8 @@ tags:
 - Canadian Computing Olympiad
 ---
 
+Solutions and walkthroughs for selected CCC and CCO problems from 2010–2014: ideas, full code, and complexity notes. Originally written for my old blog; consolidated here for competitors.
+
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>

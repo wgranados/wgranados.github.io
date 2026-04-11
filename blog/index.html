@@ -1,21 +1,61 @@
 ---
 layout: default-blog
 title: Blog
+description: "Latest posts on programming, contests, games, and notes from William Granados."
 ---
 
 <p class="blog-index-tools"><a href="{{ '/blog/archive/' | relative_url }}">Archive</a> · {% include blog-search-trigger.html %} · <a href="{{ '/blog/tags/' | relative_url }}">Tags</a> · <a href="{{ '/feed.xml' | relative_url }}">Feed</a> <span class="visually-hidden">(Atom)</span></p>
 
 <div class="catalogue">
   {% for post in paginator.posts %}
-    <a href="{{ post.url | relative_url }}" class="catalogue-item">
-      <div>
+    {% assign _src = site.posts | where: "path", post.path | first %}
+    {% unless _src %}
+      {% assign _src = post %}
+    {% endunless %}
+    {% assign _blurb = "" %}
+    {% assign _from_data = "" %}
+    {% for t in site.data.post_teasers %}
+      {% if _from_data == "" %}
+        {% if t.slug and t.slug == _src.slug %}
+          {% assign _from_data = t.text | strip %}
+        {% elsif t.path_contains and _src.path contains t.path_contains %}
+          {% assign _from_data = t.text | strip %}
+        {% elsif t.url_contains and post.url contains t.url_contains %}
+          {% assign _from_data = t.text | strip %}
+        {% elsif t.id_contains and post.id contains t.id_contains %}
+          {% assign _from_data = t.text | strip %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if _from_data != "" %}
+      {% assign _blurb = _from_data %}
+    {% endif %}
+    {% if _blurb == blank %}
+      {% assign _blurb = _src.description | strip %}
+    {% endif %}
+    {% if _blurb == blank %}
+      {% assign _blurb = _src["description"] | strip %}
+    {% endif %}
+    {% if _blurb == blank %}
+      {% assign _parts = _src.content | split: '<!--more-->' %}
+      {% assign _blurb = _parts[0] | strip_html | strip %}
+    {% endif %}
+    {% if _blurb == blank %}
+      {% assign _blurb = _src.excerpt | strip_html | strip %}
+    {% endif %}
+    {% if _blurb == blank %}
+      {% assign _blurb = _src.content | strip_html | strip %}
+    {% endif %}
+    <div class="catalogue-item">
+      <a href="{{ post.url | relative_url }}" class="catalogue-item-link">
         <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%B %d, %Y" }}</time>
-        <h1 class="catalogue-title">{{ post.title }}</h1>
-        <div class="catalogue-line"></div>
-        {% comment %}Use Jekyll excerpt (override in post front matter with excerpt:). Falls back to auto-excerpt from body.{% endcomment %}
-        <p class="catalogue-excerpt">{{ post.excerpt | strip_html | truncatewords: 45 }}</p>
-      </div>
-    </a>
+        <span class="catalogue-title">{{ post.title }}</span>
+        <span class="catalogue-line" aria-hidden="true"></span>
+      </a>
+      {% if _blurb != blank %}
+      <p class="catalogue-excerpt">{{ _blurb | truncatewords: 50 }}</p>
+      {% endif %}
+    </div>
   {% endfor %}
 </div>
 
