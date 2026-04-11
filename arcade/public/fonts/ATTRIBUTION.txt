@@ -1,0 +1,15 @@
+Self-hosted font files in this directory (WOFF2 subsets: latin, latin-ext).
+
+Libre Baskerville
+  Copyright (c) 2012, Pablo Impallari (www.impallari.com), impallari@gmail.com,
+  Copyright (c) 2012, Rodrigo Fuenzalida. Copyright (c) 2012, Igino Marini.
+  Licensed under the SIL Open Font License, Version 1.1.
+  https://openfontlicense.org/open-font-license-official-text/
+
+Syne
+  Copyright 2017 The Syne Project Authors (https://github.com/googlefonts/syne-vf).
+  Licensed under the SIL Open Font License, Version 1.1.
+  https://openfontlicense.org/open-font-license-official-text/
+
+Source: Google Fonts (fonts.google.com). Subsets were downloaded for self-hosting;
+unmodified font binaries retain their respective copyright and license.

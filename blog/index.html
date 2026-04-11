@@ -12,7 +12,11 @@ title: Blog
         <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%B %d, %Y" }}</time>
         <h1 class="catalogue-title">{{ post.title }}</h1>
         <div class="catalogue-line"></div>
+        {% if post.description %}
+        <p>{{ post.description }}</p>
+        {% else %}
         <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        {% endif %}
       </div>
     </a>
   {% endfor %}
