@@ -39,6 +39,22 @@ docker compose up arcade    # Astro only
 
 Create a new directory under `arcade/src/pages/<game-slug>/` with an `index.astro` page that imports a React component with `client:load`.
 
+### Search (Pagefind)
+
+The site search at [`/search/`](https://wgma.ca/search/) uses [Pagefind](https://pagefind.app/) on the **built** output. The index is **not** present until you run Pagefind after Jekyll (and optionally the arcade merge).
+
+From the repo root, after a full static build:
+
+```bash
+bundle exec jekyll build
+(cd arcade && npm install && npm run build)
+rm -rf _site/arcade && cp -r arcade/dist _site/arcade
+npm install
+npm run pagefind
+```
+
+Then serve `_site` (for example `npx serve _site`) and open `/search/`. The same `npm run pagefind` step runs in GitHub Actions before deploy.
+
 ## Deployment (GitHub Actions)
 
 Pushes to `master` automatically build and deploy the site via the workflow in

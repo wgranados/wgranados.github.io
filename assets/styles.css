@@ -125,6 +125,21 @@
     opacity: 0.6;
 }
 
+.search-page {
+    padding-bottom: 2rem;
+}
+
+.search-page-intro {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    max-width: 40rem;
+}
+
+.search-page-actions {
+    margin: 1.25rem 0 0;
+}
+
 /* --- Home landing (hero, name, nav polish) --- */
 /* Modular scale: name > icons ≈ nav caps > tagline (all fluid for mobile) */
 .home-body {

@@ -4,7 +4,7 @@ title: Archive
 permalink: /blog/archive/
 ---
 
-<p class="blog-index-tools"><a href="{{ '/blog/' | relative_url }}">Latest posts</a> · <a href="{{ '/blog/tags/' | relative_url }}">Tags</a></p>
+<p class="blog-index-tools"><a href="{{ '/search/' | relative_url }}">Search</a> · <a href="{{ '/blog/' | relative_url }}">Latest posts</a> · <a href="{{ '/blog/tags/' | relative_url }}">Tags</a></p>
 
 <div class="archive">
   {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: "name" | reverse %}

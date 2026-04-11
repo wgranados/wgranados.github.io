@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "description": "Root tooling for wgranados.github.io (Pagefind search index after Jekyll + Astro build)",
+  "scripts": {
+    "pagefind": "pagefind --site _site --quiet"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.0"
+  }
+}
