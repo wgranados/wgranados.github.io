@@ -170,7 +170,9 @@ export default function StarfluxGame() {
     const onDown = (e: KeyboardEvent) => {
       const gs = gsRef.current;
       if (
-        ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space", "KeyZ", "KeyX"].includes(e.code)
+        ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
+         "KeyW", "KeyA", "KeyS", "KeyD",
+         "Space", "KeyZ", "KeyX", "KeyQ", "KeyE"].includes(e.code)
       ) {
         e.preventDefault();
       }
@@ -186,7 +188,7 @@ export default function StarfluxGame() {
         return;
       }
 
-      if (e.code === "KeyZ" || e.code === "Space") {
+      if (e.code === "KeyZ" || e.code === "KeyQ" || e.code === "Space") {
         if (gs.phase === Phase.Menu) {
           gs.phase = Phase.Play;
           forceRender((n) => n + 1);
@@ -333,10 +335,10 @@ export default function StarfluxGame() {
       ? PLAYER_FOCUS_SPEED
       : PLAYER_BASE_SPEED + player.stats[StatIndex.SpeedBoost];
 
-    if (keys["ArrowUp"]) player.y -= speed;
-    if (keys["ArrowDown"]) player.y += speed;
-    if (keys["ArrowLeft"]) player.x -= speed;
-    if (keys["ArrowRight"]) player.x += speed;
+    if (keys["ArrowUp"] || keys["KeyW"]) player.y -= speed;
+    if (keys["ArrowDown"] || keys["KeyS"]) player.y += speed;
+    if (keys["ArrowLeft"] || keys["KeyA"]) player.x -= speed;
+    if (keys["ArrowRight"] || keys["KeyD"]) player.x += speed;
 
     player.x = Math.max(PLAY_AREA_LEFT, Math.min(PLAY_AREA_RIGHT - player.w, player.x));
     player.y = Math.max(0, Math.min(H - player.h, player.y));
@@ -347,7 +349,7 @@ export default function StarfluxGame() {
 
     // -- player shoot --
     player.shootTimer++;
-    if (keys["KeyZ"] && player.shootTimer >= PLAYER_SHOOT_COOLDOWN) {
+    if ((keys["KeyZ"] || keys["KeyQ"]) && player.shootTimer >= PLAYER_SHOOT_COOLDOWN) {
       const cx = player.x + player.w / 2;
       const py = player.y;
       const bspd = PLAYER_BULLET_SPEED * sm;
@@ -384,7 +386,7 @@ export default function StarfluxGame() {
     // -- player bomb --
     player.bombTimer++;
     if (
-      keys["KeyX"] &&
+      (keys["KeyX"] || keys["KeyE"]) &&
       player.bombTimer >= PLAYER_BOMB_COOLDOWN &&
       player.stats[StatIndex.Bombs] > 0
     ) {
@@ -888,7 +890,7 @@ export default function StarfluxGame() {
     ctx.fillStyle = "#888";
     ctx.font = "16px 'Syne', sans-serif";
     if (!touch) {
-      ctx.fillText("Arrow keys to move  |  Z to shoot  |  X for bomb  |  Shift for focus", cx, H / 2 + 100);
+      ctx.fillText("Arrow keys / WASD to move  |  Z / Q to shoot  |  X / E for bomb  |  Shift for focus", cx, H / 2 + 100);
     } else {
       ctx.fillText("Drag to move  |  Auto-shoots while moving", cx, H / 2 + 100);
     }
@@ -969,8 +971,8 @@ export default function StarfluxGame() {
         </p>
       ) : (
         <p style={styles.hint}>
-          <kbd>&larr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd> <kbd>&rarr;</kbd> move
-          &ensp;|&ensp;<kbd>Z</kbd> shoot&ensp;|&ensp;<kbd>X</kbd> bomb
+          <kbd>&larr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd> <kbd>&rarr;</kbd> / <kbd>WASD</kbd> move
+          &ensp;|&ensp;<kbd>Z</kbd> / <kbd>Q</kbd> shoot&ensp;|&ensp;<kbd>X</kbd> / <kbd>E</kbd> bomb
           &ensp;|&ensp;<kbd>Shift</kbd> focus&ensp;|&ensp;<kbd>Esc</kbd> pause
         </p>
       )}

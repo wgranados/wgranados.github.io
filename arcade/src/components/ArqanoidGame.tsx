@@ -220,7 +220,9 @@ export default function ArqanoidGame() {
     const onDown = (e: KeyboardEvent) => {
       const gs = gsRef.current;
 
-      if (e.code === "ArrowLeft" || e.code === "ArrowRight" || e.code === "Space") {
+      if (e.code === "ArrowLeft" || e.code === "ArrowRight" ||
+          e.code === "KeyA" || e.code === "KeyD" ||
+          e.code === "Space") {
         e.preventDefault();
       }
 
@@ -352,8 +354,8 @@ export default function ArqanoidGame() {
     const { ball, paddle, keys } = gs;
     const spd = BALL_SPEED * gs.speedMultiplier;
 
-    if (keys["ArrowLeft"]) paddle.vx = -PADDLE_SPEED;
-    else if (keys["ArrowRight"]) paddle.vx = PADDLE_SPEED;
+    if (keys["ArrowLeft"] || keys["KeyA"]) paddle.vx = -PADDLE_SPEED;
+    else if (keys["ArrowRight"] || keys["KeyD"]) paddle.vx = PADDLE_SPEED;
     else paddle.vx = 0;
     if (paddle.vx !== 0) {
       paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x + paddle.vx));
@@ -470,7 +472,7 @@ export default function ArqanoidGame() {
       ctx.textAlign = "center";
       ctx.fillText(touch ? "Tap to launch" : "Press SPACE to launch", W / 2, H / 2);
       ctx.font = "20px 'Syne', sans-serif";
-      ctx.fillText(touch ? "Slide to move paddle" : "\u2190 \u2192 to move paddle", W / 2, H / 2 + 40);
+      ctx.fillText(touch ? "Slide to move paddle" : "\u2190 \u2192 / A D to move paddle", W / 2, H / 2 + 40);
     }
 
     if (gs.paused) {
@@ -551,7 +553,7 @@ export default function ArqanoidGame() {
         </p>
       ) : (
         <p style={styles.hint}>
-          Use <kbd>←</kbd> <kbd>→</kbd> to move&ensp;|&ensp;<kbd>Space</kbd> to launch&ensp;|&ensp;<kbd>Esc</kbd> to pause
+          Use <kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> to move&ensp;|&ensp;<kbd>Space</kbd> to launch&ensp;|&ensp;<kbd>Esc</kbd> to pause
         </p>
       )}
       <div style={styles.speedRow}>
