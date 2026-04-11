@@ -4,13 +4,13 @@ title: Search
 permalink: /search/
 ---
 
-<link rel="stylesheet" href="{{ '/pagefind/pagefind-component-ui.css' | relative_url }}">
-<script src="{{ '/pagefind/pagefind-component-ui.js' | relative_url }}" type="module"></script>
-
 <div class="search-page">
   <p class="search-page-intro">
-    Full-text search across the static site (blog, pages, and arcade HTML). Index is built at deploy time with
-    <a href="https://pagefind.app/">Pagefind</a>.
+    Site search opens as an overlay from <strong>Search</strong> in the navigation on any page (including the home page).
+    You can also press <kbd>Ctrl</kbd>+<kbd>K</kbd> (Windows/Linux) or <kbd>Cmd</kbd>+<kbd>K</kbd> (Mac) when the search bundle is loaded.
+  </p>
+  <p class="search-page-intro">
+    Indexing uses <a href="https://pagefind.app/">Pagefind</a> on the built site; run <code>./scripts/docker-index-search.sh</code> locally after a full build, or rely on production deploy.
   </p>
   <p class="blog-index-tools">
     <a href="{{ '/blog/' | relative_url }}">Blog</a>
@@ -19,9 +19,7 @@ permalink: /search/
     ·
     <a href="{{ '/blog/tags/' | relative_url }}">Tags</a>
   </p>
-
-  <div class="search-page-actions">
-    <pagefind-modal-trigger></pagefind-modal-trigger>
-  </div>
-  <pagefind-modal></pagefind-modal>
+  <p class="search-page-actions">
+    <pagefind-modal-trigger placeholder="Open search"></pagefind-modal-trigger>
+  </p>
 </div>

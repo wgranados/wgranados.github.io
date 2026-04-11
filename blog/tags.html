@@ -4,7 +4,7 @@ title: Tags
 permalink: /blog/tags/
 ---
 
-<p class="blog-index-tools"><a href="{{ '/search/' | relative_url }}">Search</a> · <a href="{{ '/blog/' | relative_url }}">Latest posts</a> · <a href="{{ '/blog/archive/' | relative_url }}">Archive</a></p>
+<p class="blog-index-tools"><a href="{{ '/blog/' | relative_url }}">Latest posts</a> · <a href="{{ '/blog/archive/' | relative_url }}">Archive</a></p>
 
 <div class="tags-page">
   {% capture tag_names_joined %}{% for tag in site.tags %}{{ tag[0] }}|||{% endfor %}{% endcapture %}

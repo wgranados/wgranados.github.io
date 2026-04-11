@@ -140,6 +140,32 @@
     margin: 1.25rem 0 0;
 }
 
+.search-page-intro kbd {
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.85em;
+    padding: 0.1em 0.35em;
+}
+
+/* Pagefind: nav trigger aligns with Tale .nav li */
+.nav-item-search {
+    align-items: center;
+    display: inline-flex;
+    list-style: none;
+    padding: 0 0.9rem 0 0;
+}
+
+.home-nav-link--search {
+    align-items: center;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.home-nav-link--search pagefind-modal-trigger {
+    line-height: 1;
+}
+
 /* --- Home landing (hero, name, nav polish) --- */
 /* Modular scale: name > icons ≈ nav caps > tagline (all fluid for mobile) */
 .home-body {
