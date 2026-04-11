@@ -26,6 +26,15 @@
     margin-top: 0;
 }
 
+/* About page: match tutorials / work vertical rhythm */
+.about-page {
+    padding: 3rem 0;
+}
+
+.about-page h1:first-of-type {
+    margin-top: 0;
+}
+
 /* --- Home landing (hero, name, nav polish) --- */
 /* Modular scale: name > icons ≈ nav caps > tagline (all fluid for mobile) */
 .home-body {
@@ -33,8 +42,8 @@
 }
 
 .home-page {
-    --home-font-name: clamp(1.6rem, 4.6vw + 0.55rem, 2.85rem);
-    --home-font-tagline: clamp(0.78rem, 1.45vw + 0.42rem, 0.94rem);
+    --home-font-name: clamp(1.5rem, 3.5vw + 0.5rem, 2.3rem);
+    --home-font-tagline: clamp(0.82rem, 1.5vw + 0.44rem, 1rem);
     --home-font-nav: clamp(0.8rem, 1.55vw + 0.42rem, 0.94rem);
     --home-icon: clamp(1.02rem, 2vw + 0.48rem, 1.2rem);
     --home-gap-section: clamp(1rem, 2.8vw, 1.35rem);
@@ -56,10 +65,10 @@
 
 .name {
     font-family: "Syne", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-    font-weight: 800;
+    font-weight: 700;
     font-size: var(--home-font-name);
-    letter-spacing: -0.03em;
-    line-height: 1.12;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
     margin: 0 0 clamp(0.35rem, 1.5vw, 0.5rem);
     color: #2a3d32;
 }
@@ -96,8 +105,8 @@
 
 .home-hero-visual {
     position: relative;
-    width: min(220px, min(58vw, 16.5rem));
-    height: min(168px, min(44vw, 12.5rem));
+    width: min(200px, min(52vw, 14rem));
+    height: min(200px, min(52vw, 14rem));
     margin: 0 auto clamp(0.85rem, 2.5vw, 1.15rem);
     border-radius: 50%;
     overflow: hidden;
