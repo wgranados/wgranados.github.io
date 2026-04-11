@@ -41,7 +41,7 @@ Create a new directory under `arcade/src/pages/<game-slug>/` with an `index.astr
 
 ### Search (Pagefind)
 
-Search uses [Pagefind](https://pagefind.app/) and opens as a **modal** from the **Search** control in the **blog** toolbar (index, archive, tags, and each post). It is not in the main site nav. The index lives under `_site/pagefind/` and is created **after** Jekyll (and the arcade merge into `_site/arcade/`). [`/search/`](https://wgma.ca/search/) is a short help page; **Ctrl+K** / **Cmd+K** works on blog layouts once the bundle is built.
+Search uses [Pagefind](https://pagefind.app/). A **Search** link in the **blog** toolbar (index, archive, tags, each post) goes to [`/search/`](https://wgma.ca/search/), where the search **modal** and keyboard shortcut (**Ctrl+K** / **Cmd+K**) work. It is not in the main site nav. The index lives under `_site/pagefind/` and is created **after** Jekyll (and the arcade merge into `_site/arcade/`).
 
 **Docker (no local Node required):** from the repo root:
 

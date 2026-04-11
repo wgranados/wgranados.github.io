@@ -148,15 +148,6 @@
     padding: 0.1em 0.35em;
 }
 
-.blog-search-trigger {
-    display: inline-flex;
-    vertical-align: middle;
-}
-
-.blog-search-trigger pagefind-modal-trigger {
-    line-height: 1;
-}
-
 .blog-post-search-tools {
     margin-bottom: 1rem;
     margin-top: 0;
