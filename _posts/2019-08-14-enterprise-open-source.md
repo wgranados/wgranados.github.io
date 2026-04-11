@@ -2,14 +2,14 @@
 comments: true
 date: 2019-08-14
 layout: post
-slug: opensourceenterprise 
-title: Open Source in the Enterprise 
+slug: opensourceenterprise
+title: Open Source in the Enterprise
 categories:
-- Open Source 
+- Open Source
 tags:
 - Open Source
-- Recruiting 
-- Techonology 
+- Recruiting
+- Techonology
 ---
 
 

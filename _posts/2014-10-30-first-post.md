@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Welcome!
+tags:
+  - Meta
 ---
 
 Welcome to my blog! I have recently decided to port over my blog from wgma00.me

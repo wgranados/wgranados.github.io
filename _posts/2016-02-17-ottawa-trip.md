@@ -2,13 +2,13 @@
 comments: true
 date: 2016-09-27
 layout: post
-slug: ottawatrip 
-title: Ottawa Trip - February 
+slug: ottawatrip
+title: Ottawa Trip - February
 categories:
-- Travelling 
+- Travelling
 tags:
-- Ottawa 
-- Nature Musuem 
+- Ottawa
+- Nature Musuem
 - Parliament
 - Ice Skating
 ---

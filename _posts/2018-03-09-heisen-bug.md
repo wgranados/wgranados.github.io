@@ -2,16 +2,16 @@
 comments: true
 date: 2018-03-09
 layout: post
-slug: heisenbug 
-title: Infamous Heisenbug 
+slug: heisenbug
+title: Infamous Heisenbug
 categories:
 - Competitive Programming
 - General Programming
 tags:
 - Programming
-- Mathematics 
-- Compiler Optimization 
-- Heisenbug 
+- Mathematics
+- Compiler Optimization
+- Heisenbug
 ---
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 

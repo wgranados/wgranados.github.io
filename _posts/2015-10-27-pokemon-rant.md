@@ -3,12 +3,12 @@ layout: post
 comments: true
 title: 'Pokémon Rant #1'
 categories:
-- gaming 
+- gaming
 tags:
-- Pokemon 
-- ORAS 
+- Pokemon
+- ORAS
 - Overused
-- Smogon 
+- Smogon
 ---
 
 Ever since the release of Pokémon ORAS (6th generation), I have seen the meta-game evolve in an unexpected way. This once intellectually-stimulating game has fallen from grace and has turned into a meta-game where everyone has decided that their main priority is to status their opponent's Pokémon. This mentality has caused many players, in my experience, to make brain-dead plays/decisions in battles. This is likely because are no repercussions for doing so, unlike for other statuses like sleep (smogon sleep clause). But before I dive into this topic, how about we take a walk down memory lane and see how the previous generations led up to the current one?

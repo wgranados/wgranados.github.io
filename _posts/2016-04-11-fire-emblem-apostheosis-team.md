@@ -5,11 +5,11 @@ layout: post
 slug: fire-emblem-awakening-apostheosis
 title: Fire Emblem Awakening - Apostheosis
 categories:
-- Gaming 
+- Gaming
 tags:
-- Gaming 
-- Fire Emblem 
-- Nintendo 
+- Gaming
+- Fire Emblem
+- Nintendo
 ---
 
 ![Actual Best Grills](/images/fire_emblem/fire_emblem2.jpeg){: .center-image}

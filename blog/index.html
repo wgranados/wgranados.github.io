@@ -3,6 +3,8 @@ layout: default-blog
 title: Blog
 ---
 
+<p class="blog-index-tools"><a href="{{ '/blog/archive/' | relative_url }}">Archive</a> · <a href="{{ '/blog/tags/' | relative_url }}">Tags</a></p>
+
 <div class="catalogue">
   {% for post in paginator.posts %}
     <a href="{{ post.url | relative_url }}" class="catalogue-item">

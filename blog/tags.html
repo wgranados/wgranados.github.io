@@ -1,0 +1,30 @@
+---
+layout: default-blog
+title: Tags
+permalink: /blog/tags/
+---
+
+<p class="blog-index-tools"><a href="{{ '/blog/' | relative_url }}">Latest posts</a> · <a href="{{ '/blog/archive/' | relative_url }}">Archive</a></p>
+
+<div class="tags-page">
+  {% capture tag_names_joined %}{% for tag in site.tags %}{{ tag[0] }}|||{% endfor %}{% endcapture %}
+  {% assign tag_names = tag_names_joined | split: '|||' | sort %}
+  {% for tag_name in tag_names %}
+    {% if tag_name != '' %}
+      {% assign posts_in_tag = site.tags[tag_name] | sort: 'date' | reverse %}
+      <section class="tag-section" id="{{ tag_name | slugify }}">
+        <h2 class="tag-heading">{{ tag_name }}</h2>
+        <ul class="archive-list">
+          {% for post in posts_in_tag %}
+            <li class="archive-item">
+              <a href="{{ post.url | relative_url }}" class="archive-link">
+                <time class="archive-date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+                <span class="archive-title">{{ post.title }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  {% endfor %}
+</div>

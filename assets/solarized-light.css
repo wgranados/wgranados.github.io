@@ -196,6 +196,28 @@ html[data-theme="light"] body {
     border-top-color: #073642;
 }
 
+[data-theme="light"] .blog-index-tools a,
+[data-theme="light"] .post-tags a {
+    color: #268bd2;
+}
+
+[data-theme="light"] .archive-link {
+    color: #657b83;
+}
+
+[data-theme="light"] .archive-date {
+    color: #93a1a1;
+}
+
+[data-theme="light"] .archive-title {
+    color: #073642;
+}
+
+[data-theme="light"] .archive-year-heading,
+[data-theme="light"] .tag-heading {
+    color: #073642;
+}
+
 /* --- Tale pagination --- */
 
 [data-theme="light"] .pagination {

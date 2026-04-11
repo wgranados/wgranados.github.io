@@ -1,5 +1,5 @@
 owner: William Granados
-tagline: "CS & Stats, curious person, motivated by the next problem and adventure!"
+tagline: "Curious person, motivated by the next problem and adventure!"
 url: "https://wgma.ca"
 baseurl: ""
 title: William Granados
@@ -49,3 +49,10 @@ defaults:
       type: posts
     values:
       layout: post
+      # Default Open Graph / Twitter card image (override per post with `image: /path/to.jpg` in front matter).
+      image: /images/wgma_teemo_aesthetic_one.jpg
+  - scope:
+      path: ""
+      type: pages
+    values:
+      image: /images/wgma_teemo_aesthetic_one.jpg

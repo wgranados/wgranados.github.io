@@ -196,6 +196,28 @@ html[data-theme="dark"] body {
     border-top-color: #eee8d5;
 }
 
+[data-theme="dark"] .blog-index-tools a,
+[data-theme="dark"] .post-tags a {
+    color: #2aa198;
+}
+
+[data-theme="dark"] .archive-link {
+    color: #839496;
+}
+
+[data-theme="dark"] .archive-date {
+    color: #586e75;
+}
+
+[data-theme="dark"] .archive-title {
+    color: #eee8d5;
+}
+
+[data-theme="dark"] .archive-year-heading,
+[data-theme="dark"] .tag-heading {
+    color: #eee8d5;
+}
+
 /* --- Tale pagination --- */
 
 [data-theme="dark"] .pagination {

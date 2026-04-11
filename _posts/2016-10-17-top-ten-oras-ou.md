@@ -2,15 +2,15 @@
 comments: true
 date: 2016-10-17
 layout: post
-slug: toptenorasou 
+slug: toptenorasou
 title: Road to Top 10 ORAS OU
 categories:
-- Gaming 
+- Gaming
 tags:
-- Pokemon 
+- Pokemon
 - ORAS
 - Overused
-- Smogon 
+- Smogon
 ---
 
 After years of playing smogon's [ORAS OU](http://www.smogon.com/dex/xy/formats/ou/) metagame I have finally made a spot for myself in the top 10 ranking. I come in at lucky number 7 with an Elo rating of 1959, GXE of 82.3% and a Glicko-1 of 1790 ± 25 ([more details](http://www.smogon.com/smog/issue43/elo-hello)). The team I used was the ever popular [ABR](http://www.smogon.com/forums/members/abr.223276/)/[Blunder](http://www.smogon.com/forums/members/blunder.112856/) Medi squad, a pastebin can be found [here](http://pastebin.com/nzEzH4yK) for those who wish to use the team. Now I will pay homage to both my opponent and Robin Williams, [Carpe diem: Seize the day](https://www.youtube.com/watch?v=vi0Lbjs5ECI).

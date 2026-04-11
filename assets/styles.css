@@ -35,6 +35,96 @@
     margin-top: 0;
 }
 
+/* Blog: archive, tags, post meta */
+.blog-index-tools {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    margin: 0 0 1.25rem;
+    text-align: center;
+}
+
+.blog-index-tools a {
+    text-decoration: none;
+}
+
+.blog-index-tools a:hover,
+.blog-index-tools a:focus {
+    text-decoration: underline;
+}
+
+.archive-year {
+    margin-bottom: 2rem;
+}
+
+.archive-year-heading {
+    font-size: 1.35rem;
+    margin: 0 0 0.65rem;
+}
+
+.archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.archive-item + .archive-item {
+    margin-top: 0.35rem;
+}
+
+.archive-link {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    text-decoration: none;
+}
+
+.archive-link:hover .archive-title,
+.archive-link:focus .archive-title {
+    text-decoration: underline;
+}
+
+.archive-date {
+    flex: 0 0 auto;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    min-width: 4.5rem;
+    opacity: 0.85;
+}
+
+.archive-title {
+    flex: 1 1 12rem;
+    font-weight: 600;
+}
+
+.tag-section + .tag-section {
+    margin-top: 2rem;
+}
+
+.tag-heading {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+}
+
+.post-tags {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.88rem;
+    margin: -0.25rem 0 1.25rem;
+}
+
+.post-tags a {
+    text-decoration: none;
+}
+
+.post-tags a:hover,
+.post-tags a:focus {
+    text-decoration: underline;
+}
+
+.post-tags-sep {
+    opacity: 0.6;
+}
+
 /* --- Home landing (hero, name, nav polish) --- */
 /* Modular scale: name > icons ≈ nav caps > tagline (all fluid for mobile) */
 .home-body {

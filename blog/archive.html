@@ -1,0 +1,27 @@
+---
+layout: default-blog
+title: Archive
+permalink: /blog/archive/
+---
+
+<p class="blog-index-tools"><a href="{{ '/blog/' | relative_url }}">Latest posts</a> · <a href="{{ '/blog/tags/' | relative_url }}">Tags</a></p>
+
+<div class="archive">
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: "name" | reverse %}
+  {% for year_group in posts_by_year %}
+    <section class="archive-year" aria-labelledby="y{{ year_group.name }}">
+      <h2 class="archive-year-heading" id="y{{ year_group.name }}">{{ year_group.name }}</h2>
+      <ul class="archive-list">
+        {% assign year_posts = year_group.items | sort: "date" | reverse %}
+        {% for post in year_posts %}
+          <li class="archive-item">
+            <a href="{{ post.url | relative_url }}" class="archive-link">
+              <time class="archive-date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d" }}</time>
+              <span class="archive-title">{{ post.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+</div>

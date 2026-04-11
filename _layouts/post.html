@@ -19,6 +19,14 @@ layout: default-blog
   <h1 class="post-title">{{ page.title }}</h1>
   <div class="post-line"></div>
 
+  {% if page.tags.size > 0 %}
+  <p class="post-tags">
+    {% for tag in page.tags %}
+      <a href="{{ '/blog/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% unless forloop.last %}<span class="post-tags-sep"> · </span>{% endunless %}
+    {% endfor %}
+  </p>
+  {% endif %}
+
   {{ content }}
 </div>
 
