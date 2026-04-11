@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import StarfluxGame from "../../components/StarfluxGame.tsx";
+---
+
+<Base title="Starflux" description="A vertical-scrolling space shooter ported from a Verilog project.">
+  <div class="game-page">
+    <h1>Starflux</h1>
+    <p>A space shooter — originally <a href="https://github.com/wgranados/Starflux" target="_blank" rel="noopener noreferrer">written in Verilog</a>, now playable in the browser.</p>
+    <StarfluxGame client:only="react" />
+  </div>
+</Base>
+
+<style>
+  .game-page {
+    padding: 2rem 0;
+  }
+
+  .game-page h1 {
+    margin-bottom: 0.25rem;
+  }
+
+  .game-page > p {
+    color: #979797;
+    margin-bottom: 1.5rem;
+  }
+</style>
