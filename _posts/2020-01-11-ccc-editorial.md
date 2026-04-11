@@ -3,6 +3,8 @@ date: 2020-01-10
 layout: post
 slug: ccosolutions
 title: CCC/CCO Selected Solutions (2010-2014)
+description: "Archived solutions and explanations for selected CCC and CCO problems from 2010–2014, with code and complexity notes."
+excerpt: "Archived solutions and explanations for selected CCC and CCO problems from 2010–2014, with code and complexity notes."
 categories:
 - Competitive Programming
 - General Programming
@@ -18,16 +20,15 @@ tags:
 
 # Introduction
 
-I actually wrote all of editurials when I was in highschool, and had them on my old blog. 
+I actually wrote all of these editorials when I was in high school, and had them on my old blog. 
 I removed it because I couldn't find a good way to organize it at the time, but now I have a better idea. 
-I hope anyone thinking of competiting in this competition will find these useful :) 
+I hope anyone thinking of competing in this competition will find these useful :) 
 
 # Table of Contents
 
 # Solution for [CCC10S3 - Firehose](http://wcipeg.com/problem/ccc10s3)
 
-This problems asks us to find the minimum length of hose required to connect a series of houses if were only given K fire hydrants from which to extend our hose from. We must then take into consideration the maximum hose length possible is 1,000,000, because this number is so large we know that a simple iterative solution will likely not run in time. What we need to notice is that once we have found one possible hose length that satisfies the condition above we do not need to consider hose lengths that are longer, likewise we also have to notice that if the current hose length does not satisfy the conditions then all hose lengths less than this hose length are also impossible. Once we see this property the problem becomes a trivial binary search problem, we're using binary search on the hose length.
-te
+This problem asks us to find the minimum length of hose required to connect a series of houses if we're only given K fire hydrants from which to extend our hose. We must then take into consideration the maximum hose length possible is 1,000,000, because this number is so large we know that a simple iterative solution will likely not run in time. What we need to notice is that once we have found one possible hose length that satisfies the condition above we do not need to consider hose lengths that are longer, likewise we also have to notice that if the current hose length does not satisfy the conditions then all hose lengths less than this hose length are also impossible. Once we see this property the problem becomes a trivial binary search problem, we're using binary search on the hose length.
 
 Now that this idea has been formulated we must define a predicate. The predicate should be if the current hose length is possible then the upper bound is now the hose length, otherwise the lower bound is now equal to the hose length. In provided solution the predicate written has a time complexity of $$O(H^2)$$ where $$H$$ is the number of houses and the binary search has a time complexity of $$O(\log{}L)$$ where $$L$$ is the length of the hose.
 
