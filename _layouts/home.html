@@ -32,14 +32,15 @@
             </section>
             <nav class="home-main-nav" aria-label="Site sections">
                 <a href="{{ '/about' | relative_url }}" class="link home-nav-link">About</a>
+                <a href="{{ '/contact/' | relative_url }}" class="link home-nav-link">Contact</a>
                 <a href="{{ '/blog/' | relative_url }}" class="link home-nav-link">Blog</a>
                 <a href="{{ '/tutorials' | relative_url }}" class="link home-nav-link">Tutorials</a>
                 <a href="{{ '/work' | relative_url }}" class="link home-nav-link">Work</a>
                 <a href="{{ '/arcade/' | relative_url }}" class="link home-nav-link">Arcade</a>
             </nav>
             <div class="home-social-row">
-                <a class="social-media link" href="mailto:{{site.social.email}}"
-                    aria-label="Email {{ site.social.email }}">
+                <a class="social-media link" href="{{ '/contact/' | relative_url }}"
+                    aria-label="Contact">
                     <i class="fa fa-envelope home-social-icon" aria-hidden="true"></i>
                 </a>
                 <a class="social-media link"

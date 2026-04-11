@@ -1,0 +1,50 @@
+---
+layout: default
+title: Contact
+permalink: /contact/
+---
+
+<div id="contact" class="container contact-page">
+  <h1>Contact</h1>
+
+  <p class="contact-intro">Send a message below. I read everything; replies may take a few days.</p>
+
+  {% assign formspree_id = site.contact_form.formspree_id | strip %}
+  {% if formspree_id != "" %}
+  <form
+    class="contact-form"
+    action="https://formspree.io/f/{{ formspree_id }}"
+    method="POST"
+  >
+    <input type="hidden" name="_next" value="{{ '/contact/thanks/' | absolute_url }}">
+
+    <p class="contact-form-honeypot" aria-hidden="true">
+      <label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+    </p>
+
+    <div class="contact-form-field">
+      <label for="contact-name">Name</label>
+      <input id="contact-name" name="name" type="text" autocomplete="name" required>
+    </div>
+
+    <div class="contact-form-field">
+      <label for="contact-email">Email</label>
+      <input id="contact-email" name="email" type="email" autocomplete="email" required>
+    </div>
+
+    <div class="contact-form-field">
+      <label for="contact-message">Message</label>
+      <textarea id="contact-message" name="message" rows="8" required></textarea>
+    </div>
+
+    <button type="submit" class="contact-form-submit">Send</button>
+  </form>
+  {% else %}
+  <div class="contact-setup-note" role="status">
+    <p><strong>Form not configured yet.</strong> Add your Formspree form id to <code>_config.yml</code> under <code>contact_form.formspree_id</code>, then rebuild the site.</p>
+    <p>Create a free form at <a href="https://formspree.io/">formspree.io</a>, confirm your email, and use the id from the form URL (<code>https://formspree.io/f/<em>your-id-here</em></code>).</p>
+  </div>
+  {% endif %}
+
+  <p class="contact-pgp-note">For OpenPGP, see my <a href="https://keys.openpgp.org/search?q=59CBA9C8BDCB7D776ACCD24D42269B11EB26C3A1">public key</a>.</p>
+</div>

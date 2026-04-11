@@ -113,6 +113,10 @@ In the repository **Settings > Pages** section:
 You can also trigger a deploy without pushing code by going to
 **Actions > Deploy to GitHub Pages > Run workflow** in the GitHub UI.
 
+## Contact form (`/contact/`)
+
+Messages are submitted through [Formspree](https://formspree.io/) (no server code on GitHub Pages). Create a form, verify your email, then set `contact_form.formspree_id` in `_config.yml` to the id from your form URL (`https://formspree.io/f/<id>`). Until it is set, the contact page shows setup instructions instead of the form. Submissions redirect to `/contact/thanks/`.
+
 ## Troubleshooting
 
 - **Port already in use**: change the host-side port mapping in `docker-compose.yml` (e.g. `4400:4000` or `4322:4321`).

@@ -10,6 +10,11 @@ author:
   url: https://wgma.ca
   email: me@wgma.ca
 
+# Formspree: create a form at https://formspree.io/, verify your email, then paste the form id
+# (the segment after /f/ in the form endpoint URL). Leave empty to show setup instructions only.
+contact_form:
+  formspree_id: ""
+
 # Build settings
 markdown: kramdown
 
