@@ -11,11 +11,7 @@
       {{ content }}
     </main>
 
-    <footer>
-      <span>
-        &copy; <time datetime="{{ site.time }}">{{ site.time | date: '%Y' }}</time> {{ site.author.name }}. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme by Chester How.
-      </span>
-    </footer>
+    {% include site-footer.html %}
     {% include blog-pagefind-gate.html %}
     {% if show_pagefind_blog %}
     {% include pagefind-modal.html %}
