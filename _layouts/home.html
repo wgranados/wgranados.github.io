@@ -7,13 +7,20 @@
         <div class="container home-page">
             <section class="home-hero" aria-label="Introduction">
                 <div class="home-hero-visual">
-                    <img class="home-hero-img"
+                    <img class="home-hero-img home-hero-img--light"
                         src="{{ '/images/wgma_teemo_aesthetic_one.jpg' | relative_url }}"
                         width="800"
                         height="600"
                         alt=""
                         decoding="async"
                         fetchpriority="high">
+                    <img class="home-hero-img home-hero-img--dark"
+                        src="{{ '/images/wgma_teemo_aesthetic_two.jpg' | relative_url }}"
+                        width="800"
+                        height="600"
+                        alt=""
+                        decoding="async"
+                        style="display:none">
                 </div>
                 <div class="row h-100 justify-content-center align-items-center home-hero-heading">
                     <h1 class="name">{{ site.owner }}</h1>

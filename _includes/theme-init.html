@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="{{ "/assets/solarized-light.css" | relative_url }}">
+<link rel="stylesheet" href="{{ "/assets/solarized-dark.css" | relative_url }}">
+<style>
+.theme-toggle {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 9999;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+.theme-toggle:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+}
+.theme-toggle:focus-visible {
+    outline: 2px solid #268bd2;
+    outline-offset: 2px;
+}
+.theme-toggle svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    display: block;
+}
+[data-theme="dark"] .theme-toggle {
+    background: rgba(7, 54, 66, 0.85);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+[data-theme="dark"] .theme-toggle:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+[data-theme="light"] .theme-toggle {
+    background: rgba(238, 232, 213, 0.85);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle { transition: none !important; }
+}
+</style>
+<script>
+(function() {
+    var STORAGE_KEY = 'theme-preference';
+    var CYCLE = ['auto', 'dark', 'light'];
+
+    function getAutoTheme() {
+        var h = new Date().getHours();
+        return (h >= 20 || h < 6) ? 'dark' : 'light';
+    }
+
+    function resolveTheme(pref) {
+        return pref === 'dark' || pref === 'light' ? pref : getAutoTheme();
+    }
+
+    var pref;
+    try { pref = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+    if (CYCLE.indexOf(pref) === -1) pref = 'auto';
+    document.documentElement.setAttribute('data-theme', resolveTheme(pref));
+
+    var SVG_AUTO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><path d="M12 7a5 5 0 0 1 0 10" fill="currentColor" opacity="0.4"/></svg>';
+    var SVG_LIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    var SVG_DARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+    var LABELS = { auto: 'Auto', dark: 'Solarized Dark', light: 'Solarized Light' };
+    var ICONS  = { auto: SVG_AUTO, dark: SVG_DARK, light: SVG_LIGHT };
+
+    function updateButton(btn, mode) {
+        btn.innerHTML = ICONS[mode];
+        btn.setAttribute('title', LABELS[mode]);
+        btn.setAttribute('aria-label', 'Theme: ' + LABELS[mode] + '. Click to change.');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.createElement('button');
+        btn.className = 'theme-toggle';
+        btn.type = 'button';
+        updateButton(btn, pref);
+
+        btn.addEventListener('click', function() {
+            var idx = CYCLE.indexOf(pref);
+            pref = CYCLE[(idx + 1) % CYCLE.length];
+            var resolved = resolveTheme(pref);
+            document.documentElement.setAttribute('data-theme', resolved);
+            updateButton(btn, pref);
+            try { localStorage.setItem(STORAGE_KEY, pref); } catch(e) {}
+        });
+
+        document.body.appendChild(btn);
+    });
+})();
+</script>
