@@ -342,6 +342,7 @@ html[data-theme="dark"] body {
 
 [data-theme="dark"] .about-page,
 [data-theme="dark"] .work-page,
+[data-theme="dark"] .resume-page,
 [data-theme="dark"] .tutorials-page {
     color: #839496;
 }

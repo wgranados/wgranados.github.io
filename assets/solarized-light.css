@@ -335,6 +335,7 @@ html[data-theme="light"] body {
 
 [data-theme="light"] .about-page,
 [data-theme="light"] .work-page,
+[data-theme="light"] .resume-page,
 [data-theme="light"] .tutorials-page {
     color: #657b83;
 }

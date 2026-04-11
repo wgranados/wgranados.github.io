@@ -1,0 +1,45 @@
+meta:
+  name: William Granados
+  contact_lines:
+    - "Location Toronto, Canada • Phone +1(647) 741-8751 • Email me@wgma.ca"
+    - LinkedIn linkedin.com/in/wlgranados • Portfolio wgma.ca • Github github.com/wgranados
+
+experience:
+  - company: Reddit
+    title: Software Engineer III
+    location: Ads Targeting Toronto
+    tech: "Golang, Scala, Python, React, Terraform, Docker, Kubernetes, Kafka, BigQuery, Thrift, gRPC"
+    range: 2022 - Present
+    bullets:
+      - "Owned the architecture and execution of full-stack ad experiments, including data pipelines, ad serving, and real-time metrics infrastructure, delivering major wins in targeting products such as interest, pixel, and geolocation, which unlocked high-value monetization windows for advertisers."
+      - "Spearheaded the design and rollout of City Targeting and Contextual Gender Targeting, collaborating with XFN teams to build scalable infrastructure, meet compliance requirements, and deliver $10M+ in new ad revenue."
+      - "Led infrastructure and cross-functional compliance projects (Apple Privacy, Thrift-to-gRPC migrations, DSA). Delivered outcomes including net-neutral revenue and <10% KCPA3 loss on Pixel Retargeting, improved endpoint availability/latency, and accelerated engineering velocity from 1 week to 1 day while reducing risks."
+      - "Conducted 20+ technical interviews and mentored junior engineers via code reviews, pair programming, and 1:1s. Improved developer productivity by driving enhancements to internal tools and sharing knowledge from conferences."
+      - "Participated in on-call rotations across a large product surface, resolving Sev1/2 incidents and completing post-mortems within 1 week; improved runbooks and onboarded new engineers on best practices."
+  - company: TripAdvisor
+    title: Software Engineer II
+    location: Ads Experience Remote
+    tech: "Java, React, Typescript, GraphQL, Hive, Tableau, Snowflake, Postgres, Google Ad Manager"
+    range: 2020-2022
+    bullets:
+      - "Led high-impact features and large-scale refactors across ad surfaces, including the Layout Shift project that introduced backfill ads. Boosted impressions, CTR, and revenue while enabling B2C monetization through redirected traffic."
+      - Improved header bidding performance by refactoring targeting logic and integrating Liveramps cookieless solution via Prebid.js and Google Tag Manager. Collaborated with vendors to boost bid quality and prep for a cookieless future.
+      - "Planned and executed the monthly rollout of Travelers Choice, a consumer product surfacing top-rated businesses. Delivered end-to-end changes across frontend, backend, and database layers with robust support for human + SQL-driven rankings."
+
+education:
+  - school: University of Toronto
+    range: 2015-2020
+    degree: "Bachelors of Science, Computer Science and Statistics"
+    highlights:
+      - Teaching Assistant for Algorithm Design and Data Structures courses.
+      - "Co-founded CSEC (Enrichment Club), connecting students with alumni in industry; running for over 10 years."
+
+achievements:
+  - "Bronze Medallist, Canadian Computing Olympiad"
+  - "Student Coach, ICPC team placing 21st of 130 teams against top universities"
+  - "Reached Diamond in League of Legends, and TeamFight Tactics SoloQ (1% of player-base)"
+  - Beginner-level acoustic and electric guitar player; may play wonderwall at team outings
+
+skills:
+  - "Additional Technologies: Postman, Cassandra, PostgreSQL, Redux, OpenApi , Vim, Druid, CI/CD"
+  - "Open Source Contributions (University): PokemonShowdown, Matplotlib, Pandas"

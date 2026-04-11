@@ -17,13 +17,112 @@
     margin-bottom: 0.75rem;
 }
 
-/* Work page: match tutorials / post vertical rhythm under nav */
-.work-page {
+/* Resume page */
+.resume-page {
     padding: 3rem 0;
+    max-width: 52rem;
 }
 
-.work-page #professional-experience > h2:first-of-type {
-    margin-top: 0;
+.resume-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.resume-header h1 {
+    margin: 0;
+}
+
+
+.resume-contact {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.85;
+}
+
+.resume-contact p {
+    margin: 0.15rem 0;
+}
+
+.resume-section {
+    margin-top: 2rem;
+}
+
+.resume-section h2 {
+    font-size: 1.25rem;
+    border-bottom: 1px solid;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.resume-entry {
+    margin-bottom: 1.5rem;
+}
+
+.resume-entry-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.resume-entry-title {
+    flex: 1 1 auto;
+}
+
+.resume-entry-date {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    opacity: 0.75;
+    white-space: nowrap;
+}
+
+.resume-entry-tech {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin: 0.25rem 0 0.5rem;
+}
+
+.resume-entry-degree {
+    margin: 0.15rem 0 0.5rem;
+}
+
+.resume-entry-bullets {
+    margin: 0.35rem 0 0;
+    padding-left: 1.4rem;
+}
+
+.resume-entry-bullets li {
+    margin-bottom: 0.35rem;
+    line-height: 1.5;
+}
+
+.resume-skills-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.resume-footer {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .resume-header {
+        flex-direction: column;
+    }
+    .resume-actions {
+        margin-left: 0;
+    }
+    .resume-entry-header {
+        flex-direction: column;
+    }
 }
 
 /* About page: match tutorials / work vertical rhythm */

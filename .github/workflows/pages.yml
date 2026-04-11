@@ -35,6 +35,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Parse resume paste → YAML
+        run: python3 resume/parse_paste.py
+
       - name: Build Jekyll
         run: JEKYLL_ENV=production bundle exec jekyll build
 
