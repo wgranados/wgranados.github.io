@@ -1,5 +1,4 @@
 ---
-comments: true
 date: 2018-03-09
 layout: post
 slug: heisenbug

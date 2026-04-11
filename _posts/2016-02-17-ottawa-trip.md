@@ -1,5 +1,4 @@
 ---
-comments: true
 date: 2016-09-27
 layout: post
 slug: ottawatrip

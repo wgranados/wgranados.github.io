@@ -1,6 +1,5 @@
 ---
 layout: post
-comments: true
 title: 'Pokémon Rant #1'
 categories:
 - gaming

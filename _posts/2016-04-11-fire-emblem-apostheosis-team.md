@@ -1,5 +1,4 @@
 ---
-comments: true
 date: 2016-09-22 06:41:39+00:00
 layout: post
 slug: fire-emblem-awakening-apostheosis

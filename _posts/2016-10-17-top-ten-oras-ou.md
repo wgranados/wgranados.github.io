@@ -1,5 +1,4 @@
 ---
-comments: true
 date: 2016-10-17
 layout: post
 slug: toptenorasou

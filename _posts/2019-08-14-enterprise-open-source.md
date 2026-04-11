@@ -1,5 +1,4 @@
 ---
-comments: true
 date: 2019-08-14
 layout: post
 slug: opensourceenterprise

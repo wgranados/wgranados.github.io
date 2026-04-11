@@ -1,5 +1,4 @@
 ---
-comments: true
 date: 2020-01-10
 layout: post
 slug: ccosolutions

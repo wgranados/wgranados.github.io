@@ -17,14 +17,7 @@ const siteUrl = import.meta.env.DEV ? "http://localhost:4000" : "https://wgma.ca
     <title>{title} · William Granados</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" sizes="32x32" href={`${siteUrl}/assets/favicon.ico`} />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap"
-    />
+    <link rel="stylesheet" href={`${base}fonts/fonts.css`} />
   </head>
   <body>
     <nav class="nav">
