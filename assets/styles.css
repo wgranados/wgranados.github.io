@@ -36,13 +36,6 @@
 }
 
 /* Blog: archive, tags, post meta */
-/* Tale uses inline-block catalogue items; narrow excerpts (e.g. short first paragraph) let two posts share a row */
-.catalogue .catalogue-item {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-}
-
 .blog-index-tools {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.9rem;

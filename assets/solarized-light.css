@@ -415,3 +415,10 @@ html[data-theme="light"] body {
     background: rgba(38, 139, 210, 0.2);
     color: #073642;
 }
+
+/* Blog index: full-width catalogue rows (loads after main.css + styles.css) */
+main .catalogue > a.catalogue-item {
+    box-sizing: border-box;
+    display: block !important;
+    width: 100% !important;
+}

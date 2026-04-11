@@ -471,3 +471,10 @@ code,
         transition: none !important;
     }
 }
+
+/* Blog index: full-width catalogue rows (loads after main.css + styles.css) */
+main .catalogue > a.catalogue-item {
+    box-sizing: border-box;
+    display: block !important;
+    width: 100% !important;
+}

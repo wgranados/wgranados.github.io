@@ -1,9 +1,11 @@
 .catalogue {
   &-item {
     border-bottom: 1px solid $grey-2;
+    box-sizing: border-box;
     color: $default-color;
-    display: inline-block;
+    display: block;
     padding: 2rem 0;
+    width: 100%;
 
     &:hover .catalogue-line,
     &:focus .catalogue-line {
