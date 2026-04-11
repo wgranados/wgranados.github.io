@@ -2,6 +2,8 @@ import { useRef, useEffect, useCallback, useState } from "react";
 import { LEVELS } from "../game/bomberman/levels";
 import type { Player, Tile, Bomb, GameState, PickupEvent } from "../game/bomberman/types";
 import { Phase } from "../game/bomberman/types";
+import { getBestScore } from "../lib/highscores";
+import HighScoreOverlay from "./HighScoreOverlay";
 
 // ---------------------------------------------------------------------------
 // Constants — match the original Java game
@@ -198,16 +200,14 @@ export default function BombermanGame() {
   const lastTimeRef = useRef<number>(0);
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
+  const [showHighScores, setShowHighScores] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
   const isTouch = useIsTouch();
   const mobileRef = useRef(false);
   mobileRef.current = isTouch;
 
-  // ---- load best score + apply mobile mode ----
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("bomberman_best");
-      if (saved) gsRef.current.bestScore = Number(saved);
-    } catch { /* ignore */ }
+    gsRef.current.bestScore = getBestScore("bomberman");
   }, []);
 
   useEffect(() => {
@@ -245,9 +245,7 @@ export default function BombermanGame() {
         }
       }
 
-      if (gs.phase === Phase.GameOver && e.code === "Space") {
-        restartGame();
-      }
+      // restart handled by overlay
     };
     const onUp = (e: KeyboardEvent) => { gsRef.current.keys[e.code] = false; };
     window.addEventListener("keydown", onDown);
@@ -271,8 +269,6 @@ export default function BombermanGame() {
         gs.gameStartedAt = performance.now();
         if (mobileRef.current) gs.p2.alive = false;
         forceRender((n) => n + 1);
-      } else if (gs.phase === Phase.GameOver) {
-        restartGame();
       }
     };
 
@@ -326,7 +322,9 @@ export default function BombermanGame() {
     const elapsed = (now - gs.gameStartedAt) / 1000;
     if (elapsed >= gs.timeLimitSec) {
       gs.phase = Phase.GameOver;
-      saveBest(gs);
+      const top = mobileRef.current ? gs.p1.score : Math.max(gs.p1.score, gs.p2.score);
+      setFinalScore(top);
+      setShowHighScores(true);
       forceRender((n) => n + 1);
       return;
     }
@@ -827,40 +825,9 @@ export default function BombermanGame() {
     ctx.fillText(mobile ? "Tap Resume to continue" : "Press ESC or P to resume", W / 2, H / 2 + 35);
   }
 
-  function drawGameOverOverlay(ctx: CanvasRenderingContext2D, gs: GameState, mobile: boolean) {
+  function drawGameOverOverlay(ctx: CanvasRenderingContext2D, _gs: GameState, _mobile: boolean) {
     ctx.fillStyle = "rgba(0,0,0,0.7)";
     ctx.fillRect(0, 0, W, H);
-
-    ctx.font = "bold 56px 'Syne', sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#f5a623";
-    ctx.fillText("TIME'S UP!", W / 2, H / 2 - 80);
-
-    if (mobile) {
-      ctx.fillStyle = "#ecf0f1";
-      ctx.font = "bold 36px 'Syne', sans-serif";
-      ctx.fillText(`Score: ${gs.p1.score}`, W / 2, H / 2 - 10);
-    } else {
-      const winner = gs.p1.score > gs.p2.score ? "P1 Wins!" :
-                     gs.p2.score > gs.p1.score ? "P2 Wins!" : "It's a Tie!";
-      ctx.fillStyle = "#ecf0f1";
-      ctx.font = "bold 36px 'Syne', sans-serif";
-      ctx.fillText(winner, W / 2, H / 2 - 20);
-
-      ctx.font = "26px 'Syne', sans-serif";
-      ctx.fillStyle = CLR_P1_ACCENT;
-      ctx.fillText(`P1: ${gs.p1.score}`, W / 2 - 100, H / 2 + 30);
-      ctx.fillStyle = CLR_P2_ACCENT;
-      ctx.fillText(`P2: ${gs.p2.score}`, W / 2 + 100, H / 2 + 30);
-    }
-
-    ctx.fillStyle = "#bbb";
-    ctx.font = "20px 'Syne', sans-serif";
-    ctx.fillText(`Best: ${gs.bestScore}`, W / 2, H / 2 + 70);
-
-    ctx.font = "bold 22px 'Syne', sans-serif";
-    ctx.fillText(mobile ? "Tap to play again" : "Press SPACE to play again", W / 2, H / 2 + 120);
   }
 
   // [Improvement #6] Level transition overlay
@@ -884,17 +851,10 @@ export default function BombermanGame() {
   }
 
   // ---- helpers ----
-  const saveBest = (gs: GameState) => {
-    const top = mobileRef.current ? gs.p1.score : Math.max(gs.p1.score, gs.p2.score);
-    if (top > gs.bestScore) {
-      gs.bestScore = top;
-      try { localStorage.setItem("bomberman_best", String(gs.bestScore)); } catch { /* ignore */ }
-    }
-  };
-
   const restartGame = useCallback(() => {
-    const best = gsRef.current.bestScore;
+    const best = getBestScore("bomberman");
     gsRef.current = initState(best);
+    setShowHighScores(false);
     if (mobileRef.current) gsRef.current.p2.alive = false;
     lastTimeRef.current = 0;
     accumulatorRef.current = 0;
@@ -923,13 +883,22 @@ export default function BombermanGame() {
 
   return (
     <div style={styles.wrapper}>
-      <canvas
-        ref={canvasRef}
-        width={W}
-        height={H}
-        style={styles.canvas}
-        tabIndex={0}
-      />
+      <div style={styles.canvasContainer}>
+        <canvas
+          ref={canvasRef}
+          width={W}
+          height={H}
+          style={styles.canvas}
+          tabIndex={0}
+        />
+        {showHighScores && (
+          <HighScoreOverlay
+            gameId="bomberman"
+            score={finalScore}
+            onDismiss={restartGame}
+          />
+        )}
+      </div>
       {isTouch ? (
         <>
           <div style={styles.touchControls}>
@@ -1027,6 +996,11 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  canvasContainer: {
+    position: "relative",
+    width: "100%",
+    maxWidth: W,
   },
   canvas: {
     width: "100%",

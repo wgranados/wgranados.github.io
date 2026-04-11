@@ -1,4 +1,6 @@
 import { useRef, useEffect, useCallback, useState } from "react";
+import { getBestScore } from "../lib/highscores";
+import HighScoreOverlay from "./HighScoreOverlay";
 import {
   W,
   H,
@@ -130,17 +132,15 @@ export default function StarfluxGame() {
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
   const [activeSpeed, setActiveSpeed] = useState(1);
+  const [showHighScores, setShowHighScores] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
   const isTouch = useIsTouch();
   const isTouchRef = useRef(false);
   isTouchRef.current = isTouch;
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
-  // ---- localStorage ----
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("starflux_best");
-      if (saved) gsRef.current.bestScore = Number(saved);
-    } catch { /* ignore */ }
+    gsRef.current.bestScore = getBestScore("starflux");
   }, []);
 
   // ---- keyboard ----
@@ -168,9 +168,6 @@ export default function StarfluxGame() {
         if (gs.phase === Phase.Menu) {
           gs.phase = Phase.Play;
           forceRender((n) => n + 1);
-        }
-        if (gs.phase === Phase.GameOver) {
-          restartGame();
         }
       }
     };
@@ -243,8 +240,6 @@ export default function StarfluxGame() {
         if (gs.phase === Phase.Menu) {
           gs.phase = Phase.Play;
           forceRender((n) => n + 1);
-        } else if (gs.phase === Phase.GameOver) {
-          restartGame();
         }
       }
     };
@@ -516,7 +511,8 @@ export default function StarfluxGame() {
       gs.lives--;
       if (gs.lives <= 0) {
         gs.phase = Phase.GameOver;
-        saveBest(gs);
+        setFinalScore(gs.score);
+        setShowHighScores(true);
         forceRender((n) => n + 1);
         return;
       }
@@ -527,13 +523,14 @@ export default function StarfluxGame() {
       gs.score = Math.max(0, gs.score - DEATH_SCORE_PENALTY);
     }
 
+    if (gs.score > gs.bestScore) gs.bestScore = gs.score;
+
     // -- boss check / stage advance --
     const bossAlive = gs.enemies.some((e) => e.type === "boss");
     if (!bossAlive && gs.enemies.length === 0) {
       advanceStage(gs);
     }
 
-    saveBest(gs);
   };
 
   // ---- power-up helpers ----
@@ -566,13 +563,6 @@ export default function StarfluxGame() {
     gs.stage++;
     gs.enemies = buildStage(gs.stage);
     gs.bullets = [];
-  };
-
-  const saveBest = (gs: GameState) => {
-    if (gs.score > gs.bestScore) {
-      gs.bestScore = gs.score;
-      try { localStorage.setItem("starflux_best", String(gs.bestScore)); } catch { /* ignore */ }
-    }
   };
 
   // ---- draw ----
@@ -897,33 +887,18 @@ export default function StarfluxGame() {
     ctx.fillText(touch ? "Tap Resume to continue" : "Press ESC or P to resume", cx, H / 2 + 35);
   };
 
-  const drawGameOver = (ctx: CanvasRenderingContext2D, gs: GameState) => {
+  const drawGameOver = (ctx: CanvasRenderingContext2D, _gs: GameState) => {
     ctx.fillStyle = "rgba(0,0,0,0.7)";
     ctx.fillRect(0, 0, PLAY_AREA_RIGHT, H);
-
-    const cx = PLAY_AREA_RIGHT / 2;
-    ctx.fillStyle = "#e74c3c";
-    ctx.font = "bold 64px 'Syne', sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("GAME OVER", cx, H / 2 - 40);
-
-    ctx.fillStyle = "#ecf0f1";
-    ctx.font = "32px 'Syne', sans-serif";
-    ctx.fillText(`Final Score: ${gs.score}`, cx, H / 2 + 20);
-    ctx.fillText(`Best: ${gs.bestScore}`, cx, H / 2 + 60);
-
-    const touch = isTouchRef.current;
-    ctx.font = "24px 'Syne', sans-serif";
-    ctx.fillStyle = "#bbb";
-    ctx.fillText(touch ? "Tap to restart" : "Press Z or SPACE to restart", cx, H / 2 + 110);
   };
 
   // ---- callbacks ----
   const restartGame = useCallback(() => {
-    const best = gsRef.current.bestScore;
+    const best = getBestScore("starflux");
     const spd = gsRef.current.speedMultiplier;
     gsRef.current = initState(best, spd);
     gsRef.current.phase = Phase.Play;
+    setShowHighScores(false);
     lastTimeRef.current = 0;
     accumulatorRef.current = 0;
     forceRender((n) => n + 1);
@@ -948,13 +923,22 @@ export default function StarfluxGame() {
 
   return (
     <div style={styles.wrapper}>
-      <canvas
-        ref={canvasRef}
-        width={W}
-        height={H}
-        style={styles.canvas}
-        tabIndex={0}
-      />
+      <div style={styles.canvasContainer}>
+        <canvas
+          ref={canvasRef}
+          width={W}
+          height={H}
+          style={styles.canvas}
+          tabIndex={0}
+        />
+        {showHighScores && (
+          <HighScoreOverlay
+            gameId="starflux"
+            score={finalScore}
+            onDismiss={restartGame}
+          />
+        )}
+      </div>
       {isTouch ? (
         <p style={styles.hint}>
           Drag to move &amp; auto-shoot&ensp;|&ensp;Tap to start/restart
@@ -1001,6 +985,11 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  canvasContainer: {
+    position: "relative",
+    width: "100%",
+    maxWidth: W,
   },
   canvas: {
     width: "100%",

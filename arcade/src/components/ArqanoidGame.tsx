@@ -1,5 +1,7 @@
 import { useRef, useEffect, useCallback, useState } from "react";
 import { LEVELS } from "../game/arqanoid/levels";
+import { getBestScore } from "../lib/highscores";
+import HighScoreOverlay from "./HighScoreOverlay";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -180,17 +182,15 @@ export default function ArqanoidGame() {
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
   const [activeSpeed, setActiveSpeed] = useState(1);
+  const [showHighScores, setShowHighScores] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
   const isTouch = useIsTouch();
   const isTouchRef = useRef(false);
   isTouchRef.current = isTouch;
   const touchStartXRef = useRef<number | null>(null);
 
-  // ---- load best score from localStorage on mount ----
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("arqanoid_best");
-      if (saved) gsRef.current.bestScore = Number(saved);
-    } catch { /* ignore */ }
+    gsRef.current.bestScore = getBestScore("arqanoid");
   }, []);
 
   // ---- keyboard ----
@@ -217,9 +217,6 @@ export default function ArqanoidGame() {
       if (e.code === "Space") {
         if (gs.phase === Phase.Play && gs.ballMode === BallMode.Waiting) {
           gs.ballMode = BallMode.Moving;
-        }
-        if (gs.phase === Phase.Lose) {
-          restartGame();
         }
       }
     };
@@ -276,8 +273,6 @@ export default function ArqanoidGame() {
         const gs = gsRef.current;
         if (gs.phase === Phase.Play && gs.ballMode === BallMode.Waiting) {
           gs.ballMode = BallMode.Moving;
-        } else if (gs.phase === Phase.Lose) {
-          restartGame();
         }
       }
     };
@@ -360,7 +355,8 @@ export default function ArqanoidGame() {
       gs.lives--;
       if (gs.lives <= 0) {
         gs.phase = Phase.Lose;
-        saveBest(gs);
+        setFinalScore(gs.score);
+        setShowHighScores(true);
         forceRender((n) => n + 1);
         return;
       }
@@ -405,7 +401,6 @@ export default function ArqanoidGame() {
       gs.level++;
       gs.bricks = buildBricks(gs.level);
       resetBall(gs);
-      saveBest(gs);
     }
   };
 
@@ -470,17 +465,6 @@ export default function ArqanoidGame() {
     if (gs.phase === Phase.Lose) {
       ctx.fillStyle = "rgba(0,0,0,0.7)";
       ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = "#e74c3c";
-      ctx.font = "bold 64px 'Syne', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("GAME OVER", W / 2, H / 2 - 40);
-      ctx.fillStyle = "#ecf0f1";
-      ctx.font = "32px 'Syne', sans-serif";
-      ctx.fillText(`Final Score: ${gs.score}`, W / 2, H / 2 + 20);
-      ctx.fillText(`Best: ${gs.bestScore}`, W / 2, H / 2 + 60);
-      ctx.font = "24px 'Syne', sans-serif";
-      ctx.fillStyle = "#bbb";
-      ctx.fillText(touch ? "Tap to restart" : "Press SPACE to restart", W / 2, H / 2 + 110);
     }
   };
 
@@ -492,17 +476,11 @@ export default function ArqanoidGame() {
     gs.ball.vy = -spd;
   };
 
-  const saveBest = (gs: GameState) => {
-    if (gs.score > gs.bestScore) {
-      gs.bestScore = gs.score;
-      try { localStorage.setItem("arqanoid_best", String(gs.bestScore)); } catch { /* ignore */ }
-    }
-  };
-
   const restartGame = useCallback(() => {
-    const best = gsRef.current.bestScore;
+    const best = getBestScore("arqanoid");
     const spd = gsRef.current.speedMultiplier;
     gsRef.current = initState(best, spd);
+    setShowHighScores(false);
     lastTimeRef.current = 0;
     accumulatorRef.current = 0;
     forceRender((n) => n + 1);
@@ -527,13 +505,22 @@ export default function ArqanoidGame() {
 
   return (
     <div style={styles.wrapper}>
-      <canvas
-        ref={canvasRef}
-        width={W}
-        height={H}
-        style={styles.canvas}
-        tabIndex={0}
-      />
+      <div style={styles.canvasContainer}>
+        <canvas
+          ref={canvasRef}
+          width={W}
+          height={H}
+          style={styles.canvas}
+          tabIndex={0}
+        />
+        {showHighScores && (
+          <HighScoreOverlay
+            gameId="arqanoid"
+            score={finalScore}
+            onDismiss={restartGame}
+          />
+        )}
+      </div>
       {isTouch ? (
         <p style={styles.hint}>
           Slide to move&ensp;|&ensp;Tap to launch
@@ -578,6 +565,11 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  canvasContainer: {
+    position: "relative",
+    width: "100%",
+    maxWidth: W,
   },
   canvas: {
     width: "100%",
