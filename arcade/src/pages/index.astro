@@ -14,7 +14,7 @@ import Base from "../layouts/Base.astro";
     </header>
 
     <div class="game-grid">
-      <a href="/arcade/arqanoid/" class="game-card">
+      <a href="/arcade/arqanoid/" class="game-card" data-game-id="arqanoid">
         <div class="card-screen">
           <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
             <rect x="8" y="6" width="10" height="6" rx="1" fill="#ff6b6b" />
@@ -41,7 +41,7 @@ import Base from "../layouts/Base.astro";
         <span class="card-cta">Play</span>
       </a>
 
-      <a href="/arcade/starflux/" class="game-card">
+      <a href="/arcade/starflux/" class="game-card" data-game-id="starflux">
         <div class="card-screen">
           <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
             <circle cx="12" cy="10" r="1.5" fill="#fff" opacity="0.5" />
@@ -77,6 +77,23 @@ import Base from "../layouts/Base.astro";
     </div>
   </div>
 </Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".game-card[data-game-id]").forEach((card) => {
+    const id = card.dataset.gameId;
+    if (!id) return;
+    try {
+      const saved = localStorage.getItem(`arcade_session_${id}`);
+      if (saved) {
+        const cta = card.querySelector(".card-cta");
+        if (cta) {
+          cta.textContent = "Resume";
+          card.classList.add("has-session");
+        }
+      }
+    } catch { /* ignore */ }
+  });
+</script>
 
 <style>
   .arcade {
@@ -173,6 +190,26 @@ import Base from "../layouts/Base.astro";
 
   .game-card:hover .card-cta {
     background: #48dbfb;
+    color: #0a0a1a;
+  }
+
+  .game-card.has-session {
+    border-color: rgba(254, 202, 87, 0.3);
+  }
+
+  .game-card.has-session .card-cta {
+    color: #feca57;
+  }
+
+  .game-card.has-session:hover {
+    border-color: rgba(254, 202, 87, 0.5);
+    box-shadow:
+      0 8px 32px rgba(254, 202, 87, 0.1),
+      0 0 0 1px rgba(254, 202, 87, 0.15);
+  }
+
+  .game-card.has-session:hover .card-cta {
+    background: #feca57;
     color: #0a0a1a;
   }
 

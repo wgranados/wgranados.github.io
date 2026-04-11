@@ -1,6 +1,8 @@
 import { useRef, useEffect, useCallback, useState } from "react";
 import { LEVELS } from "../game/arqanoid/levels";
+import { saveSession, loadSession, clearSession } from "../lib/gameSession";
 import { getBestScore } from "../lib/highscores";
+import { useAutoPause } from "../lib/useAutoPause";
 import HighScoreOverlay from "./HighScoreOverlay";
 
 // ---------------------------------------------------------------------------
@@ -174,14 +176,27 @@ function useIsTouch(): boolean {
   return touch;
 }
 
+function loadOrInit(): GameState {
+  const saved = loadSession<GameState>("arqanoid");
+  if (saved && saved.phase === Phase.Play) {
+    saved.keys = {};
+    saved.paused = true;
+    saved.bestScore = getBestScore("arqanoid");
+    clearSession("arqanoid");
+    return saved;
+  }
+  clearSession("arqanoid");
+  return initState();
+}
+
 export default function ArqanoidGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gsRef = useRef<GameState>(initState());
+  const gsRef = useRef<GameState>(loadOrInit());
   const rafRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
-  const [activeSpeed, setActiveSpeed] = useState(1);
+  const [activeSpeed, setActiveSpeed] = useState(() => gsRef.current.speedMultiplier);
   const [showHighScores, setShowHighScores] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const isTouch = useIsTouch();
@@ -192,6 +207,13 @@ export default function ArqanoidGame() {
   useEffect(() => {
     gsRef.current.bestScore = getBestScore("arqanoid");
   }, []);
+
+  const saveState = useCallback(() => {
+    const gs = gsRef.current;
+    saveSession("arqanoid", { ...gs, keys: {} });
+  }, []);
+
+  useAutoPause({ gsRef, playPhase: Phase.Play, forceRender, onPause: saveState });
 
   // ---- keyboard ----
   useEffect(() => {
@@ -355,6 +377,7 @@ export default function ArqanoidGame() {
       gs.lives--;
       if (gs.lives <= 0) {
         gs.phase = Phase.Lose;
+        clearSession("arqanoid");
         setFinalScore(gs.score);
         setShowHighScores(true);
         forceRender((n) => n + 1);
@@ -477,6 +500,7 @@ export default function ArqanoidGame() {
   };
 
   const restartGame = useCallback(() => {
+    clearSession("arqanoid");
     const best = getBestScore("arqanoid");
     const spd = gsRef.current.speedMultiplier;
     gsRef.current = initState(best, spd);

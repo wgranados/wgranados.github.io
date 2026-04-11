@@ -1,5 +1,7 @@
 import { useRef, useEffect, useCallback, useState } from "react";
+import { saveSession, loadSession, clearSession } from "../lib/gameSession";
 import { getBestScore } from "../lib/highscores";
+import { useAutoPause } from "../lib/useAutoPause";
 import HighScoreOverlay from "./HighScoreOverlay";
 import {
   W,
@@ -124,14 +126,27 @@ function useIsTouch(): boolean {
 // Component
 // ---------------------------------------------------------------------------
 
+function loadOrInit(): GameState {
+  const saved = loadSession<GameState>("starflux");
+  if (saved && saved.phase === Phase.Play) {
+    saved.keys = {};
+    saved.paused = true;
+    saved.bestScore = getBestScore("starflux");
+    clearSession("starflux");
+    return saved;
+  }
+  clearSession("starflux");
+  return initState();
+}
+
 export default function StarfluxGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gsRef = useRef<GameState>(initState());
+  const gsRef = useRef<GameState>(loadOrInit());
   const rafRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const accumulatorRef = useRef<number>(0);
   const [_, forceRender] = useState(0);
-  const [activeSpeed, setActiveSpeed] = useState(1);
+  const [activeSpeed, setActiveSpeed] = useState(() => gsRef.current.speedMultiplier);
   const [showHighScores, setShowHighScores] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const isTouch = useIsTouch();
@@ -142,6 +157,13 @@ export default function StarfluxGame() {
   useEffect(() => {
     gsRef.current.bestScore = getBestScore("starflux");
   }, []);
+
+  const saveState = useCallback(() => {
+    const gs = gsRef.current;
+    saveSession("starflux", { ...gs, keys: {} });
+  }, []);
+
+  useAutoPause({ gsRef, playPhase: Phase.Play, forceRender, onPause: saveState });
 
   // ---- keyboard ----
   useEffect(() => {
@@ -511,6 +533,7 @@ export default function StarfluxGame() {
       gs.lives--;
       if (gs.lives <= 0) {
         gs.phase = Phase.GameOver;
+        clearSession("starflux");
         setFinalScore(gs.score);
         setShowHighScores(true);
         forceRender((n) => n + 1);
@@ -894,6 +917,7 @@ export default function StarfluxGame() {
 
   // ---- callbacks ----
   const restartGame = useCallback(() => {
+    clearSession("starflux");
     const best = getBestScore("starflux");
     const spd = gsRef.current.speedMultiplier;
     gsRef.current = initState(best, spd);

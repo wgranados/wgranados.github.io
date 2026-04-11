@@ -3,6 +3,7 @@ import { LEVELS } from "../game/bomberman/levels";
 import type { Player, Tile, Bomb, GameState, PickupEvent } from "../game/bomberman/types";
 import { Phase } from "../game/bomberman/types";
 import { getBestScore } from "../lib/highscores";
+import { useAutoPause } from "../lib/useAutoPause";
 import HighScoreOverlay from "./HighScoreOverlay";
 
 // ---------------------------------------------------------------------------
@@ -209,6 +210,8 @@ export default function BombermanGame() {
   useEffect(() => {
     gsRef.current.bestScore = getBestScore("bomberman");
   }, []);
+
+  useAutoPause({ gsRef, playPhase: Phase.Play, forceRender });
 
   useEffect(() => {
     if (isTouch) {
