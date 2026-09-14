@@ -15,11 +15,10 @@ tags:
 - arcade
 ---
 
-The [IOCCC](https://www.ioccc.org/) — the International Obfuscated C Code Contest — has been rewarding beautifully unreadable C since 1984. One of my favorite winners is [endoh1.c](https://github.com/ioccc-src/winner/blob/master/2012/endoh1/endoh1.c), Yusuke Endoh's 2012 entry: a full SPH (smoothed-particle hydrodynamics) fluid simulator, rendered live as ANSI art in your terminal, in well under a kilobyte of source. I recently added it to [the arcade](/arcade/fluid/) on this site, unmodified, running entirely client-side. Here's how.
+The [IOCCC](https://www.ioccc.org/) — the International Obfuscated C Code Contest — has been rewarding beautifully unreadable C since 1984. One of my favorite winners is [endoh1.c](https://github.com/ioccc-src/winner/blob/master/2012/endoh1/endoh1.c), Yusuke Endoh's 2012 entry: a full SPH (smoothed-particle hydrodynamics) fluid simulator, rendered live as ANSI art in your terminal, in well under a kilobyte of source. I recently added it to [the arcade](/arcade/fluid/) on this site, unmodified, running entirely client-side with WebAssembly (a tool I heard of during university). See the original code in-action below, it's really really cool and a real flex for a progammer! 
 
 <!--more-->
 
-Before the "how," here's the "why bother": this is what the original looks like running full-speed in a real terminal.
 
 <div style="max-width:100%;">
   <iframe src="https://www.youtube.com/embed/QMYfkOtYYlg" title="ASCII fluid dynamics -- IOCCC2012 endoh1.c" style="width:100%;aspect-ratio:16/9;height:auto;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
