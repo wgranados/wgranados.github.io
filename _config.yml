@@ -92,6 +92,11 @@ social_links:
     url: "https://wgma.yelp.ca"
     label: wgma
     desc: Food reviews
+  - name: Goodreads
+    icon: fa-book
+    url: "https://www.goodreads.com/user/show/199315372-william-granados"
+    label: william-granados
+    desc: Books I'm reading
   - name: AllTrails
     icon: fa-map-signs
     url: "https://www.alltrails.com/members/william-granados"
