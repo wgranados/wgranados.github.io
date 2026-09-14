@@ -1,0 +1,50 @@
+---
+import Base from "../../layouts/Base.astro";
+import FluidGame from "../../components/FluidGame.tsx";
+---
+
+<Base title="Fluid Sim" description="An IOCCC-winning fluid simulator, compiled from C to WebAssembly, running live in your browser.">
+  <div class="game-page">
+    <h1>Fluid Sim</h1>
+    <p>
+      A tiny SPH fluid simulator — the actual, unmodified
+      <a href="https://github.com/ioccc-src/winner/tree/master/2012/endoh1" target="_blank" rel="noopener noreferrer">
+        2012 IOCCC-winning entry
+      </a>
+      by Yusuke Endoh, compiled to WebAssembly and run in a Web Worker in your browser. Draw a scene with
+      <code>#</code> as walls and any other character as fluid, then pour it.
+    </p>
+    <FluidGame client:only="react" />
+  </div>
+</Base>
+
+<style>
+  .game-page {
+    padding: 2rem 0;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .game-page h1 {
+    margin-bottom: 0.25rem;
+    font-family: "Syne", sans-serif;
+    font-weight: 800;
+    text-shadow: 0 0 12px rgba(72, 219, 251, 0.3);
+  }
+
+  .game-page > p {
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1.5rem;
+  }
+
+  .game-page > p a {
+    color: #48dbfb;
+  }
+
+  .game-page code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    color: #feca57;
+  }
+</style>
