@@ -1,34 +1,48 @@
-# Resume pipeline
+# Resume publishing workflow
 
-Single source of truth: **`resume_paste.txt`** (plain-text copy-paste from your PDF).
+`resume.tex` is the typeset source. The root-level `resume.pdf` is the downloadable version published at `/resume.pdf`. The `/work/` page is rendered from `_data/resume.yml`, generated from the normalized text in `resume_paste.txt`.
 
-## Workflow
+## Update the resume
 
-1. Copy-paste your resume text into `resume_paste.txt`.
-2. Run the parser:
+1. Edit `resume.tex`.
+2. Compile the PDF from this directory and copy it to the repository root:
+
+   ```bash
+   mkdir -p /tmp/resume-build
+   pdflatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/resume-build resume.tex
+   cp /tmp/resume-build/resume.pdf ../resume.pdf
+   ```
+
+3. Update `resume_paste.txt` to match the PDF text. Use pipe-separated role headers and a `Dates:` line so titles with commas and month-based dates parse correctly:
+
+   ```text
+   Reddit | Software Engineer III, Ads Privacy | Toronto, ON
+   Dates: June 2025 - Present
+   - Resume bullet
+   ```
+
+   Keep the section headings `Employment`, `Education`, `Achievements / Hobbies`, and `Technical Skills` on their own lines.
+
+4. Regenerate the website data:
 
    ```bash
    python3 resume/parse_paste.py
    ```
 
-   This writes `_data/resume.yml`, which Jekyll uses to render the `/work` page.
+   This updates `_data/resume.yml`; do not edit that generated file directly.
 
-3. Place your PDF at `resume.pdf` in the repo root (committed manually).
-4. Run Jekyll as usual.
+5. Preview the Jekyll site with Docker:
 
-## CI
+   ```bash
+   docker compose run --rm site bundle exec jekyll build
+   ```
 
-GitHub Actions runs step 2 automatically before `jekyll build` (see `.github/workflows/pages.yml`).
+   Check `/work/` and confirm `_site/resume.pdf` exists.
 
-## Paste format
+6. Commit `resume.tex`, `resume_paste.txt`, the generated `_data/resume.yml`, and the updated root `resume.pdf` together.
 
-The parser expects section headers on their own line:
+## Deployment
 
-- `Employment`
-- `Education`
-- `Achievements / Hobbies`
-- `Technical Skills`
+GitHub Actions runs the parser before building Jekyll. Jekyll copies the root-level PDF into `_site`, and the workflow verifies that it is present before deployment. The `/work/` page links directly to the published PDF.
 
-Employment entries: role line (`Company, Title, Location`), then `Tech: ...` with a date range at end, then bullet lines starting with `–`, `•`, or `-`.
-
-See `fixtures/` for a sample input and expected YAML output.
+The text parser also accepts the legacy `Tech:` metadata line for older resume paste files. New entries should use `Dates:` and the pipe-separated role header shown above.

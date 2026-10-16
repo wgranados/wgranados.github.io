@@ -35,11 +35,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Parse resume paste → YAML
+      - name: Parse resume text → YAML
         run: python3 resume/parse_paste.py
 
       - name: Build Jekyll
         run: JEKYLL_ENV=production bundle exec jekyll build
+
+      - name: Verify resume PDF is published
+        run: test -s _site/resume.pdf
 
       - name: Build Astro (arcade)
         run: npm install && npm run build

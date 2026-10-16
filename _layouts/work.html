@@ -7,6 +7,9 @@ layout: default
 
   <header class="resume-header">
     <h1>Resume</h1>
+    <div class="resume-actions">
+      <a href="{{ '/resume.pdf' | relative_url }}" download>Download PDF</a>
+    </div>
   </header>
 
   {% if r.experience.size > 0 %}
@@ -17,6 +20,7 @@ layout: default
       <div class="resume-entry-header">
         <div class="resume-entry-title">
           <strong>{{ job.company }}</strong>{% if job.title %}, {{ job.title }}{% endif %}
+          {% if job.location %}<span class="resume-entry-location"> · {{ job.location }}</span>{% endif %}
         </div>
         {% if job.range %}
         <span class="resume-entry-date">{{ job.range }}</span>

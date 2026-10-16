@@ -24,9 +24,11 @@ SECTION_HEADERS = [
     "Technical Skills",
 ]
 
-DATE_RE = re.compile(r"(\d{4}\s*-\s*(?:Present|\d{4}))\s*$")
+MONTH_RE = r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
+DATE_RE = re.compile(rf"((?:{MONTH_RE}\s+)?\d{{4}}\s*-\s*(?:Present|(?:{MONTH_RE}\s+)?\d{{4}}))\s*$", re.IGNORECASE)
 BULLET_RE = re.compile(r"^\s*[–•\-]\s+")
 TECH_LINE_RE = re.compile(r"^Tech:\s*")
+DATE_LINE_RE = re.compile(r"^Dates:\s*")
 
 
 def is_section_header(line: str) -> bool:
@@ -55,8 +57,7 @@ def parse_header(lines: list[str]) -> dict:
 
 
 def parse_employment(lines: list[str]) -> list[dict]:
-    """Two-pass parser: first find role blocks by looking for Tech: lines
-    as delimiters, then extract company/title from the line before Tech:."""
+    """Parse role blocks delimited by a Tech: or Dates: metadata line."""
     jobs: list[dict] = []
 
     stripped_lines = []
@@ -67,7 +68,7 @@ def parse_employment(lines: list[str]) -> list[dict]:
 
     role_start_indices: list[int] = []
     for i, line in enumerate(stripped_lines):
-        if TECH_LINE_RE.match(line) and i > 0:
+        if (TECH_LINE_RE.match(line) or DATE_LINE_RE.match(line)) and i > 0:
             role_start_indices.append(i - 1)
 
     if not role_start_indices:
@@ -77,20 +78,26 @@ def parse_employment(lines: list[str]) -> list[dict]:
         end = role_start_indices[idx + 1] if idx + 1 < len(role_start_indices) else len(stripped_lines)
 
         role_line = stripped_lines[start]
-        tech_line = stripped_lines[start + 1] if start + 1 < len(stripped_lines) else ""
+        metadata_line = stripped_lines[start + 1] if start + 1 < len(stripped_lines) else ""
 
-        parts = [p.strip() for p in role_line.split(",")]
-        company = parts[0] if parts else ""
-        title = parts[1] if len(parts) > 1 else ""
-        location = ", ".join(parts[2:]) if len(parts) > 2 else ""
+        role_parts = [part.strip() for part in role_line.split(" | ", maxsplit=2)]
+        if len(role_parts) == 3:
+            company, title, location = role_parts
+        else:
+            parts = [p.strip() for p in role_line.split(",")]
+            company = parts[0] if parts else ""
+            title = parts[1] if len(parts) > 1 else ""
+            location = ", ".join(parts[2:]) if len(parts) > 2 else ""
 
-        tech_and_date = TECH_LINE_RE.sub("", tech_line)
-        date_match = DATE_RE.search(tech_and_date)
+        is_dates_line = DATE_LINE_RE.match(metadata_line)
+        metadata = (DATE_LINE_RE if is_dates_line else TECH_LINE_RE).sub("", metadata_line)
+        date_match = DATE_RE.search(metadata)
         date_range = ""
-        tech_str = tech_and_date.strip()
+        tech_str = "" if is_dates_line else metadata.strip()
         if date_match:
             date_range = date_match.group(1).strip()
-            tech_str = DATE_RE.sub("", tech_and_date).strip().rstrip(",")
+            if not is_dates_line:
+                tech_str = DATE_RE.sub("", metadata).strip().rstrip(",")
 
         bullets: list[str] = []
         bullet_parts: list[str] = []

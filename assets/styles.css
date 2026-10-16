@@ -35,6 +35,14 @@
     margin: 0;
 }
 
+.resume-actions {
+    margin-left: auto;
+}
+
+.resume-entry-location {
+    font-size: 0.9em;
+    opacity: 0.75;
+}
 
 .resume-contact {
     font-size: 0.9rem;

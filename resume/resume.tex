@@ -1,0 +1,161 @@
+% resume.tex
+% vim:set ft=tex spell:
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[letterpaper,margin=0.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{mdwlist}
+\usepackage{sectsty}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{tgpagella}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=black,
+}
+% sentence spacing to be slight better
+\usepackage{setspace}
+\setstretch{1.05}
+
+\usepackage{calc}
+\usepackage{enumitem}
+
+\pagestyle{empty}
+\setlength{\tabcolsep}{0em}
+
+% indentsection style, used for sections that aren't already in lists
+% that need indentation to the level of all text in the document
+\newenvironment{indentsection}[1]%
+{\begin{list}{}%
+		{\setlength{\leftmargin}{#1}}%
+		\item[]%
+	}
+	{\end{list}}
+
+% format two pieces of text, one left aligned and one right aligned
+\newcommand{\headerrow}[2]
+{\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
+		#1 &
+		#2 \\
+\end{tabular*}}
+
+% and the actual content starts here
+\begin{document}
+
+	\begin{center}
+		{\LARGE \textbf{William Granados}}
+		\ \vspace{0.2em}
+		\ \\ \textbf{Location} Toronto, Canada\ \ \textbullet
+		\ \textbf{Phone} \href{tel:16477418751}{+1(647) 741-8751}\ \ \textbullet
+		\ \textbf{Email}  \href{mailto:me@wgma.ca}{me@wgma.ca}
+		\\ \ \textbf{LinkedIn} \href{https://linkedin.com/in/wlgranados}{linkedin.com/in/wlgranados} \textbullet
+		\ \textbf{Portfolio} \href{https://wgma.ca}{wgma.ca} \textbullet
+		\ \textbf{Github} \href{https://github.com/wgranados}{github.com/wgranados}
+		\
+	\end{center}
+
+	\vspace{-0.3em}
+	\hrule
+	\vspace{-0.4em}
+	\bigskip
+
+	\subsubsection*{Employment}
+
+	\begin{itemize}[label={}, leftmargin=*]
+
+		\item
+		\headerrow
+		{\textbf{Reddit}}
+		{\textbf{Toronto, ON}}
+		\headerrow
+		{\emph{Software Engineer III, Ads Privacy}}
+		{\emph{June 2025 -- Present}}
+		\begin{itemize}
+			\setlength\itemsep{0.1em}
+			\item Designed and led a real-time privacy-compliance initiative for Kafka-backed behavioral data, honoring first- and third-party opt-outs across three datasets serving targeting, measurement, and ranking teams. Scaled privacy-preserving processing to handle terabytes of data, supporting EU GDPR compliance and helping mitigate exposure to potential fines in the millions
+			\item Led the privacy-logging component for the Age and Gender Beta, contributing to a launch associated with \$75M in annual revenue. Owned the microservice, implemented role-based access control (RBAC), and built monitoring dashboards, alerts, and on-call documentation in partnership with Reporting and Forecasting
+			\item Conducted 50+ technical interviews and mentored junior engineers through code reviews, pair programming, and 1:1s; improved developer productivity through internal tooling and LLM-assisted engineering practices
+		\end{itemize}
+
+		\item
+		\headerrow
+		{\textbf{Reddit}}
+		{\textbf{Toronto, ON}}
+		\headerrow
+		{\emph{Software Engineer II to III, Ads Targeting}}
+		{\emph{2022 -- May 2025}}
+		\begin{itemize}
+			\setlength\itemsep{0.1em}
+			\item Owned AB experiments, infra migrations, and full-stack Beta/GA rollouts for \href{https://business.reddithelp.com/s/article/Overview-Reddit-Ads-Audience-and-Targeting}{audience-targeting products}, including community, interest, pixel, device, and geolocation (city). Work spanned ad-serving experiments, data pipelines, ad-server shard code, public APIs, and advertiser-facing interfaces on ads.reddit.com
+			\item Served as a subject matter expert (SME) on community, interest, and gender targeting, notable results include the \href{https://www.socialmediatoday.com/news/reddit-expands-interest-targeting-for-ads/691572/}{Interest Targeting V2} GA and Contextual Gender Targeting which generated \$10M+ in new ad revenue
+			\item Led the cross-functional Digital Services Act (DSA) Transparency Refactor across web and mobile consumer surfaces and the ad-serving funnel for all targeting products. Added comprehensive documentation and SLO/SLA coverage, reducing rollout engineering time from $\sim$1 week to $\sim$1 day
+			\item Managed Sev1/2 incident response and resolution with engineering teams and stakeholders; completed postmortems and root-cause analyses within one week. Created runbooks and tuned alerts to reduce on-call noise
+
+		
+		\end{itemize}
+
+		\item
+		\headerrow
+		{\textbf{TripAdvisor}}
+		{\textbf{Remote}}
+		\headerrow
+		{\emph{Software Engineer II, Ads Experience}}
+		{\emph{2020 -- 2022}}
+		\begin{itemize}
+			\setlength\itemsep{0.1em}
+			\item Led high-impact features and large-scale refactors across ad surfaces, including the Layout Shift project that introduced backfill ads. Boosted impressions, CTR, and revenue while enabling B2C monetization through redirected traffic
+			\item Planned and executed the monthly rollout of Travelers' Choice, a consumer product surfacing top-rated businesses. Delivered end-to-end changes across frontend, backend, and database layers with robust support for human + SQL-driven rankings
+		\end{itemize}
+
+	\end{itemize}
+
+	\hrule
+	\vspace{-0.4em}
+	\bigskip
+
+	\begin{tabular}[b]{ll}
+		\begin{minipage}[t]{.47\textwidth}
+			\subsubsection*{\centering{Education}}
+			\headerrow
+			{\textbf{University of Toronto}}
+			{\textbf{2015 -- 2020}}
+			\headerrow
+			{\emph{Bachelors of Science, Computer Science and Statistics}}
+			{}
+			\vspace{-1.8em}
+			\begin{itemize}[leftmargin=*]
+				\setlength\itemsep{0em}
+				\item Teaching Assistant for Algorithm Design and Data Structures courses
+			
+			\end{itemize}
+		\end{minipage}% This must go next to `\end{tabular}`
+
+		\begin{minipage}[t]{.53\textwidth}
+			\subsubsection*{\centering{Achievements / Hobbies}}
+			\begin{itemize*}
+				\setlength\itemsep{0.1em}
+				\item Student Coach, ICPC team placing 21st of 130 teams against top universities
+				\item Beginner-level acoustic and electric guitar player; may play a fun song at team outings
+			\end{itemize*}
+		\end{minipage}% This must go next to `\end{minipage}`
+	\end{tabular}
+
+	\vspace{0.4em}
+	\hrule
+	\vspace{-0.5em}
+
+	\subsubsection*{Technical Skills}
+	\begin{indentsection}{\parindent/2}
+		\hyphenpenalty=1000
+		\begin{description*}
+			\item[Core Technologies:]
+			  Golang, Scala, Python, React, Terraform, Kubernetes, Kafka, BigQuery, Thrift, gRPC
+			\item[Additional Technologies:]
+			  Cassandra, PostgreSQL, Vim, Claude, Cursor, CI/CD 
+		\end{description*}
+	\end{indentsection}
+
+\end{document}
