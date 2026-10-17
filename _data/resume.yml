@@ -20,7 +20,7 @@ experience:
     tech: ""
     range: 2022 - May 2025
     bullets:
-      - "Owned AB experiments, infra migrations, and full-stack Beta/GA rollouts for audience-targeting products, including community, interest, pixel, device, and geolocation (city). Work spanned ad-serving experiments, data pipelines, ad-server shard code, public APIs, and advertiser-facing interfaces on ads.reddit.com"
+      - "Owned A/B experiments, infrastructure migrations, and full-stack Beta/GA rollouts for audience-targeting products, including community, interest, pixel, device, and geolocation (city). Work spanned the targeting funnel from advertiser-facing interfaces and public APIs to data pipelines and ad-server shard selection logic"
       - "Served as a subject matter expert (SME) on community, interest, and gender targeting, notable results include the Interest Targeting V2 GA and Contextual Gender Targeting which generated $10M+ in new ad revenue"
       - "Led the cross-functional Digital Services Act (DSA) Transparency Refactor across web and mobile consumer surfaces and the ad-serving funnel for all targeting products. Added comprehensive documentation and SLO/SLA coverage, reducing rollout engineering time from ~1 week to ~1 day"
       - Managed Sev1/2 incident response and resolution with engineering teams and stakeholders; completed postmortems and root-cause analyses within one week. Created runbooks and tuned alerts to reduce on-call noise
