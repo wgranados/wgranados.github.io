@@ -46,4 +46,4 @@ achievements:
 
 skills:
   - "Core Technologies: Go, Scala, Java, Python, Terraform, Kubernetes, Kafka, BigQuery, Cassandra, PostgreSQL"
-  - "Additional Technologies: Flink, React, Thrift, gRPC, CI/CD, AI Assisted tools (Claude, Cursor, Codex)"
+  - "Additional Technologies: Airflow, Spark, React, Thrift, gRPC, CI/CD, AI Assisted tools (Claude, Cursor, Codex)"
